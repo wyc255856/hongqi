@@ -1,0 +1,2 @@
+include ':app', ':hongqi'
+rootProject.name='HongQICar'
