@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panorama id="">
+  <input levelbiashidpi="0.400" levelbias="0.400" levelingpitch="0" levelingroll="0" width="750" overlap="1" leveltileurl="tiles/hs5/cf_%c/l_%l/c_%x/tile_%y.jpg" height="750" leveltilesize="510">
+    <level predecode="0" preload="0" width="750" height="750"/>
+    <level predecode="1" preload="1" width="375" height="375"/>
+    <preview color="0x808080" strip="1"/>
+  </input>
+  <view pannorth="0" fovmode="0">
+    <start tilt="0" pan="0" fov="70"/>
+    <min tilt="-90" pan="0" fov="5"/>
+    <max tilt="90" pan="360" fov="120"/>
+  </view>
+  <userdata longitude="" datetime="" info="" latitude="" author="" title="" copyright="" comment="" source="" tags="Desktop" description=""/>
+  <hotspots wordwrap="1" width="180" height="20" >
+    <label borderalpha="1" enabled="1" wordwrap="1" borderradius="1" backgroundalpha="1" textalpha="1" backgroundcolor="0xffffff" textcolor="0x000000" border="1" bordercolor="0x000000" width="180" height="20" background="1"/>
+    <polystyle borderalpha="1" handcursor="1" mode="0" backgroundalpha="0.2509803921568627" backgroundcolor="0x0000ff" bordercolor="0x0000ff"/>
+    <hotspot tilt="-10.92" target="_blank" title="" url="" pan="44.02" id="hout_1" description="" skinid="Hotspot 1" onclick="spot1()"/>
+  </hotspots>
+  
+  <action name="spot1" type="javascript">
+	<!-- console.log('ddd') -->
+  </action>
+  
+  <media/>
+  <transition type="crossdissolve" blendtime="1" softedge="0" enabled="0" zoomfov="20" zoomoutpause="1" zoomspeed="2" zoomout="0" blendcolor="0x000000" zoomin="0"/>
+  <control lockedkeyboardzoom="1" hideabout="0" invertwheel="0" lockedmouse="0" dblclickfullscreen="0" simulatemass="1" lockedkeyboard="1" lockedwheel="1" sensitivity="8" speedwheel="1" invertcontrol="1" contextfullscreen="0"/>
+</panorama>

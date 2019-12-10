@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+//annotationProcessor plugin: 'com.neenbedankt.android-apt'
+def dbflow_version = "3.0.0-beta2"
 android {
     compileSdkVersion 29
 
@@ -8,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -25,9 +26,36 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation 'com.android.support:design:29.0.0'
+    implementation 'com.android.support:support-v4:29.0.0'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+//图片框架
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+    //数据解析框架
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //注解框架
+    implementation 'org.xutils:xutils:3.3.36'
+    //事件框架
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation 'com.google.vr:sdk-panowidget:1.80.0'
+
+    //数据库框架
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+
+    // sql-cipher database encyrption (optional)
+    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${dbflow_version}"
+
+    implementation 'homhomlin.lib:ptrrv-library:1.3.1'
+
+//    implementation 'com.viewpagerindicator:library:2.4.1'
+
 }
