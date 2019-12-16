@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/theme1_main_bg"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/main_back_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="32dp"
+        android:src="@mipmap/theme1_c229_back_icon" />
+
+    <RelativeLayout
+        android:id="@+id/root_rl"
+        android:layout_width="1030dp"
+        android:layout_height="580dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="10dp">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="1030dp"
+            android:layout_height="580dp" />
+
+        <ImageView
+            android:id="@+id/playOrPause"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/video_play_btn_n" />
+
+        <LinearLayout
+            android:id="@+id/control_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#00000000"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#00000000"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:id="@+id/tv_start_time"
+                    style="@style/text_26_white"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="00.00" />
+
+
+                <TextView
+                    android:id="@+id/tv_end_time"
+                    style="@style/text_26_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:text="00.00" />
+
+
+                <SeekBar
+                    android:id="@+id/tv_progess"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_below="@+id/tv_start_time"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:progressDrawable="@drawable/seek_bar_style"
+                    android:thumb="@drawable/shape_seekbar_btn" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/interactive_layout"
+            android:layout_width="905dp"
+            android:layout_height="477dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <com.faw.hongqi.widget.BigPointView
+                android:id="@+id/spreadView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="580dp"
+        android:layout_height="455dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="90dp"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/text_32_white"
+                android:text="盲区监测系统" />
+
+            <TextView
+                android:id="@+id/text_content"
+                style="@style/text_28_gray"
+                android:layout_marginTop="40dp"
+                android:text="按下盲区探测关闭按键，组合仪表显示系统关闭指示灯，盲区探测系统关闭。再次按下关闭按键，指示灯熄灭，盲区探测系统开启
+若系统故障时，盲区探测系统为关闭状态，通过开关无法开启。" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
