@@ -8,10 +8,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="95dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="95dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginRight="147dp"
+        android:layout_marginBottom="53dp"
         android:background="@mipmap/content_bg">
 
         <androidx.viewpager.widget.ViewPager
@@ -21,16 +21,16 @@
 
         <com.faw.hongqi.widget.CirclePageIndicator
             android:id="@+id/circleView"
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="22dp" />
+            android:layout_marginBottom="55dp" />
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="22dp"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_margin="43dp"
             android:src="@mipmap/theme1_c229_back_icon" />
     </FrameLayout>
 

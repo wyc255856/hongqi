@@ -15,7 +15,7 @@ import com.faw.hongqi.R;
 public class HomeModelHotPointView extends LinearLayout implements View.OnClickListener {
 
     View point_view_1;
-    ImageView point_view_1_point1;
+//    ImageView point_view_1_point1;
 
     private Activity mContext;
 
@@ -36,11 +36,11 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         LayoutInflater.from(context).inflate(R.layout.view_home_hot_point,
                 this, true);
         point_view_1 = findViewById(R.id.point_view_1);
-        point_view_1_point1 = findViewById(R.id.point_view_1_point1);
+//        point_view_1_point1 = findViewById(R.id.point_view_1_point1);
 //        Glide.with(mContext).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(point_view_1_point1);
 //        Glide.with(mContext).load(R.drawable.c229_point).into(point_view_1_point1);
-        Glide.with(mContext).load(R.drawable.c229_point)
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(point_view_1_point1);
+//        Glide.with(mContext).load(R.drawable.c229_point)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL).into(point_view_1_point1);
     }
 
     @Override

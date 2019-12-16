@@ -38,7 +38,7 @@ public class ContentHolder extends BaseHolder {
         if (layout != null)
             layout.removeAllViews();
         List<NewsModel> allList = bean.getRECORDS();
-        int lineCount = Constant.IS_PHONE ? 4 : 6;
+        int lineCount = Constant.IS_PHONE ? 3 : 4;
         LinearLayout hLayout = null;
         for (int i = 0; i < allList.size(); i++) {
             NewsModel model = allList.get(i);

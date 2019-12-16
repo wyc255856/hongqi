@@ -101,7 +101,13 @@ public class DBUtil {
 //                .where()
                 .async().queryList(transactionListener);
     }
-
+    public static void getManuaCategoryList(TransactionListener transactionListener) {
+        SQLite.select()
+                .from(CategoryModel.class)
+                .where(CategoryModel_Table.parentid.eq(1855))
+//                .where()
+                .async().queryList(transactionListener);
+    }
     public static void getNewsListByCatId(int catid, TransactionListener transactionListener) {
         LogUtil.logError("fast catid = " + catid);
         SQLite.select()

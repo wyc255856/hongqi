@@ -6,23 +6,23 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="80dp" />
+        android:layout_height="110dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="160dp"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="700dp"
-            android:layout_height="35.33dp"
+            android:layout_width="1125dp"
+            android:layout_height="70dp"
             android:background="@mipmap/search_c229_bg">
 
             <ImageView
                 android:id="@+id/search_icon"
-                android:layout_width="20.6dp"
-                android:layout_height="20.6dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
                 android:src="@mipmap/search_c229_icon" />
@@ -32,7 +32,7 @@
                 style="@style/text_32_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="14dp"
+                android:layout_marginLeft="25dp"
                 android:layout_toRightOf="@id/search_icon"
                 android:background="@null"
                 android:gravity="center_vertical"
@@ -40,23 +40,22 @@
 
             <ImageView
                 android:id="@+id/delete_btn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
                 android:src="@mipmap/search_c229_close"
                 android:visibility="gone" />
         </RelativeLayout>
-<!--        android:scrollbarThumbVertical="#bfbfbf"-->
-<!--        android:scrollbarTrackVertical="#393c41"-->
+        <!--        android:scrollbarThumbVertical="#bfbfbf"-->
+        <!--        android:scrollbarTrackVertical="#393c41"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ptrrv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="70dp"
-
+            android:layout_marginBottom="85dp"
             android:scrollbars="vertical" />
     </LinearLayout>
 

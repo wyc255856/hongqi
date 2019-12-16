@@ -7,25 +7,25 @@
 
     <ImageView
         android:id="@+id/image_content"
-        android:layout_width="264dp"
-        android:layout_height="264dp"
+        android:layout_width="390dp"
+        android:layout_height="390dp"
         android:layout_marginLeft="95dp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="264dp"
-        android:layout_marginLeft="20dp">
+        android:layout_height="390dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="95dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="95dp"
+            android:layout_marginRight="45dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_content"
-                style="@style/text_28_white"
-                android:layout_marginRight="10dp"></TextView>
+                style="@style/text_28_white"></TextView>
 
         </LinearLayout>
     </ScrollView>

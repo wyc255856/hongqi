@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:id="@+id/tab_item_1"
-        android:layout_width="140dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -23,7 +23,7 @@
 
     <FrameLayout
         android:id="@+id/tab_item_2"
-        android:layout_width="140dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -39,7 +39,7 @@
 
     <FrameLayout
         android:id="@+id/tab_item_3"
-        android:layout_width="140dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -55,7 +55,7 @@
 
     <FrameLayout
         android:id="@+id/tab_item_4"
-        android:layout_width="140dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -67,12 +67,12 @@
         <View
             android:id="@+id/tab_line_4"
             style="@style/home_tab_line"
-            android:layout_width="47dp"/>
+            android:layout_width="70dp"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/tab_item_5"
-        android:layout_width="140dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -84,6 +84,6 @@
         <View
             android:id="@+id/tab_line_5"
             style="@style/home_tab_line"
-            android:layout_width="47dp"/>
+            android:layout_width="70dp"/>
     </FrameLayout>
 </LinearLayout>

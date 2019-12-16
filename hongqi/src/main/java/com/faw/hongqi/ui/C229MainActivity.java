@@ -1,12 +1,20 @@
 package com.faw.hongqi.ui;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.fragment.BaseFragment;
+import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
+import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.widget.TabView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,7 +25,8 @@ public class C229MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        LogUtil.logError("path = " + FileUtil.getResPath());
+        requestWritePermission();
     }
 
     @Override
@@ -84,5 +93,26 @@ public class C229MainActivity extends BaseActivity {
             }
         }
 
+    }
+
+
+    private static final int WRITE_PERMISSION = 0x01;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if(requestCode == WRITE_PERMISSION){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("tag", "Write Permission Failed");
+                Toast.makeText(this, "You must allow permission write external storage to your mobile device.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
+
+    private void requestWritePermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},WRITE_PERMISSION);
+            }
+        }
     }
 }

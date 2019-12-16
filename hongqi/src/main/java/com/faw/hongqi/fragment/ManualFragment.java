@@ -46,7 +46,7 @@ public class ManualFragment extends BaseFragment {
     protected void initData() {
         EventBus.getDefault().register(this);
 
-        DBUtil.getFastCategoryList(new TransactionListener() {
+        DBUtil.getManuaCategoryList(new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
 

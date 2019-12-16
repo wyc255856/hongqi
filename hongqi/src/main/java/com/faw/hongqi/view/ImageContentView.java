@@ -44,6 +44,6 @@ public class ImageContentView extends BaseContentView {
 
     @Override
     public void setContent(ContentItemModel data) {
-        setImage(mContext, image_content, data.getImage());
+        setLongImage(mContext, image_content, data.getImage());
     }
 }

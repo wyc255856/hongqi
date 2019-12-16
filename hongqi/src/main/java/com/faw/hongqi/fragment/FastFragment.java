@@ -289,14 +289,14 @@ public class FastFragment extends BaseFragment {
         for (int i = 0; i < newsList.size(); i++) {
             NewsListModel newsListModel = newsList.get(i);
             int newsSize = newsListModel.getRECORDS().size();
-            int lineCount = Constant.IS_PHONE ? 4 : 6;
+            int lineCount = Constant.IS_PHONE ? 3 : 4;
             int lineNum = 0;
             if (newsSize % lineCount == 0) {
                 lineNum = newsSize / lineCount;
             } else {
                 lineNum = (newsSize / lineCount) + 1;
             }
-            downIndex += lineNum * PhoneUtil.dip2px(mContext, 191f);
+            downIndex += lineNum * PhoneUtil.dip2px(mContext, 240f);
             LogUtil.logError("downIndex = " + downIndex);
             scrollerUpIndexs.add(downIndex);
         }
@@ -312,7 +312,7 @@ public class FastFragment extends BaseFragment {
      */
     public void refreshMenueState() {
         //当前中线的滑动距离
-        int scrollerLengh = dyCount + PhoneUtil.dip2px(mContext, 191f);
+        int scrollerLengh = dyCount + PhoneUtil.dip2px(mContext, 240f);
         int index = 0;
         for (int i = 0; i < scrollerUpIndexs.size(); i++) {
             if (i + 1 != scrollerUpIndexs.size()) {
