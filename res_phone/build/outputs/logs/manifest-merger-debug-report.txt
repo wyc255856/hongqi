@@ -1,23 +1,23 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
+ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
+INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
 	package
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:2:5-39
+		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:2:9-43
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
+		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:42
+		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
 		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:11-69
