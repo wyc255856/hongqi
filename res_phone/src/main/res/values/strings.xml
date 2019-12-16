@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">hongqi</string>
+    <string name="home_tab_model_text">车型概览</string>
+    <string name="home_tab_fast_text">快速入门</string>
+    <string name="home_tab_brightspot_text">车型亮点</string>
+    <string name="home_tab_manual_text">手册</string>
+    <string name="home_tab_search_text">搜索</string>
+
+
+</resources>

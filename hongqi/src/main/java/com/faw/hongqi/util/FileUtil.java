@@ -10,8 +10,15 @@ import java.io.FileNotFoundException;
 public class FileUtil {
 
     public static String getResPath() {
-        String path = Environment.getExternalStorageDirectory().getPath();
-        return path+"/";
+        if(Constant.IS_PHONE){
+            //TODO 修改成手机的资源地址
+            String path = Environment.getExternalStorageDirectory().getPath();
+            return path+"/";
+        }else {
+            String path = Environment.getExternalStorageDirectory().getPath();
+            return path+"/";
+        }
+
     }
     /**
      * 加载本地图片

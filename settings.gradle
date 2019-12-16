@@ -1,2 +1,2 @@
-include ':app', ':hongqi'
+include ':app', ':hongqi', ':res_car', ':res_phone'
 rootProject.name='HongQICar'
