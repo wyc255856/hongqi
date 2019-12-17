@@ -77,8 +77,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 }
 
                 NowID = NowID == 0 ? 1 : NowID;
-                OldID=NowID;
-                homeModelHotPointView.showHotPointViewByResId(pics.get(NowID  - 1));
+                OldID = NowID;
+                homeModelHotPointView.showHotPointViewByResId(pics.get(NowID - 1));
 
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -89,19 +89,23 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 int id;
                 if (spec > 0) {
                     //从左向右滑
-                    Log.e(Tag, "0  spec=" + spec + ">>singleSpec=" + singleSpec);
-                    mo = (int) ((spec / singleSpec)+OldID);
-                    if (mo > pics.size())
+                    mo = (int) ((spec / singleSpec) + (pics.size() + 1 - OldID));
+                    Log.e(Tag, "左向右 mo =" + mo + "  OldID =" + OldID);
+                    if (mo > pics.size()) {
                         mo = mo % pics.size();
+
+                    }
                     mo = pics.size() + 1 - mo;
                 } else {
                     //从右向左滑
-                    Log.e(Tag, "1  spec=" + spec + ">>singleSpec=" + singleSpec);
+//                    Log.e(Tag, "1  spec=" + spec + ">>singleSpec=" + singleSpec);
                     spec = 0 - spec;
-                    mo = (int) ((spec / singleSpec)+OldID);
+                    mo = (int) ((spec / singleSpec) + OldID);
+                    Log.e(Tag, "又向左 mo =" + mo + "  OldID =" + OldID);
                     if (mo > pics.size())
-                        mo = mo % pics.size();
+                        mo = mo % pics.size() + 1;
                 }
+                Log.e(Tag, "最后 mo =" + mo + "  OldID =" + OldID);
                 if (mo != 0 && mo != 37) {
                     id = pics.get(mo - 1);
                     if (mo != NowID && !leftScreen) {
@@ -117,7 +121,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     }
 
     int NowID = 0;
-    int OldID=0;
+    int OldID = 0;
     List<Integer> pics;
 
     private void initPics() {
