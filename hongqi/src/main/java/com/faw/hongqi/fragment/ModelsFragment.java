@@ -90,7 +90,6 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 if (spec > 0) {
                     //从左向右滑
                     mo = (int) ((spec / singleSpec) + (pics.size() + 1 - OldID));
-                    Log.e(Tag, "左向右 mo =" + mo + "  OldID =" + OldID);
                     if (mo > pics.size()) {
                         mo = mo % pics.size();
 
@@ -101,11 +100,9 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
 //                    Log.e(Tag, "1  spec=" + spec + ">>singleSpec=" + singleSpec);
                     spec = 0 - spec;
                     mo = (int) ((spec / singleSpec) + OldID);
-                    Log.e(Tag, "又向左 mo =" + mo + "  OldID =" + OldID);
                     if (mo > pics.size())
                         mo = mo % pics.size() + 1;
                 }
-                Log.e(Tag, "最后 mo =" + mo + "  OldID =" + OldID);
                 if (mo != 0 && mo != 37) {
                     id = pics.get(mo - 1);
                     if (mo != NowID && !leftScreen) {
