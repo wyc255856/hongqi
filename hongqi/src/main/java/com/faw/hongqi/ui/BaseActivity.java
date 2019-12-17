@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.util.Constant;
 
 import org.xutils.x;
 
@@ -24,7 +25,13 @@ public abstract class BaseActivity extends FragmentActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-
+        if (Constant.IS_PHONE) {
+            // 隐藏状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            // 显示状态栏
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         DBUtil.initData(this);
         initData();
         initViews();
