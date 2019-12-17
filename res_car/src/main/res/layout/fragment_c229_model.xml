@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/car_model"
-        android:layout_width="1200dp"
-        android:layout_height="720dp"
+        android:layout_width="1344dp"
+        android:layout_height="630dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="fitXY"
         android:src="@drawable/c229_car_1" />

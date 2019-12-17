@@ -47,7 +47,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     float start;
     boolean leftScreen;
     long startTime;
-    float singleSpec = 20;
+    float singleSpec = 15;
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
@@ -75,8 +75,11 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                     Log.e(Tag, "ACTION_UP>>");
 //                    intertia(NowID, intertiaStart);
                 }
+
                 NowID = NowID == 0 ? 1 : NowID;
+                OldID=NowID;
                 homeModelHotPointView.showHotPointViewByResId(pics.get(NowID  - 1));
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 int nowX = (int) event.getX();
@@ -87,7 +90,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 if (spec > 0) {
                     //从左向右滑
                     Log.e(Tag, "0  spec=" + spec + ">>singleSpec=" + singleSpec);
-                    mo = (int) (spec / singleSpec);
+                    mo = (int) ((spec / singleSpec)+OldID);
                     if (mo > pics.size())
                         mo = mo % pics.size();
                     mo = pics.size() + 1 - mo;
@@ -95,11 +98,11 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                     //从右向左滑
                     Log.e(Tag, "1  spec=" + spec + ">>singleSpec=" + singleSpec);
                     spec = 0 - spec;
-                    mo = (int) (spec / singleSpec);
+                    mo = (int) ((spec / singleSpec)+OldID);
                     if (mo > pics.size())
                         mo = mo % pics.size();
                 }
-                if (mo != 0 && mo != 17) {
+                if (mo != 0 && mo != 37) {
                     id = pics.get(mo - 1);
                     if (mo != NowID && !leftScreen) {
                         Log.e(Tag, "ACTION_MOVE>>" + NowID);
@@ -114,11 +117,12 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     }
 
     int NowID = 0;
+    int OldID=0;
     List<Integer> pics;
 
     private void initPics() {
         pics = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 36; i++) {
             pics.add(ResUtil.getDrawableResId("c229_car_" + (i + 1)));
         }
     }
