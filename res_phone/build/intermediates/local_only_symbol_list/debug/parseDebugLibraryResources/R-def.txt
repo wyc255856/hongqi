@@ -225,6 +225,7 @@ layout view_point
 layout view_secondary_item
 layout view_secondary_list
 mipmap bottom_bg
+mipmap c229_model_bg
 mipmap carlight_top_bg
 mipmap content_bg
 mipmap fast_list_item_bg_1
@@ -235,10 +236,16 @@ mipmap fast_list_item_bg_5
 mipmap item_arrow
 mipmap point_view_1_1
 mipmap point_view_1_2
+mipmap point_view_line_1
+mipmap point_view_line_2
+mipmap point_view_line_3
 mipmap search_c229_bg
 mipmap search_c229_close
 mipmap search_c229_icon
 mipmap search_item_line
+mipmap test_point_view_icon_2
+mipmap test_point_view_icon_3
+mipmap test_point_view_icon_l
 mipmap test_video
 mipmap theme1_c229_back_icon
 mipmap theme1_detail_alert_bg

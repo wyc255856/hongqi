@@ -3,9 +3,13 @@ package com.faw.hongqi.fragment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.util.Constant;
+import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.ResUtil;
 import com.faw.hongqi.widget.HomeModelHotPointView;
 
@@ -36,6 +40,46 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
 
     @Override
     protected void initWidgetActions() {
+        ViewTreeObserver vto = car_model.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void
+            onGlobalLayout() {
+                car_model.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) car_model.getLayoutParams();
+                if (Constant.IS_PHONE) {
+                    //TODO 手机尺寸适配
+                } else {
+                    lp.width = 1440;
+                    lp.height = 675;
+                }
+
+                car_model.setLayoutParams(lp);
+
+            }
+
+        });
+        ViewTreeObserver vtoView = homeModelHotPointView.getViewTreeObserver();
+        vtoView.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void
+            onGlobalLayout() {
+                homeModelHotPointView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) homeModelHotPointView.getLayoutParams();
+                if (Constant.IS_PHONE) {
+                    //TODO 手机尺寸适配
+                } else {
+                    lp.width = PhoneUtil.getDisplayWidth(mContext);
+                    lp.height = 620;
+                    homeModelHotPointView.setItem(lp.width);
+                }
+                homeModelHotPointView.setLayoutParams(lp);
+
+
+            }
+
+        });
+
 
     }
 
@@ -47,7 +91,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     float start;
     boolean leftScreen;
     long startTime;
-    float singleSpec = 15;
+    float singleSpec = 10;
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {

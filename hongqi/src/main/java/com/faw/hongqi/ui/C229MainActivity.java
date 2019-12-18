@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.faw.hongqi.R;
@@ -22,6 +23,7 @@ public class C229MainActivity extends BaseActivity {
     private BaseFragment currentFragment;
     private String currentTag;
     TabView tabView;
+    View main_layout;
 
     @Override
     protected void initData() {
@@ -41,6 +43,7 @@ public class C229MainActivity extends BaseActivity {
             }
 
         });
+        main_layout = findViewById(R.id.main_layout);
         changeTabs("0");
     }
 
@@ -55,6 +58,11 @@ public class C229MainActivity extends BaseActivity {
     }
 
     public void changeTabs(String tag) {
+        if ("0".equals(tag)) {
+            main_layout.setBackgroundResource(R.mipmap.c229_model_bg);
+        } else {
+            main_layout.setBackgroundResource(R.mipmap.theme1_main_bg);
+        }
         FragmentManager fm = this.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
@@ -97,9 +105,10 @@ public class C229MainActivity extends BaseActivity {
 
 
     private static final int WRITE_PERMISSION = 0x01;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if(requestCode == WRITE_PERMISSION){
+        if (requestCode == WRITE_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("tag", "Write Permission Failed");
                 Toast.makeText(this, "You must allow permission write external storage to your mobile device.", Toast.LENGTH_SHORT).show();
@@ -108,10 +117,10 @@ public class C229MainActivity extends BaseActivity {
         }
     }
 
-    private void requestWritePermission(){
+    private void requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},WRITE_PERMISSION);
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
             }
         }
     }
