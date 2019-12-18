@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/point_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/point_view_1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="250dp">
+
+            <TextView
+                android:id="@+id/point_view_1_text1"
+                style="@style/text_32_white"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="70dp"
+                android:text="车轮/轮毂" />
+
+            <ImageView
+                android:id="@+id/point_view_1_line1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:src="@mipmap/point_view_1_1" />
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/point_view_1_point1"-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:layout_marginLeft="550dp"-->
+            <!--                android:layout_marginTop="25dp" />-->
+            <com.faw.hongqi.widget.PointView
+                android:id="@+id/point_view_1_point1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="550dp"
+                android:layout_marginTop="25dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</FrameLayout>

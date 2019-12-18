@@ -93,9 +93,9 @@ public class BaseModelItem extends LinearLayout {
                     setPhonePoint(250, 500, style);
                     setPhoneText(60, 400, style);
                 } else {
-                    setLine(50, 400, style);
-                    setPoint(250, 500, style);
-                    setText(60, 400, style);
+                    setLine(50, 200, style);
+                    setPoint(400, 295, style);
+                    setText(60, 200, style);
                 }
                 break;
             case 3:
@@ -125,9 +125,9 @@ public class BaseModelItem extends LinearLayout {
         if (style == 1) {
             line.setImageResource(R.mipmap.point_view_line_2);
         } else if (style == 2) {
-            line.setImageResource(R.mipmap.point_view_line_2);
-        } else if (style == 3) {
             line.setImageResource(R.mipmap.point_view_line_3);
+        } else if (style == 3) {
+            line.setImageResource(R.mipmap.point_view_line_1);
         }
         RelativeLayout.LayoutParams lpline = (RelativeLayout.LayoutParams) line.getLayoutParams();
         lpline.leftMargin = x;
