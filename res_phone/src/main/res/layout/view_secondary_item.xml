@@ -7,6 +7,6 @@
     <TextView
         android:id="@+id/title"
         style="@style/text_28_white"
-        android:layout_height="85dp"
-        android:gravity="center_vertical" />
+        android:layout_marginTop="26.5dp"
+        />
 </LinearLayout>
