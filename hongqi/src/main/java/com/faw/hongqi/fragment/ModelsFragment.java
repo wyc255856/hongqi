@@ -91,7 +91,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     float start;
     boolean leftScreen;
     long startTime;
-    float singleSpec = 10;
+    float singleSpec = 15;
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {

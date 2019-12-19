@@ -7,7 +7,7 @@ package com.faw.hongqi.util;
 public class Constant {
     public final static String BASE_URL = "http://59.110.156.116/app/";//万臣
 
-    public final static boolean IS_PHONE = true;//判断包是否是手机应用
+    public final static boolean IS_PHONE = false;//判断包是否是手机应用
 
     public final static boolean DEBUG = true;//是否是调试包
 

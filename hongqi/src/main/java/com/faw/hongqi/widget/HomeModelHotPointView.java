@@ -232,7 +232,7 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         if (Constant.IS_PHONE) {
             k = width / WIDTH;
         } else {
-            k = 0.75;
+            k = 1;
         }
         BaseModelItem baseModelItem1 = new BaseModelItem(mContext, "1064", mContext.getString(R.string.model_item_text_1), R.mipmap.test_point_view_icon_2);
         BaseModelItem baseModelItem2 = new BaseModelItem(mContext, "906", mContext.getString(R.string.model_item_text_2), R.mipmap.test_point_view_icon_l);
@@ -249,149 +249,149 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
 
     private void setCarPointView(int resID) {
         if (resID == R.drawable.c229_car_1) {
-            view_list.get(0).setPosition(160, 140, 2, k);
-            view_list.get(1).setPosition(160, 120, 1, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(160, 400, 2, k);
+            view_list.get(1).setPosition(200, 250, 1, k);
+            view_list.get(2).setPosition(1200, 230, 3, k);
         } else if (resID == R.drawable.c229_car_2) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(150, 400, 2, k);
+            view_list.get(1).setPosition(160, 250, 1, k);
+            view_list.get(2).setPosition(1270, 230, 3, k);
         } else if (resID == R.drawable.c229_car_3) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(340, 400, 2, k);
+            view_list.get(1).setPosition(120, 250, 1, k);
+            view_list.get(2).setPosition(1310, 230, 3, k);
         } else if (resID == R.drawable.c229_car_4) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(340, 400, 2, k);
+            view_list.get(1).setPosition(120, 250, 1, k);
+            view_list.get(2).setPosition(1350, 230, 3, k);
         } else if (resID == R.drawable.c229_car_5) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(300, 400, 2, k);
+            view_list.get(1).setPosition(160, 240, 1, k);
+            view_list.get(2).setPosition(1350, 230, 3, k);
         } else if (resID == R.drawable.c229_car_6) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(170, 235, 1, k);
+            view_list.get(2).setPosition(1400, 230, 3, k);
         } else if (resID == R.drawable.c229_car_7) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(195, 400, 2, k);
+            view_list.get(1).setPosition(150, 235, 1, k);
+            view_list.get(2).setPosition(1400, 230, 3, k);
         } else if (resID == R.drawable.c229_car_8) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(195, 400, 2, k);
+            view_list.get(1).setPosition(150, 235, 1, k);
+            view_list.get(2).setPosition(1400, 230, 3, k);
         } else if (resID == R.drawable.c229_car_9) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(195, 400, 2, k);
+            view_list.get(1).setPosition(150, 235, 1, k);
+            view_list.get(2).setPosition(1400, 230, 3, k);
         } else if (resID == R.drawable.c229_car_10) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(195, 400, 2, k);
+            view_list.get(1).setPosition(160, 235, 1, k);
+            view_list.get(2).setPosition(1400, 230, 3, k);
         } else if (resID == R.drawable.c229_car_11) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(215, 400, 2, k);
+            view_list.get(1).setPosition(190, 235, 1, k);
+            view_list.get(2).setPosition(1380, 220, 3, k);
         } else if (resID == R.drawable.c229_car_12) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(215, 400, 2, k);
+            view_list.get(1).setPosition(250, 235, 1, k);
+            view_list.get(2).setPosition(1350, 220, 3, k);
         } else if (resID == R.drawable.c229_car_13) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(255, 400, 2, k);
+            view_list.get(1).setPosition(300, 235, 1, k);
+            view_list.get(2).setPosition(1300, 220, 3, k);
         } else if (resID == R.drawable.c229_car_14) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(300, 400, 2, k);
+            view_list.get(1).setPosition(400, 235, 1, k);
+            view_list.get(2).setPosition(1250, 220, 3, k);
         } else if (resID == R.drawable.c229_car_15) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(380, 400, 2, k);
+            view_list.get(1).setPosition(380, 235, 1, k);
+            view_list.get(2).setPosition(1100, 220, 3, k);
         } else if (resID == R.drawable.c229_car_16) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(400, 400, 2, k);
+            view_list.get(1).setPosition(390, 235, 1, k);
+            view_list.get(2).setPosition(1100, 220, 3, k);
         } else if (resID == R.drawable.c229_car_17) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(400, 400, 2, k);
+            view_list.get(1).setPosition(390, 235, 1, k);
+            view_list.get(2).setPosition(1100, 220, 3, k);
         } else if (resID == R.drawable.c229_car_18) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(1200, 250, 3, k);
+            view_list.get(2).setPosition(300, 250, 1, k);
         } else if (resID == R.drawable.c229_car_19) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(1250, 250, 3, k);
+            view_list.get(2).setPosition(280, 230, 1, k);
         } else if (resID == R.drawable.c229_car_20) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(1300, 250, 3, k);
+            view_list.get(2).setPosition(280, 230, 1, k);
         } else if (resID == R.drawable.c229_car_21) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(1350, 250, 3, k);
+            view_list.get(2).setPosition(240, 230, 1, k);
         } else if (resID == R.drawable.c229_car_22) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(260, 400, 2, k);
+            view_list.get(1).setPosition(1370, 250, 3, k);
+            view_list.get(2).setPosition(200, 230, 1, k);
         } else if (resID == R.drawable.c229_car_23) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(270, 400, 2, k);
+            view_list.get(1).setPosition(1410, 250, 3, k);
+            view_list.get(2).setPosition(160, 230, 1, k);
         } else if (resID == R.drawable.c229_car_24) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(270, 400, 2, k);
+            view_list.get(1).setPosition(1430, 250, 3, k);
+            view_list.get(2).setPosition(160, 230, 1, k);
         } else if (resID == R.drawable.c229_car_25) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(290, 400, 2, k);
+            view_list.get(1).setPosition(1440, 250, 3, k);
+            view_list.get(2).setPosition(160, 230, 1, k);
         } else if (resID == R.drawable.c229_car_26) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(290, 400, 2, k);
+            view_list.get(1).setPosition(1440, 250, 3, k);
+            view_list.get(2).setPosition(150, 230, 1, k);
         } else if (resID == R.drawable.c229_car_27) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(280, 400, 2, k);
+            view_list.get(1).setPosition(1340, 250, 3, k);
+            view_list.get(2).setPosition(160, 230, 1, k);
         } else if (resID == R.drawable.c229_car_28) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(240, 400, 2, k);
+            view_list.get(1).setPosition(1340, 250, 3, k);
+            view_list.get(2).setPosition(180, 230, 1, k);
         } else if (resID == R.drawable.c229_car_29) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(240, 400, 2, k);
+            view_list.get(1).setPosition(1250, 250, 3, k);
+            view_list.get(2).setPosition(200, 230, 1, k);
         } else if (resID == R.drawable.c229_car_30) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(260, 400, 2, k);
+            view_list.get(1).setPosition(1380, 250, 3, k);
+            view_list.get(2).setPosition(240, 230, 1, k);
         } else if (resID == R.drawable.c229_car_31) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(280, 400, 2, k);
+            view_list.get(1).setPosition(1320, 250, 3, k);
+            view_list.get(2).setPosition(300, 230, 1, k);
         } else if (resID == R.drawable.c229_car_32) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(340, 400, 2, k);
+            view_list.get(1).setPosition(1280, 250, 3, k);
+            view_list.get(2).setPosition(340, 230, 1, k);
         } else if (resID == R.drawable.c229_car_33) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(420, 400, 2, k);
+            view_list.get(1).setPosition(1200, 250, 3, k);
+            view_list.get(2).setPosition(380, 230, 1, k);
         } else if (resID == R.drawable.c229_car_34) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(360, 400, 2, k);
+            view_list.get(1).setPosition(1100, 250, 3, k);
+            view_list.get(2).setPosition(400, 230, 1, k);
         } else if (resID == R.drawable.c229_car_35) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(270, 400, 2, k);
+            view_list.get(1).setPosition(320, 250, 1, k);
+            view_list.get(2).setPosition(1120, 230, 3, k);
         } else if (resID == R.drawable.c229_car_36) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(220, 400, 2, k);
+            view_list.get(1).setPosition(270, 250, 1, k);
+            view_list.get(2).setPosition(1150, 230, 3, k);
         }
     }
 
