@@ -82,9 +82,9 @@ public class BaseModelItem extends LinearLayout {
                     setPhonePoint(450, 300, style);
                     setPhoneText(60, 200, style);
                 } else {
-                    setLine(50, 200, style);
-                    setPoint(400, 295, style);
-                    setText(60, 200, style);
+                    setLine(0, 10, style);
+                    setPoint(350, 105, style);
+                    setText(10, 0, style);
                 }
                 break;
             case 2:
@@ -93,9 +93,9 @@ public class BaseModelItem extends LinearLayout {
                     setPhonePoint(1080, 385, style);
                     setPhoneText(200, 420, style);
                 } else {
-                    setLine(50, 200, style);
-                    setPoint(400, 295, style);
-                    setText(60, 200, style);
+                    setLine(0, 15, style);
+                    setPoint(380, 0, style);
+                    setText(0, 30, style);
                 }
                 break;
             case 3:
@@ -104,9 +104,9 @@ public class BaseModelItem extends LinearLayout {
                     setPhonePoint(250, 300, style);
                     setPhoneText(260, 200, style);
                 } else {
-                    setLine(250, 200, style);
-                    setPoint(250, 300, style);
-                    setText(260, 200, style);
+                    setLine(15, 0, style);
+                    setPoint(0, 85, style);
+                    setText(130, 0, style);
                 }
                 break;
         }
