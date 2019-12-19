@@ -28,13 +28,8 @@
                     android:id="@+id/item_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginLeft="35dp"
                     android:layout_marginTop="14dp"
-=======
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginTop="40dp"
->>>>>>> 2a089724908150b9baa0c9dff040888d3fcb7d45
                     android:orientation="vertical">
 
                 </LinearLayout>

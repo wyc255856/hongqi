@@ -76,9 +76,9 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
 
     private void setPhonePointView(int resID) {
         if (resID == R.drawable.c229_car_1) {
-            view_list.get(0).setPosition(0, 0, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(150, 100, 1, k);
+            view_list.get(1).setPosition(20, 20, 2, k);
+            view_list.get(2).setPosition(30, 30, 3, k);
         } else if (resID == R.drawable.c229_car_2) {
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);

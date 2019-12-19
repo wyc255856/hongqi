@@ -145,15 +145,14 @@ id iv_wave
 id iv_wave_1
 id iv_wave_2
 id layout
+id line
 id main_back_icon
+id main_layout
 id none
 id playOrPause
 id play_btn
-id point_view_1
-id point_view_1_1
-id point_view_1_line1
-id point_view_1_point1
-id point_view_1_text1
+id point
+id point_view
 id progress_bar_healthy
 id ptrrv
 id root_rl
@@ -178,6 +177,7 @@ id tab_text_3
 id tab_text_4
 id tab_text_5
 id tab_view
+id text
 id text_content
 id text_title
 id title
@@ -189,6 +189,7 @@ id tv_start_time
 id underline
 id video_content
 id video_view
+id view_layout
 id viewpager
 id vp_picture
 id web_view
@@ -220,6 +221,7 @@ layout view_c229_text_content
 layout view_c229_video_content
 layout view_car
 layout view_home_hot_point
+layout view_model_item
 layout view_point
 layout view_secondary_item
 layout view_secondary_list
@@ -263,6 +265,9 @@ string home_tab_fast_text
 string home_tab_manual_text
 string home_tab_model_text
 string home_tab_search_text
+string model_item_text_1
+string model_item_text_2
+string model_item_text_3
 style TextAppearance_TabPageIndicator
 style Theme_AppCompat_Light_NoActionBar_Translucent
 style Theme_PageIndicatorDefaults

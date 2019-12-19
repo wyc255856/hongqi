@@ -38,6 +38,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
         car_model.setOnTouchListener(this);
     }
 
+
+
     @Override
     protected void initWidgetActions() {
         ViewTreeObserver vto = car_model.getViewTreeObserver();
@@ -49,6 +51,10 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) car_model.getLayoutParams();
                 if (Constant.IS_PHONE) {
                     //TODO 手机尺寸适配
+                    int screenWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
+                    int screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+                    lp.width = screenWidth - 250;
+                    lp.height = screenHeight - 150;
                 } else {
                     lp.width = 1440;
                     lp.height = 675;
@@ -68,6 +74,11 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) homeModelHotPointView.getLayoutParams();
                 if (Constant.IS_PHONE) {
                     //TODO 手机尺寸适配
+                    int screenWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
+                    int screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+                    lp.width = screenWidth - 250;
+                    lp.height = screenHeight - 150;
+                    homeModelHotPointView.setItem(lp.width);
                 } else {
                     lp.width = PhoneUtil.getDisplayWidth(mContext);
                     lp.height = 620;

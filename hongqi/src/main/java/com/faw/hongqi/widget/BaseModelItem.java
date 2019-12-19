@@ -90,8 +90,8 @@ public class BaseModelItem extends LinearLayout {
             case 2:
                 if (Constant.IS_PHONE) {
                     setPhoneLine(50, 400, style);
-                    setPhonePoint(250, 500, style);
-                    setPhoneText(60, 400, style);
+                    setPhonePoint(1080, 385, style);
+                    setPhoneText(200, 420, style);
                 } else {
                     setLine(50, 200, style);
                     setPoint(400, 295, style);

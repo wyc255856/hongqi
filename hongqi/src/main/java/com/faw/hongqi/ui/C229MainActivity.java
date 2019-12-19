@@ -14,6 +14,9 @@ import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.widget.TabView;
+import com.liulishuo.filedownloader.util.FileDownloadUtils;
+
+import java.io.File;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
@@ -24,7 +27,8 @@ public class C229MainActivity extends BaseActivity {
     private String currentTag;
     TabView tabView;
     View main_layout;
-
+    private String saveZipFilePath = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+            + File.separator + "MyFolder";
     @Override
     protected void initData() {
         LogUtil.logError("path = " + FileUtil.getResPath());
