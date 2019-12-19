@@ -128,6 +128,9 @@ drawable vpi__tab_unselected_pressed_holo
 drawable vr
 id back
 id bottom
+id btn_download
+id btn_show_picture
+id btn_unzip
 id car_model
 id cecondary_seek_bg
 id circleView
@@ -152,6 +155,7 @@ id point_view_1_1
 id point_view_1_line1
 id point_view_1_point1
 id point_view_1_text1
+id progress_bar_healthy
 id ptrrv
 id root_rl
 id search_edit
@@ -187,6 +191,7 @@ id underline
 id video_content
 id video_view
 id viewpager
+id vp_picture
 id web_view
 id word
 integer default_circle_indicator_orientation
@@ -198,6 +203,7 @@ layout activity_c229_content
 layout activity_c229_main
 layout activity_c229_play_video
 layout activity_c229_video
+layout activity_load_and_unzip_file
 layout fragment_c229_bring
 layout fragment_c229_content
 layout fragment_c229_fast
