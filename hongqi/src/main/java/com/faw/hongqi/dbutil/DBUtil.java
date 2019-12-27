@@ -93,7 +93,14 @@ public class DBUtil {
                 .where()
                 .async().queryList(transactionListener);
     }
-
+    public static void getNewsListById(int id, TransactionListener transactionListener) {
+        LogUtil.logError("fast id = " + id);
+        SQLite.select()
+                .from(NewsModel.class)
+                .where(NewsModel_Table.id.eq(id))
+//                .where()
+                .async().querySingle(transactionListener);
+    }
     public static void getFastCategoryList(TransactionListener transactionListener) {
         SQLite.select()
                 .from(CategoryModel.class)

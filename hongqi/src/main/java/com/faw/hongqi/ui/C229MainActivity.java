@@ -1,6 +1,7 @@
 package com.faw.hongqi.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
@@ -14,6 +15,9 @@ import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.widget.TabView;
+import com.liulishuo.filedownloader.util.FileDownloadUtils;
+
+import java.io.File;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
@@ -29,6 +33,7 @@ public class C229MainActivity extends BaseActivity {
     protected void initData() {
         LogUtil.logError("path = " + FileUtil.getResPath());
         requestWritePermission();
+//        startActivity(new Intent(C229MainActivity.this,C229LoadAndUnzipFileActivity.class));
     }
 
     @Override

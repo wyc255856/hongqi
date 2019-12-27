@@ -44,6 +44,8 @@ public class FastFragment extends BaseFragment {
         return R.layout.fragment_c229_fast;
     }
 
+    private List<CategoryModel> list5 = new ArrayList<>();
+
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
@@ -63,6 +65,10 @@ public class FastFragment extends BaseFragment {
             public boolean hasResult(BaseTransaction transaction, Object result) {
                 if (result != null)
                     list = (List<CategoryModel>) result;
+                for (int i = 0; i < 5; i++) {
+                    list5.add(list.get(i));
+                }
+
                 LogUtil.logError("list size = " + list.size());
                 ((Activity) mContext).runOnUiThread(new Runnable() {
                     @Override
@@ -160,7 +166,7 @@ public class FastFragment extends BaseFragment {
     long startTime = 0;
 
     private void initList() {
-        secondaryListView.setDataList(list, SecondaryOnclickEvent.FAST);
+        secondaryListView.setDataList(list5, SecondaryOnclickEvent.FAST);
         startTime = System.currentTimeMillis();
         getFastNewsList();
 
@@ -289,7 +295,7 @@ public class FastFragment extends BaseFragment {
         for (int i = 0; i < newsList.size(); i++) {
             NewsListModel newsListModel = newsList.get(i);
             int newsSize = newsListModel.getRECORDS().size();
-            int lineCount = Constant.IS_PHONE ? 3 : 4;
+            int lineCount = Constant.IS_PHONE ? 4 : 4;
             int lineNum = 0;
             if (newsSize % lineCount == 0) {
                 lineNum = newsSize / lineCount;
