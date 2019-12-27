@@ -159,10 +159,12 @@ public class ManualFragment extends BaseFragment {
     long startTime = 0;
 
     private void initList() {
-        List<CategoryModel> testlist = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            testlist.add(list.get(i));
-        }
+//        List<CategoryModel> testlist = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            testlist.add(list.get(i));
+//        }
+        list = list.subList(0, 5);
+//        secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         startTime = System.currentTimeMillis();
         getFastNewsList();
@@ -299,7 +301,7 @@ public class ManualFragment extends BaseFragment {
             } else {
                 lineNum = (newsSize / lineCount) + 1;
             }
-            downIndex += lineNum * PhoneUtil.dip2px(mContext, 191f);
+            downIndex += lineNum * PhoneUtil.dip2px(mContext, 240f);
             LogUtil.logError("downIndex = " + downIndex);
             scrollerUpIndexs.add(downIndex);
         }
@@ -315,7 +317,7 @@ public class ManualFragment extends BaseFragment {
      */
     public void refreshMenueState() {
         //当前中线的滑动距离
-        int scrollerLengh = dyCount + PhoneUtil.dip2px(mContext, 191f);
+        int scrollerLengh = dyCount + PhoneUtil.dip2px(mContext, 240f);
         int index = 0;
         for (int i = 0; i < scrollerUpIndexs.size(); i++) {
             if (i + 1 != scrollerUpIndexs.size()) {
