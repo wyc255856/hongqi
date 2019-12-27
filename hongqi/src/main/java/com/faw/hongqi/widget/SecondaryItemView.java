@@ -91,7 +91,7 @@ public class SecondaryItemView extends LinearLayout implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        EventBus.getDefault().post(new SecondaryOnclickEvent(SecondaryOnclickEvent.FAST, index));
+        EventBus.getDefault().post(new SecondaryOnclickEvent(type, index));
     }
 
     public void onDestroy() {

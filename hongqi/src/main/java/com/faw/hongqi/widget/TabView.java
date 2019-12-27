@@ -10,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.event.HideKeyboardEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -90,6 +93,7 @@ public class TabView extends LinearLayout implements View.OnClickListener {
     public void onClick(View view) {
         if (lisetener != null) {
 //            FrameLayout.LayoutParams lp = null;
+            EventBus.getDefault().post(new HideKeyboardEvent());
             int tag = 0;
             if (view == tab_item_1) {
                 tag = 0;

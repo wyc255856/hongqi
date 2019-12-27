@@ -86,7 +86,7 @@ public class SecondaryListView extends LinearLayout implements View.OnClickListe
             if (SecondaryOnclickEvent.FAST == secondaryOnclickEvent.getType()) {
                 cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
             } else {
-//                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
+                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
 
             }
         }
@@ -95,6 +95,7 @@ public class SecondaryListView extends LinearLayout implements View.OnClickListe
             if (SecondaryOnclickEvent.FAST == secondaryOnclickEvent.getType()) {
                 cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
             } else {
+                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
 
             }
         }

@@ -21,10 +21,10 @@
 
         <com.faw.hongqi.widget.CirclePageIndicator
             android:id="@+id/circleView"
-            android:layout_width="160dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="55dp" />
+            android:layout_marginBottom="25dp" />
 
         <ImageView
             android:id="@+id/back"

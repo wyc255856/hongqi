@@ -1,14 +1,18 @@
 package com.faw.hongqi.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.adaptar.PtrrvAdapter;
 import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.event.BaseEvent;
+import com.faw.hongqi.event.HideKeyboardEvent;
 import com.faw.hongqi.holder.ContentHolder;
 import com.faw.hongqi.holder.SearchHolder;
 import com.faw.hongqi.model.CategoryModel;
@@ -17,6 +21,9 @@ import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.LogUtil;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +47,7 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -90,7 +97,7 @@ public class SearchFragment extends BaseFragment {
     List<CategoryModel> list;
 
     private void search(String word) {
-        WORD=word;
+        WORD = word;
         list = new ArrayList<>();
         DBUtil.searchByWord(word, new TransactionListener() {
             @Override
@@ -120,8 +127,30 @@ public class SearchFragment extends BaseFragment {
         });
     }
 
+    public void HideKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+
+        }
+    }
+
+    @Subscribe
+    public void onEvent(BaseEvent event) {
+        if (event instanceof HideKeyboardEvent) {
+            HideKeyboard(search_edit);
+        }
+
+    }
+
     @Override
     public void refreshData() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
