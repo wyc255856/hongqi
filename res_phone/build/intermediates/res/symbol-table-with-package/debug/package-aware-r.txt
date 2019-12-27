@@ -115,6 +115,7 @@ drawable c229_car_8
 drawable c229_car_9
 drawable c229_point
 drawable point_color
+drawable progress_bg_c229
 drawable seek_bar_style
 drawable shape_seekbar_btn
 drawable vpi__tab_indicator
@@ -127,9 +128,6 @@ drawable vpi__tab_unselected_pressed_holo
 drawable vr
 id back
 id bottom
-id btn_download
-id btn_show_picture
-id btn_unzip
 id car_model
 id cecondary_seek_bg
 id circleView
@@ -146,6 +144,9 @@ id iv_wave_1
 id iv_wave_2
 id layout
 id line
+id ll_is_download
+id ll_is_no_wifi
+id ll_is_wifi
 id main_back_icon
 id main_layout
 id none
@@ -153,8 +154,10 @@ id playOrPause
 id play_btn
 id point
 id point_view
-id progress_bar_healthy
+id progress_bar
 id ptrrv
+id rl_is_wifi_no
+id rl_is_wifi_yes
 id root_rl
 id search_edit
 id search_icon
@@ -183,6 +186,7 @@ id text_title
 id title
 id top
 id triangle
+id tv_download_title
 id tv_end_time
 id tv_progess
 id tv_start_time
@@ -191,7 +195,6 @@ id video_content
 id video_view
 id view_layout
 id viewpager
-id vp_picture
 id web_view
 id word
 integer default_circle_indicator_orientation
@@ -229,12 +232,16 @@ mipmap bottom_bg
 mipmap c229_model_bg
 mipmap carlight_top_bg
 mipmap content_bg
+mipmap down_wifi_no
+mipmap down_wifi_yes
 mipmap fast_list_item_bg_1
 mipmap fast_list_item_bg_2
 mipmap fast_list_item_bg_3
 mipmap fast_list_item_bg_4
 mipmap fast_list_item_bg_5
+mipmap feed_grow_progress_bar
 mipmap item_arrow
+mipmap no_wifi_bg
 mipmap point_view_1_1
 mipmap point_view_1_2
 mipmap point_view_line_1
@@ -249,6 +256,7 @@ mipmap test_point_view_icon_3
 mipmap test_point_view_icon_l
 mipmap test_video
 mipmap theme1_c229_back_icon
+mipmap theme1_c229_main_back_icon
 mipmap theme1_detail_alert_bg
 mipmap theme1_main2_bg
 mipmap theme1_main_bg
@@ -260,6 +268,14 @@ raw vr
 raw zy_category
 raw zy_news
 string app_name
+string download_assest_text_check
+string download_assest_text_lianj
+string download_assest_text_no
+string download_assest_text_pack
+string download_assest_text_signal
+string download_assest_text_unzip
+string download_assest_text_wifi
+string download_assest_text_yes
 string home_tab_brightspot_text
 string home_tab_fast_text
 string home_tab_manual_text

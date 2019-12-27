@@ -24,6 +24,8 @@ import java.io.Serializable;
 public class NewsModel extends BaseModel implements Serializable {
 
     @PrimaryKey(autoincrement = true)
+    private int newsid;
+    @Column
     private int id;
     @Column
     private int caid;
@@ -158,6 +160,13 @@ public class NewsModel extends BaseModel implements Serializable {
     }
     public int getId() {
         return id;
+    }
+    public int getNewsid() {
+        return newsid;
+    }
+
+    public void setNewsid(int newsid) {
+        this.newsid = newsid;
     }
 
     public void setCaid(int caid) {

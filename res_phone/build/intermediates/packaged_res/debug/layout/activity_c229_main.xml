@@ -23,17 +23,17 @@
             android:id="@+id/main_back_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="55dp"
-            android:layout_marginTop="32dp"
-            android:src="@mipmap/theme1_c229_back_icon" />
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="0dp"
+            android:src="@mipmap/theme1_c229_main_back_icon" />
 
 
         <com.faw.hongqi.widget.TabView
             android:id="@+id/tab_view"
             android:layout_width="1200dp"
-            android:layout_height="70dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="160dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="0dp" />
     </FrameLayout>
 
 

@@ -1,6 +1,7 @@
 package com.faw.hongqi.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
@@ -27,12 +28,12 @@ public class C229MainActivity extends BaseActivity {
     private String currentTag;
     TabView tabView;
     View main_layout;
-    private String saveZipFilePath = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "MyFolder";
+
     @Override
     protected void initData() {
         LogUtil.logError("path = " + FileUtil.getResPath());
         requestWritePermission();
+//        startActivity(new Intent(C229MainActivity.this,C229LoadAndUnzipFileActivity.class));
     }
 
     @Override

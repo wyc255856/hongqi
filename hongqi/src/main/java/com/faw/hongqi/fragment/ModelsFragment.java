@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.util.AppUtil;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.ResUtil;
@@ -39,7 +40,6 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     }
 
 
-
     @Override
     protected void initWidgetActions() {
         ViewTreeObserver vto = car_model.getViewTreeObserver();
@@ -51,10 +51,10 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) car_model.getLayoutParams();
                 if (Constant.IS_PHONE) {
                     //TODO 手机尺寸适配
-                    int screenWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
-                    int screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
-                    lp.width = screenWidth - 250;
-                    lp.height = screenHeight - 150;
+
+                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
+                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+                    lp.height = (int) ( lp.width * 0.46785);
                 } else {
                     lp.width = 1440;
                     lp.height = 675;
@@ -74,10 +74,9 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) homeModelHotPointView.getLayoutParams();
                 if (Constant.IS_PHONE) {
                     //TODO 手机尺寸适配
-                    int screenWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
-                    int screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
-                    lp.width = screenWidth - 250;
-                    lp.height = screenHeight - 150;
+                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
+                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+                    lp.height = (int) ( lp.width * 0.46785);
                     homeModelHotPointView.setItem(lp.width);
                 } else {
                     lp.width = PhoneUtil.getDisplayWidth(mContext);

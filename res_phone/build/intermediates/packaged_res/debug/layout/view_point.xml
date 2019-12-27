@@ -11,22 +11,22 @@
         <!--中心imageView-->
         <ImageView
             android:id="@+id/iv_wave"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@drawable/point_color" />
         <!--中间的imageView-->
         <ImageView
             android:id="@+id/iv_wave_1"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@drawable/point_color" />
         <!--最外层imageView-->
         <ImageView
             android:id="@+id/iv_wave_2"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@drawable/point_color" />
     </FrameLayout>

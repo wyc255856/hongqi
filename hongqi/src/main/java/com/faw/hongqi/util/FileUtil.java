@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
+import com.liulishuo.filedownloader.util.FileDownloadUtils;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -12,7 +15,8 @@ public class FileUtil {
     public static String getResPath() {
         if(Constant.IS_PHONE){
             //TODO 修改成手机的资源地址
-            String path = Environment.getExternalStorageDirectory().getPath();
+            String path = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+                    + File.separator + "MyFolder";
             return path+"/";
         }else {
             String path = Environment.getExternalStorageDirectory().getPath();

@@ -8,10 +8,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="147dp"
-        android:layout_marginTop="83dp"
-        android:layout_marginRight="147dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
         android:background="@mipmap/content_bg">
 
         <androidx.viewpager.widget.ViewPager
@@ -24,13 +24,13 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="55dp" />
+            android:layout_marginBottom="25dp" />
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="47dp"
-            android:layout_height="47dp"
-            android:layout_margin="43dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="20dp"
             android:src="@mipmap/theme1_c229_back_icon" />
     </FrameLayout>
 

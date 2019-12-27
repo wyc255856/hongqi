@@ -76,9 +76,9 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
 
     private void setPhonePointView(int resID) {
         if (resID == R.drawable.c229_car_1) {
-            view_list.get(0).setPosition(150, 100, 1, k);
-            view_list.get(1).setPosition(20, 20, 2, k);
-            view_list.get(2).setPosition(30, 30, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_2) {
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
@@ -224,19 +224,21 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
 
 
     double k;
-    private final double WIDTH = 1920;//手机端模型图片宽度常量
+    public static  final double WIDTH = 1920;//手机端模型图片宽度常量
 
     List<BaseModelItem> view_list = new ArrayList<>();
 
     public void setItem(double width) {
         if (Constant.IS_PHONE) {
-            k = width / WIDTH;
+            k =width/WIDTH;
         } else {
             k = 1;
         }
         BaseModelItem baseModelItem1 = new BaseModelItem(mContext, "1064", mContext.getString(R.string.model_item_text_1), R.mipmap.test_point_view_icon_2);
         BaseModelItem baseModelItem2 = new BaseModelItem(mContext, "906", mContext.getString(R.string.model_item_text_2), R.mipmap.test_point_view_icon_l);
         BaseModelItem baseModelItem3 = new BaseModelItem(mContext, "1152", mContext.getString(R.string.model_item_text_3), R.mipmap.test_point_view_icon_3);
+
+
         view_list.add(baseModelItem1);
         view_list.add(baseModelItem2);
         view_list.add(baseModelItem3);

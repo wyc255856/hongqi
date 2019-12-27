@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +15,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.model.CategoryModel;
+import com.faw.hongqi.model.NewsListModel;
+import com.faw.hongqi.model.NewsModel;
+import com.faw.hongqi.model.NewsModel_Table;
+import com.faw.hongqi.ui.C229ContentActivity;
 import com.faw.hongqi.util.Constant;
+import com.faw.hongqi.util.LogUtil;
+import com.faw.hongqi.util.PhoneUtil;
+import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
+import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 
@@ -22,10 +37,37 @@ public class BaseModelItem extends LinearLayout {
     protected Activity mContext;
     protected TextView textView;
     protected ImageView line;
-    protected ImageView icon;
+
     protected PointView pointView;
     int resID;
+    private NewsModel model;
+    private void getFastNewsList(int id) {
+        DBUtil.getNewsListById(id, new TransactionListener() {
+            @Override
+            public void onResultReceived(Object result) {
 
+            }
+
+            @Override
+            public boolean onReady(BaseTransaction transaction) {
+                return false;
+            }
+
+            @Override
+            public boolean hasResult(BaseTransaction transaction, Object result) {
+                if (result != null)
+                    model = (NewsModel) result;
+                LogUtil.logError("news list size = " + model.toString());
+                mContext.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        C229ContentActivity.goContentActivity(mContext,model);
+                    }
+                });
+                return false;
+            }
+        });
+    }
     public BaseModelItem(Context context) {
         super(context);
     }
@@ -39,7 +81,7 @@ public class BaseModelItem extends LinearLayout {
         initView(context, id, text, icon);
     }
 
-    private void initView(Context context, String id, String text, int icon) {
+    private void initView(final Context context, String id, String text, int icon) {
         // TODO Auto-generated method stub
         this.mContext = (Activity) context;
         LayoutInflater.from(context).inflate(R.layout.view_model_item,
@@ -55,17 +97,24 @@ public class BaseModelItem extends LinearLayout {
             @Override
             public void onClick(View v) {
                 //TODO 跳转到内容页
+                getFastNewsList(1064);
             }
         });
     }
 
-    public void setPosition(int x, int y, int style, double k) {
+    private double k;
 
+    public void setPosition(int x, int y, int style, double k) {
+        this.k = k;
+        positionX = x;
+        positionY = y;
         setStyle(style);
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
-        layoutParams.leftMargin = (int) (x * k);
-        layoutParams.topMargin = (int) (y * k);
-        setLayoutParams(layoutParams);
+//        if (!Constant.IS_PHONE) {
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
+            layoutParams.leftMargin = (int) (x * k);
+            layoutParams.topMargin = (int) (y * k);
+            setLayoutParams(layoutParams);
+//        }
     }
 
     /**
@@ -78,9 +127,9 @@ public class BaseModelItem extends LinearLayout {
         switch (style) {
             case 1:
                 if (Constant.IS_PHONE) {
-                    setPhoneLine(50, 200, style);
-                    setPhonePoint(450, 300, style);
-                    setPhoneText(60, 200, style);
+                    setPhoneLine(100, 0, style);
+                    setPhonePoint(490, 0, style);
+                    setPhoneText(20, 20, style);
                 } else {
                     setLine(0, 10, style);
                     setPoint(350, 105, style);
@@ -89,9 +138,9 @@ public class BaseModelItem extends LinearLayout {
                 break;
             case 2:
                 if (Constant.IS_PHONE) {
-                    setPhoneLine(50, 400, style);
-                    setPhonePoint(1080, 385, style);
-                    setPhoneText(200, 420, style);
+                    setPhoneLine(0, 200, style);
+                    setPhonePoint(420, 315, style);
+                    setPhoneText(0, 170, style);
                 } else {
                     setLine(0, 15, style);
                     setPoint(380, 0, style);
@@ -101,8 +150,8 @@ public class BaseModelItem extends LinearLayout {
             case 3:
                 if (Constant.IS_PHONE) {
                     setPhoneLine(250, 200, style);
-                    setPhonePoint(250, 300, style);
-                    setPhoneText(260, 200, style);
+                    setPhonePoint(220, 320, style);
+                    setPhoneText(450, 200, style);
                 } else {
                     setLine(15, 0, style);
                     setPoint(0, 85, style);
@@ -167,6 +216,10 @@ public class BaseModelItem extends LinearLayout {
         textView.setLayoutParams(lptext);
     }
 
+    double cha;
+    int positionX = 0;
+    int positionY = 0;
+
     /**
      * 设置手机文字底的横线坐标和样式
      *
@@ -182,9 +235,26 @@ public class BaseModelItem extends LinearLayout {
         } else if (style == 3) {
             line.setImageResource(R.mipmap.point_view_line_3);
         }
+//        ViewTreeObserver vto = line.getViewTreeObserver();
+//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void
+//            onGlobalLayout() {
+//                line.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) line.getLayoutParams();
+//                cha = lp.width * (1 - k);
+//                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
+//                layoutParams.leftMargin = (int) (positionX * k - cha);
+//                layoutParams.topMargin = (int) (positionY * k - cha);
+//                setLayoutParams(layoutParams);
+//
+//
+//            }
+//
+//        });
         RelativeLayout.LayoutParams lpline = (RelativeLayout.LayoutParams) line.getLayoutParams();
-        lpline.leftMargin = x;
-        lpline.topMargin = y;
+        lpline.leftMargin = (int) (x * k);
+        lpline.topMargin = (int) (y * k);
         line.setLayoutParams(lpline);
     }
 
@@ -197,8 +267,8 @@ public class BaseModelItem extends LinearLayout {
      */
     private void setPhonePoint(int x, int y, int style) {
         RelativeLayout.LayoutParams lppoint = (RelativeLayout.LayoutParams) pointView.getLayoutParams();
-        lppoint.leftMargin = x;
-        lppoint.topMargin = y;
+        lppoint.leftMargin = (int) (x * k);
+        lppoint.topMargin = (int) (y * k);
         pointView.setLayoutParams(lppoint);
     }
 
@@ -214,8 +284,8 @@ public class BaseModelItem extends LinearLayout {
                 null, null, null);
         textView.setCompoundDrawablePadding(10);
         RelativeLayout.LayoutParams lptext = (RelativeLayout.LayoutParams) textView.getLayoutParams();
-        lptext.leftMargin = x;
-        lptext.topMargin = y;
+        lptext.leftMargin = (int) (x * k);
+        lptext.topMargin = (int) (y * k);
         textView.setLayoutParams(lptext);
     }
 }

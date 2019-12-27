@@ -1,5 +1,6 @@
 package com.faw.hongqi.fragment;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -13,19 +14,21 @@ import android.webkit.WebViewClient;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.util.LogUtil;
+import com.faw.hongqi.widget.C229NativeInterface;
 import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 
 public class BrightSpotFragment extends BaseFragment {
     WebView webView;
+    public static Activity context;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_c229_bring;
     }
     @Override
     protected void initData() {
-
+        context = getActivity();
     }
 
     @Override
@@ -101,7 +104,7 @@ public class BrightSpotFragment extends BaseFragment {
         webView.getSettings().setAllowContentAccess(true);
         webView.getSettings().setAllowFileAccessFromFileURLs(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-//        webView.addJavascriptInterface(new HS5NativeInterface(), "app");
+        webView.addJavascriptInterface(new C229NativeInterface(), "Android");
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
         String appCachePath = mContext.getApplicationContext().getCacheDir().getAbsolutePath();
