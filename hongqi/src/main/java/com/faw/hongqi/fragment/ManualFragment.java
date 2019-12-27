@@ -42,6 +42,7 @@ public class ManualFragment extends BaseFragment {
     protected int getLayoutId() {
         return R.layout.fragment_c229_mauna;
     }
+
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
@@ -158,6 +159,10 @@ public class ManualFragment extends BaseFragment {
     long startTime = 0;
 
     private void initList() {
+        List<CategoryModel> testlist = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            testlist.add(list.get(i));
+        }
         secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         startTime = System.currentTimeMillis();
         getFastNewsList();
