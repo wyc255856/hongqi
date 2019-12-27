@@ -1,9 +1,10 @@
 package com.faw.hongqi.widget;
 
+import android.content.Intent;
 import android.webkit.JavascriptInterface;
-import android.widget.Toast;
 
 import com.faw.hongqi.fragment.BrightSpotFragment;
+import com.faw.hongqi.ui.C229PlayVideoActivity;
 
 public class C229NativeInterface {
 
@@ -12,7 +13,7 @@ public class C229NativeInterface {
         BrightSpotFragment.context.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(BrightSpotFragment.context,id,Toast.LENGTH_LONG).show();
+                BrightSpotFragment.context.startActivity(new Intent(BrightSpotFragment.context, C229PlayVideoActivity.class));
             }
         });
     }
