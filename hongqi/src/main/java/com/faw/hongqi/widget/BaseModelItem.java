@@ -55,13 +55,14 @@ public class BaseModelItem extends LinearLayout {
 
             @Override
             public boolean hasResult(BaseTransaction transaction, Object result) {
+                List<NewsModel> result1List = new ArrayList<>();
                 if (result != null)
-                    model = (NewsModel) result;
-                LogUtil.logError("news list size = " + model.toString());
+                    result1List = (List<NewsModel>) result;
+                final List<NewsModel> finalResult1List = result1List;
                 mContext.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        C229ContentActivity.goContentActivity(mContext,model);
+                        C229ContentActivity.goContentActivity(mContext, finalResult1List.get(0));
                     }
                 });
                 return false;
@@ -97,7 +98,7 @@ public class BaseModelItem extends LinearLayout {
             @Override
             public void onClick(View v) {
                 //TODO 跳转到内容页
-                getFastNewsList(1064);
+                getFastNewsList(1152);
             }
         });
     }
