@@ -294,7 +294,7 @@ public class ManualFragment extends BaseFragment {
         for (int i = 0; i < newsList.size(); i++) {
             NewsListModel newsListModel = newsList.get(i);
             int newsSize = newsListModel.getRECORDS().size();
-            int lineCount = Constant.IS_PHONE ? 4 : 6;
+            int lineCount = Constant.IS_PHONE ? 4 :4;
             int lineNum = 0;
             if (newsSize % lineCount == 0) {
                 lineNum = newsSize / lineCount;

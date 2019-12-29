@@ -70,7 +70,7 @@
                 <SeekBar
                     android:id="@+id/tv_progess"
                     android:layout_width="match_parent"
-                    android:layout_height="16dp"
+                    android:layout_height="3dp"
                     android:layout_below="@+id/tv_start_time"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"

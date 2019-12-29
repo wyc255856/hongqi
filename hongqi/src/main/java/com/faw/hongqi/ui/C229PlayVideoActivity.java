@@ -224,7 +224,16 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         if (id == R.id.playOrPause) {
             play();
         } else if (id == R.id.root_rl) {
-            showControl();
+            mPlayer.pause();
+            mHandler.removeMessages(UPDATE_TIME);
+//            mHandler.removeMessages(HIDE_CONTROL);
+            playOrPauseIv.setVisibility(View.VISIBLE);
+            playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
+            isShow = true;
+//        mHandler.removeMessages(HIDE_CONTROL);
+            mHandler.sendEmptyMessage(UPDATE_TIME);
+//            showControl();
+
         }
     }
 
