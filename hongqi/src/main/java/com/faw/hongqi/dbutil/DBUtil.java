@@ -97,9 +97,9 @@ public class DBUtil {
         LogUtil.logError("fast id = " + id);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.id.eq(id))
-//                .where()
-                .async().querySingle(transactionListener);
+                .where(NewsModel_Table.caid.eq(10077))
+                .and(NewsModel_Table.id.eq(1064))
+                .async().queryList(transactionListener);
     }
     public static void getFastCategoryList(TransactionListener transactionListener) {
         SQLite.select()
