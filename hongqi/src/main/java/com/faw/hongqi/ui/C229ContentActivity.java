@@ -63,6 +63,7 @@ public class C229ContentActivity extends BaseActivity {
             public void onClick(View v) {
                 finish();
 //                exitAPP();
+
             }
         });
     }
