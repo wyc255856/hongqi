@@ -80,29 +80,29 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_2) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_3) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_4) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_5) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_6) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_7) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(410, 650, 1, k);
+            view_list.get(1).setPosition(0, 140, 2, k);
+            view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_8) {
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
@@ -208,9 +208,9 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_34) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(170, 630, 1, k);
+            view_list.get(1).setPosition(245, 140, 2, k);
+            view_list.get(2).setPosition(975, 95, 3, k);
         } else if (resID == R.drawable.c229_car_35) {
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
