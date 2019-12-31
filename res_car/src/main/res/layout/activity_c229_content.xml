@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b0000000"
+    android:background="#f0000000"
     android:orientation="vertical">
 
     <FrameLayout
@@ -17,7 +17,9 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
         <com.faw.hongqi.widget.CirclePageIndicator
             android:id="@+id/circleView"

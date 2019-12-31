@@ -7,9 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
-    <uses-permission android:name="com.huawei.permission.sec.MDM" />
 
     <application
         android:name="com.faw.hongqi.C229Application"
@@ -30,7 +27,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.faw.hongqicar.c229.voice"></action>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -15,8 +15,6 @@ import android.webkit.WebViewClient;
 import com.faw.hongqi.R;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.widget.C229NativeInterface;
-import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;
-import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 
 public class BrightSpotFragment extends BaseFragment {
