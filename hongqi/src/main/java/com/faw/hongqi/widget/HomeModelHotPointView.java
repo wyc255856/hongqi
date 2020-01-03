@@ -67,6 +67,11 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         view_layout.setVisibility(VISIBLE);
         if (Constant.IS_PHONE) {
             setPhonePointView(resID);
+//            if (!"1".equals(resID) || !"14".equals(resID)||!"15".equals(resID)||!"16".equals(resID)||!"34".equals(resID)){
+//                view_layout.setVisibility(GONE);
+//            }else{
+//                view_layout.setVisibility(VISIBLE);
+//            }
         } else {
             setCarPointView(resID);
         }
@@ -80,130 +85,176 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_2) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_3) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_4) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_5) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_6) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_7) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(410, 650, 1, k);
             view_list.get(1).setPosition(0, 140, 2, k);
             view_list.get(2).setPosition(1100, 100, 3, k);
         } else if (resID == R.drawable.c229_car_8) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_9) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_10) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_11) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_12) {
+            view_layout.setVisibility(GONE);
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_13) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_layout.setVisibility(GONE);
+            view_list.get(0).setPosition(165, 650, 1, k);
+            view_list.get(1).setPosition(270, 100, 2, k);
+            view_list.get(2).setPosition(900, 100, 3, k);
         } else if (resID == R.drawable.c229_car_14) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
+            view_list.get(0).setPosition(300, 650, 1, k);
+            view_list.get(1).setPosition(200, 100, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_15) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
+            view_list.get(0).setPosition(240, 650, 1, k);
+            view_list.get(1).setPosition(350, 100, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_16) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_list.get(0).setPosition(165, 650, 1, k);
+            view_list.get(1).setPosition(270, 100, 2, k);
+            view_list.get(2).setPosition(900, 100, 3, k);
         } else if (resID == R.drawable.c229_car_17) {
-            view_list.get(0).setPosition(100, 100, 1, k);
-            view_list.get(1).setPosition(100, 200, 2, k);
-            view_list.get(2).setPosition(1000, 100, 3, k);
+            view_layout.setVisibility(GONE);
+
+            view_list.get(0).setPosition(165, 650, 1, k);
+            view_list.get(1).setPosition(270, 100, 2, k);
+            view_list.get(2).setPosition(900, 100, 3, k);
         } else if (resID == R.drawable.c229_car_18) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_19) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_20) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_21) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_22) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_23) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_24) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_25) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_26) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_27) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_28) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_29) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_30) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_31) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_32) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_33) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
@@ -212,10 +263,14 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
             view_list.get(1).setPosition(245, 140, 2, k);
             view_list.get(2).setPosition(975, 95, 3, k);
         } else if (resID == R.drawable.c229_car_35) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
         } else if (resID == R.drawable.c229_car_36) {
+            view_layout.setVisibility(GONE);
+
             view_list.get(0).setPosition(100, 100, 1, k);
             view_list.get(1).setPosition(100, 200, 2, k);
             view_list.get(2).setPosition(1000, 100, 3, k);
