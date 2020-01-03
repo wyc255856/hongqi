@@ -54,7 +54,12 @@ public class C229MainActivity extends BaseActivity {
 
     @Override
     protected void initWidgetActions() {
-
+        findViewById(R.id.main_back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

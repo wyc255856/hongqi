@@ -1,6 +1,7 @@
 package com.faw.hongqi.ui;
 
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,6 +62,8 @@ public class C229ContentActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+//                exitAPP();
+
             }
         });
     }
@@ -170,5 +173,12 @@ public class C229ContentActivity extends BaseActivity {
         Intent intent = new Intent(context, C229ContentActivity.class);
         intent.putExtra("data", newsModel);
         context.startActivity(intent);
+    }
+    private void exitAPP() {
+        ActivityManager activityManager = (ActivityManager)  getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> appTaskList = activityManager.getAppTasks();
+        for (ActivityManager.AppTask appTask : appTaskList) {
+            appTask.finishAndRemoveTask();
+        }
     }
 }
