@@ -111,10 +111,10 @@ public class BaseModelItem extends LinearLayout {
         positionY = y;
         setStyle(style);
 //        if (!Constant.IS_PHONE) {
-            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
-            layoutParams.leftMargin = (int) (x * k);
-            layoutParams.topMargin = (int) (y * k);
-            setLayoutParams(layoutParams);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
+        layoutParams.leftMargin = (int) (x * k);
+        layoutParams.topMargin = (int) (y * k);
+        setLayoutParams(layoutParams);
 //        }
     }
 

@@ -133,9 +133,9 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 NowID = NowID == 0 ? 1 : NowID;
                 OldID = NowID;
                 homeModelHotPointView.showHotPointViewByResId(pics.get(NowID - 1));
-
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 int nowX = (int) event.getX();
                 //计算移动距离
                 float spec = nowX - start;
@@ -164,7 +164,9 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                         NowID = mo;
                         car_model.setImageResource(id);
                     }
+
                 }
+
                 break;
         }
         return true;

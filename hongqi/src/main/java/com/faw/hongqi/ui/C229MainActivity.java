@@ -33,7 +33,7 @@ public class C229MainActivity extends BaseActivity {
     protected void initData() {
         LogUtil.logError("path = " + FileUtil.getResPath());
         requestWritePermission();
-//        startActivity(new Intent(C229MainActivity.this,C229LoadAndUnzipFileActivity.class));
+        startActivity(new Intent(C229MainActivity.this,C229LoadAndUnzipFileActivity.class));
     }
 
     @Override
