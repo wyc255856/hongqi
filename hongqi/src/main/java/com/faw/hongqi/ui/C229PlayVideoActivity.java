@@ -1,5 +1,6 @@
 package com.faw.hongqi.ui;
 
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.model.InteractiveVideoModel;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.view.SpreadView;
 import com.faw.hongqi.widget.BigPointView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +100,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     private void initPlayer() {
         mPlayer = new MediaPlayer();
+
         mPlayer.setOnCompletionListener(this);
         mPlayer.setOnErrorListener(this);
         mPlayer.setOnInfoListener(this);
@@ -105,7 +109,21 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         mPlayer.setOnVideoSizeChangedListener(this);
         try {
             //使用手机本地视频
-            mPlayer.setDataSource(path);
+
+//            if (Constant.TEST) {
+//                AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.vd);
+//                try {
+//                    mPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(),
+//                            file.getLength());
+//                    mPlayer.prepare();
+//                    file.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            } else {
+                mPlayer.setDataSource(path);
+//            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,7 +154,23 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     @Override
     protected void initWidgetActions() {
-
+        findViewById(R.id.replay_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.get(initInteractiveIndex).isShow = false;
+                if (initInteractiveIndex == 0) {
+                    interactive_layout.setVisibility(View.GONE);
+                    mPlayer.seekTo(0);
+                    mSeekBar.setProgress(0);
+                    play();
+                } else {
+                    interactive_layout.setVisibility(View.GONE);
+                    mPlayer.seekTo((int) list.get(initInteractiveIndex - 1).time);
+                    mSeekBar.setProgress((int) list.get(initInteractiveIndex - 1).time);
+                    play();
+                }
+            }
+        });
     }
 
     @Override
@@ -348,6 +382,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     }
 
+    int initInteractiveIndex = 0;
+
     public void showinitInteractive(long position) {
         if (position == 0) {
             return;
@@ -355,6 +391,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         for (int i = 0; i < list.size(); i++) {
             final InteractiveVideoModel interactiveVideoModel = list.get(i);
             if (position > interactiveVideoModel.time && !interactiveVideoModel.isShow) {
+                initInteractiveIndex = i;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

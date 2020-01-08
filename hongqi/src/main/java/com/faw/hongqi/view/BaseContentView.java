@@ -23,6 +23,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.faw.hongqi.model.ContentItemModel;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.GlideRoundTransform;
 
@@ -66,26 +67,35 @@ public abstract class BaseContentView extends LinearLayout {
     }
 
     public void setImage(Context mContext, ImageView imageView, String fileName) {
-
-        File file = new File(FileUtil.getResPath() + fileName);
+//        if(Constant.TEST){
+//            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
+//        }else {
+            File file = new File(FileUtil.getResPath() + fileName);
 //            LogUtil.logError("file url = " + file.exists());
-        if (file.exists())
-            Glide.with(mContext)
-                    .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
-                    .into(imageView);
+            if (file.exists())
+                Glide.with(mContext)
+                        .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
+                        .into(imageView);
+//        }
+
+
 //        Bitmap bitmap = getBitmap(mContext, fileName);
 //        if (bitmap != null)
 //            imageView.setImageBitmap(getBitmap(mContext, fileName));
     }
 
     public void setLongImage(Context mContext, final ImageView imageView, String fileName) {
-
-        File file = new File(FileUtil.getResPath() + fileName);
+//        if(Constant.TEST){
+//            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
+//        }else {
+            File file = new File(FileUtil.getResPath() + fileName);
 //            LogUtil.logError("file url = " + file.exists());
-        if (file.exists())
-            Glide.with(mContext).asBitmap()
-                    .load(Uri.fromFile(file))
-                     .into(imageView);
+            if (file.exists())
+                Glide.with(mContext).asBitmap()
+                        .load(Uri.fromFile(file))
+                        .into(imageView);
+//        }
+
 //        Bitmap bitmap = getBitmap(mContext, fileName);
 //        if (bitmap != null)
 //            imageView.setImageBitmap(getBitmap(mContext, fileName));

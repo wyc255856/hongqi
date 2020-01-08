@@ -93,6 +93,7 @@ public class DBUtil {
                 .where()
                 .async().queryList(transactionListener);
     }
+
     public static void getNewsListById(int id, TransactionListener transactionListener) {
         LogUtil.logError("fast id = " + id);
         SQLite.select()
@@ -101,6 +102,7 @@ public class DBUtil {
                 .and(NewsModel_Table.id.eq(1064))
                 .async().queryList(transactionListener);
     }
+
     public static void getFastCategoryList(TransactionListener transactionListener) {
         SQLite.select()
                 .from(CategoryModel.class)
@@ -108,6 +110,7 @@ public class DBUtil {
 //                .where()
                 .async().queryList(transactionListener);
     }
+
     public static void getManuaCategoryList(TransactionListener transactionListener) {
         SQLite.select()
                 .from(CategoryModel.class)
@@ -115,6 +118,7 @@ public class DBUtil {
 //                .where()
                 .async().queryList(transactionListener);
     }
+
     public static void getNewsListByCatId(int catid, TransactionListener transactionListener) {
         LogUtil.logError("fast catid = " + catid);
         SQLite.select()
@@ -127,7 +131,7 @@ public class DBUtil {
     public static void searchByWord(String word, TransactionListener transactionListener) {
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.title.like("%"+word+"%"))
+                .where(NewsModel_Table.title.like("%" + word + "%"))
                 .async().queryList(transactionListener);
 
 
@@ -138,4 +142,12 @@ public class DBUtil {
 //                .async().queryList(transactionListener);
     }
 
+    public static NewsModel getTestModel(Context context) {
+        String json = TestUtil.readTextFileFromRawResourceId(context, R.raw.test);
+        NewsModel menuListModel = new Gson().fromJson(json, NewsModel.class);
+        if (menuListModel != null) {
+            return menuListModel;
+        }
+        return null;
+    }
 }

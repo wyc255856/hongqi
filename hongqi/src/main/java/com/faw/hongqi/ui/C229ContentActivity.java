@@ -9,10 +9,12 @@ import android.view.View;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.adaptar.PlanePagerAdapter;
+import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.fragment.BaseFragment;
 import com.faw.hongqi.fragment.ContentFragment;
 import com.faw.hongqi.model.ContentItemModel;
 import com.faw.hongqi.model.NewsModel;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.widget.CirclePageIndicator;
 //import com.viewpagerindicator.CirclePageIndicator;
 
@@ -170,12 +172,16 @@ public class C229ContentActivity extends BaseActivity {
     }
 
     public static void goContentActivity(Context context, NewsModel newsModel) {
+        if (Constant.TEST) {
+            newsModel = DBUtil.getTestModel(context);
+        }
         Intent intent = new Intent(context, C229ContentActivity.class);
         intent.putExtra("data", newsModel);
         context.startActivity(intent);
     }
+
     private void exitAPP() {
-        ActivityManager activityManager = (ActivityManager)  getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.AppTask> appTaskList = activityManager.getAppTasks();
         for (ActivityManager.AppTask appTask : appTaskList) {
             appTask.finishAndRemoveTask();
