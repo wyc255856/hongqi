@@ -2,11 +2,13 @@ package com.faw.hongqi.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.sax.RootElement;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -142,6 +144,9 @@ public class BaseModelItem extends LinearLayout {
                     setPhoneLine(0, 200, style);
                     setPhonePoint(420, 315, style);
                     setPhoneText(0, 170, style);
+//                    setPhoneLine(120, 255, style);
+//                    setPhonePoint(420, 315, style);
+//                    setPhoneText(0, 170, style);
                 } else {
                     setLine(0, 15, style);
                     setPoint(380, 0, style);
@@ -253,9 +258,22 @@ public class BaseModelItem extends LinearLayout {
 //            }
 //
 //        });
+
+
+
         RelativeLayout.LayoutParams lpline = (RelativeLayout.LayoutParams) line.getLayoutParams();
         lpline.leftMargin = (int) (x * k);
         lpline.topMargin = (int) (y * k);
+//
+//
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        BitmapFactory.decodeResource(getResources(),R.mipmap.point_view_line_1,options);
+//
+//        //获取图片的宽高
+//        int height = options.outHeight;
+//        int width = options.outWidth;
+//        lpline.width = (int) (width*k);
+//        lpline.height = (int) (height*k);
         line.setLayoutParams(lpline);
     }
 

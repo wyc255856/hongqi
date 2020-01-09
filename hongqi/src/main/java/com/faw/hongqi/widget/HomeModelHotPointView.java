@@ -67,11 +67,6 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         view_layout.setVisibility(VISIBLE);
         if (Constant.IS_PHONE) {
             setPhonePointView(resID);
-//            if (!"1".equals(resID) || !"14".equals(resID)||!"15".equals(resID)||!"16".equals(resID)||!"34".equals(resID)){
-//                view_layout.setVisibility(GONE);
-//            }else{
-//                view_layout.setVisibility(VISIBLE);
-//            }
         } else {
             setCarPointView(resID);
         }
