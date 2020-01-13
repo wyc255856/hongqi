@@ -88,7 +88,7 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
             File file = new File(FileUtil.getResPath() + model.getImage1());
 //            LogUtil.logError("file url = " + file.exists());
             Glide.with(mContext)
-                    .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 15))
+                    .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 4))
                     .into(imageView);
         } else {
             String url = "images/2019-04-26/5cc2b440a0ab1.png";

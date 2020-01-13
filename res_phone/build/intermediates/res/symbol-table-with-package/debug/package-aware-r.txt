@@ -232,6 +232,8 @@ mipmap bottom_bg
 mipmap c229_model_bg
 mipmap carlight_top_bg
 mipmap content_bg
+mipmap content_down_bg
+mipmap content_up_bg
 mipmap down_wifi_no
 mipmap down_wifi_yes
 mipmap fast_list_item_bg_1
@@ -261,6 +263,7 @@ mipmap theme1_detail_alert_bg
 mipmap theme1_main2_bg
 mipmap theme1_main_bg
 mipmap theme1_main_up_bg
+mipmap top_fast_listview
 mipmap video_play_btn_n
 mipmap video_play_btn_p
 mipmap video_test

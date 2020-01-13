@@ -53,7 +53,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                     //TODO 手机尺寸适配
 
                     int screenWidth = PhoneUtil.getDisplayWidth(mContext);
-                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+//                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+                    lp.width = screenWidth-PhoneUtil.dip2px(mContext, (float) (screenWidth*0.1)/2);
                     lp.height = (int) ( lp.width * 0.46785);
                 } else {
                     lp.width = 1440;
@@ -75,7 +76,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 if (Constant.IS_PHONE) {
                     //TODO 手机尺寸适配
                     int screenWidth = PhoneUtil.getDisplayWidth(mContext);
-                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+//                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+                    lp.width = screenWidth-PhoneUtil.dip2px(mContext, (float) (screenWidth*0.1)/2);
                     lp.height = (int) ( lp.width * 0.46785);
                     homeModelHotPointView.setItem(lp.width);
                 } else {
