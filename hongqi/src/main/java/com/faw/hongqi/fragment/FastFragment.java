@@ -155,6 +155,7 @@ public class FastFragment extends BaseFragment {
 
     }
 
+
     @Override
     public void refreshData() {
 
