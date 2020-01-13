@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/car_model"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_gravity="bottom|center_horizontal"
+
+        android:scaleType="fitXY"
+
+        android:src="@drawable/c229_car_1" />
+
+    <com.faw.hongqi.widget.HomeModelHotPointView
+        android:id="@+id/home_model_hot_point_view"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center_horizontal"
+
+        android:layout_height="match_parent" />
+</FrameLayout>
