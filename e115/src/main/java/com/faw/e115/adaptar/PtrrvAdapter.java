@@ -23,6 +23,7 @@ public class PtrrvAdapter<T extends BaseHolder, K extends BaseModel> extends Ptr
     public PtrrvAdapter(Context context, int layoutID, Class<T> clazz) {
 
         super(context);
+
         this.context = context;
         layoutId = layoutID;
         this.clazz = clazz;
