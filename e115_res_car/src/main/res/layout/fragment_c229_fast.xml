@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.faw.hongqi.widget.SecondaryListView
+                android:id="@+id/secondary_list_view"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="150dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ptrrv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="470dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_gravity="bottom"
+        android:background="@mipmap/theme1_main_up_bg" />
+</FrameLayout>
