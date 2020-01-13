@@ -1,6 +1,7 @@
 package com.faw.hongqi.ui;
 
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -72,7 +73,7 @@ public class C229ContentActivity extends BaseActivity {
 
     @Override
     boolean isHasTitle() {
-        return false;
+        return true;
     }
 
     List<ContentItemModel> data_list = new ArrayList<>();
@@ -178,6 +179,9 @@ public class C229ContentActivity extends BaseActivity {
         Intent intent = new Intent(context, C229ContentActivity.class);
         intent.putExtra("data", newsModel);
         context.startActivity(intent);
+        ((Activity)context).overridePendingTransition(R.anim.in,
+                R.anim.out);
+
     }
 
     private void exitAPP() {

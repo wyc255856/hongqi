@@ -1,2 +1,2 @@
-include ':app', ':hongqi', ':res_car', ':res_phone'
+include ':app', ':hongqi', ':res_car', ':res_phone', ':e115', ':third_library'
 rootProject.name='HongQICar'

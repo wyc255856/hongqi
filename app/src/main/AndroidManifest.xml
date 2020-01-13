@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.haowei.wyc.hongqicar">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -23,24 +24,27 @@
 
         <activity
             android:name="com.faw.hongqi.ui.C229MainActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.faw.hongqicar.c229.voice"></action>
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.faw.hongqi.ui.C229ContentActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent" />
         <activity
             android:name="com.faw.hongqi.ui.C229LoadAndUnzipFileActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent"></activity>
         <activity
             android:name="com.faw.hongqi.ui.C229PlayVideoActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent"></activity>
 
 
     </application>

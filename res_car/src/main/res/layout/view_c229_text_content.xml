@@ -18,7 +18,7 @@
 
             <TextView
                 android:id="@+id/text_content"
-                style="@style/text_28_white" />
+                style="@style/text_32_white" />
 
         </LinearLayout>
     </ScrollView>

@@ -104,9 +104,20 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
-
+    <style name="AnimationActivity" mce_bogus="1" parent="@android:style/Animation.Activity">
+               
+        <item name="android:activityOpenEnterAnimation">@anim/in</item>
+               
+        <item name="android:activityOpenExitAnimation">@anim/out</item>
+               
+        <item name="android:activityCloseEnterAnimation">@anim/in</item>
+               
+        <item name="android:activityCloseExitAnimation">@anim/out</item>
+           
+    </style>
     <declare-styleable name="SpreadView">
         <!--中心圆颜色-->
         <attr name="spread_center_color" format="color" />
@@ -121,4 +132,5 @@
         <!--扩散延迟间隔-->
         <attr name="spread_delay_milliseconds" format="integer" />
     </declare-styleable>
+
 </resources>

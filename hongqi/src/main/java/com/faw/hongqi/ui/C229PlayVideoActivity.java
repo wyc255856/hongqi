@@ -121,7 +121,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 //                    e.printStackTrace();
 //                }
 //            } else {
-                mPlayer.setDataSource(path);
+            mPlayer.setDataSource(path);
 //            }
 
         } catch (Exception e) {
@@ -200,6 +200,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         endTime.setText(formatLongToTimeStr(mp.getDuration()));
         mSeekBar.setMax(mp.getDuration());
         mSeekBar.setProgress(mp.getCurrentPosition());
+        play();
     }
 
     @Override
