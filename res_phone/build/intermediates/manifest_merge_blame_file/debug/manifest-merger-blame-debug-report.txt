@@ -6,14 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-<<<<<<< HEAD
 8-->D:\h\res_phone\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="29" />
 9-->D:\h\res_phone\src\main\AndroidManifest.xml
-=======
-8-->/Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-9        android:targetSdkVersion="29" />
-9-->/Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
->>>>>>> cc86fe7f9a9dab126775763476942aedfd63445a
 10
 11</manifest>

@@ -1,6 +1,5 @@
 -- Merging decision tree log ---
 manifest
-<<<<<<< HEAD
 ADDED from D:\h\res_phone\src\main\AndroidManifest.xml:1:1-2:45
 INJECTED from D:\h\res_phone\src\main\AndroidManifest.xml:1:1-2:45
 INJECTED from D:\h\res_phone\src\main\AndroidManifest.xml:1:1-2:45
@@ -36,40 +35,3 @@ INJECTED from D:\h\res_phone\src\main\AndroidManifest.xml
 		INJECTED from D:\h\res_phone\src\main\AndroidManifest.xml
 		ADDED from D:\h\res_phone\src\main\AndroidManifest.xml
 		INJECTED from D:\h\res_phone\src\main\AndroidManifest.xml
-=======
-ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-	package
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:2:9-43
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-	android:versionName
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-	android:versionCode
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:1-2:45
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-	xmlns:android
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml:1:11-69
-uses-sdk
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-	android:targetSdkVersion
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-	android:minSdkVersion
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		ADDED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
-		INJECTED from /Users/wyc/Downloads/Android/HongQICar/res_phone/src/main/AndroidManifest.xml
->>>>>>> cc86fe7f9a9dab126775763476942aedfd63445a

@@ -35,19 +35,11 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
-<<<<<<< HEAD
+
     api project(path: ':res_phone')
 //    api project(path: ':e115_res_phone')
 //    implementation project(path: ':res_car')
-=======
-//    api project(path: ':res_phone')
-//    api project(path: ':e115_res_phone')
-    implementation project(path: ':res_car')
->>>>>>> cc86fe7f9a9dab126775763476942aedfd63445a
 
-//    implementation 'com.viewpagerindicator:library:2.4.1'
-
-//    implementation project(path: ':res_phone')
 
 
 
