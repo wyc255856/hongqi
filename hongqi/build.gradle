@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-//annotationProcessor plugin: 'com.neenbedankt.android-apt'
-
+def dbflow_version = "3.0.0-beta2"
 android {
     compileSdkVersion 29
 
@@ -33,8 +32,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
-    implementation project(path: ':res_phone')
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+//    api project(path: ':res_phone')
+    api project(path: ':e115_res_phone')
 //    implementation project(path: ':res_car')
 
 //    implementation 'com.viewpagerindicator:library:2.4.1'
