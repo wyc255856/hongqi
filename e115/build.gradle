@@ -33,8 +33,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+<<<<<<< HEAD
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
        implementation project(path: ':e115_res_phone')
 //    implementation project(path: ':e115_res_car')
+=======
+
+    //数据库框架
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    api project(path: ':e115_res_car')
+>>>>>>> cc86fe7f9a9dab126775763476942aedfd63445a
 
 }
