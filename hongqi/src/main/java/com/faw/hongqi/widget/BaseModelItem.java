@@ -21,7 +21,6 @@ import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
-import com.faw.hongqi.model.NewsModel_Table;
 import com.faw.hongqi.ui.C229ContentActivity;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.LogUtil;
