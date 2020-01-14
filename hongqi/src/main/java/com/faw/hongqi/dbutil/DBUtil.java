@@ -5,8 +5,10 @@ import android.content.Context;
 import com.faw.hongqi.R;
 import com.faw.hongqi.model.CategoryListModel;
 import com.faw.hongqi.model.CategoryModel;
+import com.faw.hongqi.model.CategoryModel_Table;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
+import com.faw.hongqi.model.NewsModel_Table;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.util.TestUtil;
@@ -24,6 +26,7 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 import java.util.List;
 
 public class DBUtil {
+
     public static void initData(final Context context) {
         if (SharedpreferencesUtil.isUploadBD(context)) {
             new Thread() {
