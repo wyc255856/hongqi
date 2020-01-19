@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.faw.hongqi.widget.CirclePageIndicator
+        <com.faw.e115.widget.CirclePageIndicator
             android:id="@+id/circleView"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
