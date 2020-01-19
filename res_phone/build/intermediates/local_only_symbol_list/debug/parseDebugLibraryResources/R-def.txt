@@ -138,6 +138,7 @@ id circleView
 id container
 id control_ll
 id delete_btn
+id fl_download
 id home_model_hot_point_view
 id imageView
 id image_content

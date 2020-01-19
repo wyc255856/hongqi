@@ -21,6 +21,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 public class DBUtil {
     public static void initData(final Context context) {
+        LogUtil.logDebug("=====");
         if (SharedpreferencesUtil.isUploadBD(context)) {
             new Thread() {
                 @Override
@@ -84,6 +85,12 @@ public class DBUtil {
     public static void getAllNews(TransactionListener transactionListener) {
         SQLite.select()
                 .from(NewsModel.class)
+                .where()
+                .async().queryList(transactionListener);
+    }
+    public static void getCategory(TransactionListener transactionListener) {
+        SQLite.select()
+                .from(CategoryModel.class)
                 .where()
                 .async().queryList(transactionListener);
     }

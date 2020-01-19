@@ -47,7 +47,25 @@ public class FastFragment extends BaseFragment {
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
+        DBUtil.getCategory(new TransactionListener() {
+            @Override
+            public void onResultReceived(Object result) {
 
+            }
+
+            @Override
+            public boolean onReady(BaseTransaction transaction) {
+                return false;
+            }
+
+            @Override
+            public boolean hasResult(BaseTransaction transaction, Object result) {
+                if (result != null)
+                    list = (List<CategoryModel>) result;
+                LogUtil.logError("list size = " + list.size());
+                return false;
+            }
+        });
         DBUtil.getFastCategoryList(new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
@@ -63,11 +81,12 @@ public class FastFragment extends BaseFragment {
             public boolean hasResult(BaseTransaction transaction, Object result) {
                 if (result != null)
                     list = (List<CategoryModel>) result;
+                LogUtil.logError("list size = " + list.size());
                 for (int i = 0; i < 5; i++) {
                     list5.add(list.get(i));
                 }
 
-                LogUtil.logError("list size = " + list.size());
+
                 ((Activity) mContext).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
