@@ -22,7 +22,7 @@
             android:layout_height="50dp"
             android:src="@mipmap/point_view_1_1" />
 
-        <com.faw.hongqi.widget.PointView
+        <com.faw.e115.widget.PointView
             android:id="@+id/point"
             android:layout_width="15dp"
             android:layout_height="15dp" />

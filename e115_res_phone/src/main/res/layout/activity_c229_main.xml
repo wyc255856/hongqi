@@ -28,7 +28,7 @@
             android:src="@mipmap/theme1_c229_main_back_icon" />
 
 
-        <com.faw.hongqi.widget.TabView
+        <com.faw.e115.widget.TabView
             android:id="@+id/tab_view"
             android:layout_width="1200dp"
             android:layout_height="45dp"
