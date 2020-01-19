@@ -29,7 +29,7 @@ public class E115MainActivity extends BaseActivity {
     protected void initData() {
         LogUtil.logError("path = " + FileUtil.getResPath());
         requestWritePermission();
-        startActivity(new Intent(E115MainActivity.this,E115LoadAndUnzipFileActivity.class));
+//        startActivity(new Intent(E115MainActivity.this,E115LoadAndUnzipFileActivity.class));
     }
 
     @Override
