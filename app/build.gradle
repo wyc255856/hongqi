@@ -27,8 +27,8 @@ dependencies {
     api project(path: ':third_library')
 
 
-    implementation project(path: ':e115')
 //    implementation project(path: ':e115')
+    implementation project(path: ':hongqi')
 
 
 }
