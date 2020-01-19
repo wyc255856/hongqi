@@ -46,7 +46,7 @@ public class C229MainActivity extends BaseActivity {
         new Thread() {
             @Override
             public void run() {
-                requestGet();
+//                requestGet();
             }
         }.start();
         SharedpreferencesUtil.setVersionCode(C229MainActivity.this,PhoneUtil.getVersionName(C229MainActivity.this));
