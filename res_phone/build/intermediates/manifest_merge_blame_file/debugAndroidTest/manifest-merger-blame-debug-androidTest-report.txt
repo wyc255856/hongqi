@@ -3,7 +3,31 @@
 3    package="com.haowei.wyc.res_phone.test" >
 4
 5    <uses-sdk
+<<<<<<< HEAD
 5-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:5:5-74
+=======
+<<<<<<< HEAD
+5-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:5:5-74
+6        android:minSdkVersion="21"
+6-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:5:15-41
+7        android:targetSdkVersion="29" />
+7-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:11:5-15:79
+10        android:name="androidx.test.runner.AndroidJUnitRunner"
+10-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:11:22-76
+11        android:functionalTest="false"
+11-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:13:22-53
+13        android:label="Tests for com.haowei.wyc.res_phone.test"
+13-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:15:22-77
+14        android:targetPackage="com.haowei.wyc.res_phone.test" />
+14-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:12:22-75
+=======
+5-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:5:5-74
+>>>>>>> 82818135abfe455a901c1d0da1b7cfa4b768d6c1
 6        android:minSdkVersion="21"
 6-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:5:15-41
 7        android:targetSdkVersion="29" />
@@ -20,13 +44,19 @@
 13        android:label="Tests for com.haowei.wyc.res_phone.test"
 13-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:15:22-77
 14        android:targetPackage="com.haowei.wyc.res_phone.test" />
+<<<<<<< HEAD
 14-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:12:22-75
+=======
+14-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:12:22-75
+>>>>>>> 33bfd33f848204359d7875b741e285065fcec59a
+>>>>>>> 82818135abfe455a901c1d0da1b7cfa4b768d6c1
 15    <!-- To allow starting foreground services on Android P+ - https://developer.android.com/preview/behavior-changes#fg-svc -->
 16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 16-->[com.liulishuo.filedownloader:library:1.7.7] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\57542823a05c42b379a50d1ffe739fd9\library-1.7.7\AndroidManifest.xml:9:5-77
 16-->[com.liulishuo.filedownloader:library:1.7.7] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\57542823a05c42b379a50d1ffe739fd9\library-1.7.7\AndroidManifest.xml:9:22-74
 17
 18    <application
+<<<<<<< HEAD
 18-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:7:5-9:19
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 19-->[androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:18-86
@@ -35,6 +65,27 @@
 21        <uses-library android:name="android.test.runner" />
 21-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:8:9-60
 21-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6330533404483992014.xml:8:23-57
+=======
+<<<<<<< HEAD
+18-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:7:5-9:19
+=======
+18-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:7:5-9:19
+>>>>>>> 33bfd33f848204359d7875b741e285065fcec59a
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:18-86
+20        android:debuggable="true" >
+<<<<<<< HEAD
+20-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:7:18-43
+21        <uses-library android:name="android.test.runner" />
+21-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:8:9-60
+21-->/Users/wyc/Downloads/Android/HongQICar/res_phone/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger4508933289080518562.xml:8:23-57
+=======
+20-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:7:18-43
+21        <uses-library android:name="android.test.runner" />
+21-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:8:9-60
+21-->D:\h\res_phone\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger3588844766998610352.xml:8:23-57
+>>>>>>> 33bfd33f848204359d7875b741e285065fcec59a
+>>>>>>> 82818135abfe455a901c1d0da1b7cfa4b768d6c1
 22
 23        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
 23-->[com.liulishuo.filedownloader:library:1.7.7] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\57542823a05c42b379a50d1ffe739fd9\library-1.7.7\AndroidManifest.xml:12:9-118
