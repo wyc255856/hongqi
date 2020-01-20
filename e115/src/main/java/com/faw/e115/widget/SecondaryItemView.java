@@ -22,6 +22,7 @@ public class SecondaryItemView extends LinearLayout implements View.OnClickListe
     TextView title;
     int index;
     int type;
+    View second_item_line, second_item_line_n;
 
     private Activity mContext;
 
@@ -44,6 +45,8 @@ public class SecondaryItemView extends LinearLayout implements View.OnClickListe
         LayoutInflater.from(context).inflate(R.layout.view_secondary_item,
                 this, true);
         title = findViewById(R.id.title);
+        second_item_line = findViewById(R.id.second_item_line);
+        second_item_line_n = findViewById(R.id.second_item_line_n);
 //        Glide.with(mContext).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(point_view_1_point1);
 //        Glide.with(mContext).load(R.drawable.c229_point).into(point_view_1_point1);
 //        Glide.with(mContext).load(R.drawable.c229_point)
@@ -61,24 +64,32 @@ public class SecondaryItemView extends LinearLayout implements View.OnClickListe
 
     @Subscribe
     public void onEvent(BaseEvent event) {
-        if (event instanceof SecondaryOnclickEvent ) {
+        if (event instanceof SecondaryOnclickEvent) {
             SecondaryOnclickEvent secondaryOnclickEvent = (SecondaryOnclickEvent) event;
             if (type == secondaryOnclickEvent.getType()) {
                 if (index == secondaryOnclickEvent.getIndex()) {
-                    title.setTextAppearance(mContext, R.style.text_28_blue);
+                    title.setTextAppearance(mContext, R.style.text_32_blue);
+                    second_item_line.setVisibility(VISIBLE);
+                    second_item_line_n.setVisibility(GONE);
                 } else {
-                    title.setTextAppearance(mContext, R.style.text_28_white);
+                    title.setTextAppearance(mContext, R.style.text_32_white);
+                    second_item_line.setVisibility(GONE);
+                    second_item_line_n.setVisibility(VISIBLE);
                 }
             }
 
         }
-        if(event instanceof SecondaryOnscollerEvent){
+        if (event instanceof SecondaryOnscollerEvent) {
             SecondaryOnscollerEvent secondaryOnclickEvent = (SecondaryOnscollerEvent) event;
             if (type == secondaryOnclickEvent.getType()) {
                 if (index == secondaryOnclickEvent.getIndex()) {
-                    title.setTextAppearance(mContext, R.style.text_28_blue);
+                    title.setTextAppearance(mContext, R.style.text_32_blue);
+                    second_item_line.setVisibility(VISIBLE);
+                    second_item_line_n.setVisibility(GONE);
                 } else {
-                    title.setTextAppearance(mContext, R.style.text_28_white);
+                    title.setTextAppearance(mContext, R.style.text_32_white);
+                    second_item_line.setVisibility(GONE);
+                    second_item_line_n.setVisibility(VISIBLE);
                 }
             }
         }

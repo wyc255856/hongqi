@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.faw.hongqi.widget.SecondaryListView
+            <com.faw.e115.widget.SecondaryListView
                 android:id="@+id/secondary_list_view"
                 android:layout_width="240dp"
                 android:layout_height="match_parent"

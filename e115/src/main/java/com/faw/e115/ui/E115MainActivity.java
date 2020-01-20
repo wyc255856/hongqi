@@ -64,11 +64,11 @@ public class E115MainActivity extends BaseActivity {
     }
 
     public void changeTabs(String tag) {
-        if ("0".equals(tag)) {
-            main_layout.setBackgroundResource(R.mipmap.c229_model_bg);
-        } else {
-            main_layout.setBackgroundResource(R.mipmap.theme1_main_bg);
-        }
+//        if ("0".equals(tag)) {
+//            main_layout.setBackgroundResource(R.mipmap.c229_model_bg);
+//        } else {
+//            main_layout.setBackgroundResource(R.mipmap.theme1_main_bg);
+//        }
         FragmentManager fm = this.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 

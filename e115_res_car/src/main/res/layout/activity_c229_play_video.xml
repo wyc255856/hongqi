@@ -89,7 +89,7 @@
             android:layout_centerInParent="true"
             android:visibility="gone">
 
-            <com.faw.hongqi.widget.BigPointView
+            <com.faw.e115.widget.BigPointView
                 android:id="@+id/spreadView"
                 android:layout_width="150dp"
                 android:layout_height="150dp"

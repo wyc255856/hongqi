@@ -12,7 +12,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/c229_car_1" />
 
-    <com.faw.hongqi.widget.HomeModelHotPointView
+    <com.faw.e115.widget.HomeModelHotPointView
         android:id="@+id/home_model_hot_point_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
