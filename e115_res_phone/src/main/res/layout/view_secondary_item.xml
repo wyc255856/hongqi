@@ -9,4 +9,18 @@
         style="@style/text_28_white"
         android:layout_marginTop="26.5dp"
         />
+    <View
+        android:id="@+id/second_item_line"
+        android:layout_width="189dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+        android:background="@mipmap/second_item_line_p" />
+
+    <View
+        android:id="@+id/second_item_line_n"
+        android:layout_width="189dp"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="45dp"
+        android:background="@mipmap/second_item_line_n" />
 </LinearLayout>

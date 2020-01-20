@@ -22,7 +22,6 @@ import java.util.List;
 
 public class SecondaryListView extends LinearLayout implements View.OnClickListener {
 
-    View cecondary_seek_bg;
     LinearLayout item_layout;
 
     private Activity mContext;
@@ -46,7 +45,6 @@ public class SecondaryListView extends LinearLayout implements View.OnClickListe
         LayoutInflater.from(context).inflate(R.layout.view_secondary_list,
                 this, true);
         item_layout = findViewById(R.id.item_layout);
-        cecondary_seek_bg = findViewById(R.id.cecondary_seek_bg);
 
     }
 
@@ -67,35 +65,11 @@ public class SecondaryListView extends LinearLayout implements View.OnClickListe
             item_layout.addView(item);
 
         }
-        if (SecondaryOnclickEvent.FAST == type) {
-            cecondary_seek_bg.setBackgroundResource(R.mipmap.fast_list_item_bg_1);
-        } else {
-            cecondary_seek_bg.setBackgroundResource(R.mipmap.fast_list_item_bg_1);
-        }
 
     }
 
     @Subscribe
     public void onEvent(BaseEvent event) {
-        if (event instanceof SecondaryOnclickEvent  ) {
-            LogUtil.logError("");
-            SecondaryOnclickEvent secondaryOnclickEvent = (SecondaryOnclickEvent) event;
-            if (SecondaryOnclickEvent.FAST == secondaryOnclickEvent.getType()) {
-                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
-            } else {
-                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
-
-            }
-        }
-        if(event instanceof SecondaryOnscollerEvent){
-            SecondaryOnscollerEvent secondaryOnclickEvent = (SecondaryOnscollerEvent) event;
-            if (SecondaryOnclickEvent.FAST == secondaryOnclickEvent.getType()) {
-                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
-            } else {
-                cecondary_seek_bg.setBackgroundResource(ResUtil.getMipmapResId("fast_list_item_bg_" + (secondaryOnclickEvent.getIndex() + 1)));
-
-            }
-        }
     }
 
     public void onDestory() {
