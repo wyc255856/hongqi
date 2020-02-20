@@ -18,7 +18,11 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Locale;
 
 public class PhoneUtil {
@@ -225,7 +229,53 @@ public class PhoneUtil {
         }
         return language;
     }
-
+    public static void requestGet(String strUrl,NetWorkCallBack callBack) {
+        try {
+            String baseUrl = strUrl;
+            StringBuilder tempParams = new StringBuilder();
+            String requestUrl = baseUrl + tempParams.toString();
+            URL url = new URL(requestUrl);
+            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.setConnectTimeout(5 * 1000);
+            urlConn.setReadTimeout(5 * 1000);
+            urlConn.setUseCaches(true);
+            urlConn.setRequestMethod("GET");
+            urlConn.setRequestProperty("Content-Type", "application/json");
+            urlConn.addRequestProperty("Connection", "Keep-Alive");
+            urlConn.connect();
+            if (urlConn.getResponseCode() == 200) {
+                String result = streamToString(urlConn.getInputStream());
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFail("服务器连接失败");
+            }
+            urlConn.disconnect();
+        } catch (Exception e) {
+            callBack.onFail(e.toString());
+        }
+    }
+    /**
+     * 将输入流转换成字符串
+     *
+     * @param is 从网络获取的输入流
+     * @return
+     */
+    public static String streamToString(InputStream is) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = is.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+            baos.close();
+            is.close();
+            byte[] byteArray = baos.toByteArray();
+            return new String(byteArray);
+        } catch (Exception e) {
+            return null;
+        }
+    }
     /**
      * 获取手机MAC地址
      *
