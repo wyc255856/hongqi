@@ -18,7 +18,7 @@ import static com.faw.hongqi.ui.C229MainActivity.goC229MainActivity;
 /**
  * welcome页，免责声明页共用
  */
-public class WelcomeActivity extends BaseActivity {
+public class C229WelcomeActivity extends BaseActivity {
     public Handler handler = new Handler();
 
     public int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1000;
@@ -56,10 +56,10 @@ public class WelcomeActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 if (!"2".equals(model.getVersion())){
-                                    goC229MainActivity(WelcomeActivity.this,"update");
+                                    goC229MainActivity(C229WelcomeActivity.this,"update");
                                     finish();
                                 }else{
-                                    goC229MainActivity(WelcomeActivity.this,"Unupdate");
+                                    goC229MainActivity(C229WelcomeActivity.this,"Unupdate");
                                 }
                             }
                         });
@@ -76,7 +76,7 @@ public class WelcomeActivity extends BaseActivity {
     private void goMainActivity() {
         new Handler() {
             public void handleMessage(Message msg) {
-                Intent intent = new Intent(WelcomeActivity.this, C229MainActivity.class);
+                Intent intent = new Intent(C229WelcomeActivity.this, C229MainActivity.class);
                 startActivity(intent);
                 finish();
             }

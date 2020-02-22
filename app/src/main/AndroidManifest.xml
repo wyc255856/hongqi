@@ -23,7 +23,7 @@
 
         </activity>
         <activity
-            android:name="com.faw.hongqi.ui.WelcomeActivity"
+            android:name="com.faw.hongqi.ui.C229WelcomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent">
             <intent-filter>
