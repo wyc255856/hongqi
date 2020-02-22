@@ -5,10 +5,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.model.VersionUpdateModel;
+import com.faw.hongqi.util.NetWorkCallBack;
+import com.faw.hongqi.util.PhoneUtil;
+import com.google.gson.Gson;
 
+import static com.faw.hongqi.ui.C229MainActivity.goC229MainActivity;
 
+/**
+ * welcome页，免责声明页共用
+ */
 public class WelcomeActivity extends BaseActivity {
     public Handler handler = new Handler();
 
@@ -17,8 +26,8 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         setContentView(R.layout.activity_welcome);
-        goMainActivity();
-
+//        goMainActivity();
+        isUpdate();
     }
 
     @Override
@@ -36,7 +45,34 @@ public class WelcomeActivity extends BaseActivity {
         return false;
     }
 
+    private void isUpdate(){
+        new Thread() {
+            @Override
+            public void run() {
+                PhoneUtil.requestGet("http://www.haoweisys.com/hs5_admin/index.php?m=home&c=index&a=get_first_version",new NetWorkCallBack() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        final VersionUpdateModel model = new Gson().fromJson((String) data, VersionUpdateModel.class);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                if (!"2".equals(model.getVersion())){
+                                    goC229MainActivity(WelcomeActivity.this,"update");
+                                    finish();
+                                }else{
+                                    goC229MainActivity(WelcomeActivity.this,"Unupdate");
+                                }
+                            }
+                        });
+                    }
 
+                    @Override
+                    public void onFail(Object error) {
+
+                    }
+                });
+            }
+        }.start();
+    }
     private void goMainActivity() {
         new Handler() {
             public void handleMessage(Message msg) {

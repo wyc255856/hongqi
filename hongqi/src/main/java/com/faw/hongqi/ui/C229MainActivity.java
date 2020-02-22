@@ -1,6 +1,7 @@
 package com.faw.hongqi.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -12,9 +13,11 @@ import android.widget.Toast;
 import com.faw.hongqi.R;
 import com.faw.hongqi.fragment.BaseFragment;
 import com.faw.hongqi.model.VersionModel;
+import com.faw.hongqi.model.VersionUpdateModel;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
 import com.faw.hongqi.util.LogUtil;
+import com.faw.hongqi.util.NetWorkCallBack;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.widget.TabView;
@@ -41,15 +44,42 @@ public class C229MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        LogUtil.logError("path = " + FileUtil.getResPath());
         requestWritePermission();
-        new Thread() {
-            @Override
-            public void run() {
-//                requestGet();
+        SharedpreferencesUtil.setVersionCode(C229MainActivity.this, PhoneUtil.getVersionName(C229MainActivity.this));
+        if ("update".equals(getIntent().getStringExtra("tag"))) {
+            if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon")) {
+                //增量更新
+                new Thread() {
+                    @Override
+                    public void run() {
+                        PhoneUtil.requestGet("https://www.haoweisys.com/hs5_admin/index.php?m=home&c=index&a=get_new_info", new NetWorkCallBack() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                final VersionModel model = new Gson().fromJson((String) data, VersionModel.class);
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        for (int i = 0; i < model.getZip_address().size(); i++) {
+
+                                        }
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onFail(Object error) {
+
+                            }
+                        });
+                    }
+                }.start();
+            } else {
+                goC229LoadAndUnzipFileActivity(C229MainActivity.this);
+                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "version");
             }
-        }.start();
-        SharedpreferencesUtil.setVersionCode(C229MainActivity.this,PhoneUtil.getVersionName(C229MainActivity.this));
+        } else {
+            //不需要更新
+        }
+
     }
 
     @Override
@@ -137,7 +167,7 @@ public class C229MainActivity extends BaseActivity {
         if (requestCode == WRITE_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            }else{
+            } else {
                 Log.d("tag", "Write Permission Failed");
                 Toast.makeText(this, "You must allow permission write external storage to your mobile device.", Toast.LENGTH_SHORT).show();
                 finish();
@@ -152,66 +182,13 @@ public class C229MainActivity extends BaseActivity {
             }
         }
     }
-    private void requestGet() {
-        try {
-            String baseUrl = "http://www.haoweisys.com/hs5_admin/index.php?m=home&c=index&a=get_new_info";
-            StringBuilder tempParams = new StringBuilder();
-            String requestUrl = baseUrl + tempParams.toString();
-            URL url = new URL(requestUrl);
-            final HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-            urlConn.setConnectTimeout(5 * 1000);
-            urlConn.setReadTimeout(5 * 1000);
-            urlConn.setUseCaches(true);
-            urlConn.setRequestMethod("GET");
-            urlConn.setRequestProperty("Content-Type", "application/json");
-            urlConn.addRequestProperty("Connection", "Keep-Alive");
-            urlConn.connect();
-            if (urlConn.getResponseCode() == 200) {
-                final VersionModel versionModel = new Gson().fromJson(streamToString(urlConn.getInputStream()), VersionModel.class);
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        if (SharedpreferencesUtil.getVersionCode(C229MainActivity.this).equals(versionModel.getVersion())){
-                            if (!fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-                                    + File.separator + "MyFolder" + File.separator + "NewFile"+ File.separator + "images")){
-                                goC229LoadAndUnzipFileActivity(C229MainActivity.this,versionModel,"gone");
-                                SharedpreferencesUtil.setVersionCode(C229MainActivity.this,versionModel.getVersion());
-                            }
-                        }else{
-                            goC229LoadAndUnzipFileActivity(C229MainActivity.this,versionModel,"visible");
-                            SharedpreferencesUtil.setVersionCode(C229MainActivity.this,versionModel.getVersion());
-                        }
-                    }
-                });
-            } else {
-                //
-            }
-            urlConn.disconnect();
-        } catch (Exception e) {
-            Log.e("tag", "------------->" + e.toString());
-        }
+
+    public static void goC229MainActivity(Context context, String tag) {
+        Intent intent = new Intent(context, C229MainActivity.class);
+        intent.putExtra("tag", tag);
+        context.startActivity(intent);
     }
-    /**
-     * 将输入流转换成字符串
-     *
-     * @param is 从网络获取的输入流
-     * @return
-     */
-    public String streamToString(InputStream is) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = is.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
-            }
-            baos.close();
-            is.close();
-            byte[] byteArray = baos.toByteArray();
-            return new String(byteArray);
-        } catch (Exception e) {
-            return null;
-        }
-    }
+
     //判断文件夹下是否存在该文件
     public boolean fileIsExists(String strFile) {
         try {

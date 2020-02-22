@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.faw.e115.R;
+import com.faw.e115.util.NetWorkCallBack;
 import com.faw.e115.util.PhoneUtil;
 import com.faw.e115.util.SharedpreferencesUtil;
 import com.liulishuo.filedownloader.BaseDownloadTask;
@@ -21,7 +22,6 @@ import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -110,7 +108,19 @@ public class E115LoadAndUnzipFileActivity extends BaseActivity {
             ll_is_no_wifi.setVisibility(View.GONE);
             ll_is_download.setVisibility(View.GONE);
         }
+        String strTest = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon";
+        fileIsExists(strTest);
+        PhoneUtil.requestGet("",new NetWorkCallBack() {
+            @Override
+            public void onSuccess(Object data) {
+                String result = (String) data;
+            }
 
+            @Override
+            public void onFail(Object error) {
+
+            }
+        });
     }
 
     @Override
@@ -123,66 +133,7 @@ public class E115LoadAndUnzipFileActivity extends BaseActivity {
         return false;
     }
 
-    private void requestGet() {
-        try {
-            String baseUrl = "http://www.hi-watch.com.cn/hiwatchclient/getWatchOnlineStatus.htm?deviceid=626160002649032";
-            StringBuilder tempParams = new StringBuilder();
-            String requestUrl = baseUrl + tempParams.toString();
-            // 新建一个URL对象
-            URL url = new URL(requestUrl);
-            // 打开一个HttpURLConnection连接
-            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-            // 设置连接主机超时时间
-            urlConn.setConnectTimeout(5 * 1000);
-            //设置从主机读取数据超时
-            urlConn.setReadTimeout(5 * 1000);
-            // 设置是否使用缓存  默认是true
-            urlConn.setUseCaches(true);
-            // 设置为Post请求
-            urlConn.setRequestMethod("GET");
-            //urlConn设置请求头信息
-            //设置请求中的媒体类型信息。
-            urlConn.setRequestProperty("Content-Type", "application/json");
-            //设置客户端与服务连接类型
-            urlConn.addRequestProperty("Connection", "Keep-Alive");
-            // 开始连接
-            urlConn.connect();
-            // 判断请求是否成功
-            if (urlConn.getResponseCode() == 200) {
-                // 获取返回的数据
-                String result = streamToString(urlConn.getInputStream());
-            } else {
 
-            }
-            // 关闭连接
-            urlConn.disconnect();
-        } catch (Exception e) {
-
-        }
-    }
-
-    /**
-     * 将输入流转换成字符串
-     *
-     * @param is 从网络获取的输入流
-     * @return
-     */
-    public String streamToString(InputStream is) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = is.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
-            }
-            baos.close();
-            is.close();
-            byte[] byteArray = baos.toByteArray();
-            return new String(byteArray);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     /**
      * 存放当前文件夹下所有图片文件的路径的集合
