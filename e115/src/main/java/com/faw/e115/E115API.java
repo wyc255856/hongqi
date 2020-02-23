@@ -11,6 +11,7 @@ public class E115API {
     public static void init(Context context) {
         FlowManager.init(context);
         FileDownloader.setup(context);
+//        FlowManager.initModule(e115GeneratedDatabaseHolder.class);
     }
 
     public static void openManual(Context context) {
