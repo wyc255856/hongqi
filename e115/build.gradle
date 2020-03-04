@@ -16,11 +16,11 @@ android {
 
         android.compileOptions.sourceCompatibility 1.8
         android.compileOptions.targetCompatibility 1.8
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ targetModuleName : 'e115' ]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [ targetModuleName : 'e115' ]
+//            }
+//        }
     }
     buildTypes {
         release {

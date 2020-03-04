@@ -99,7 +99,7 @@ public class SearchFragment extends BaseFragment {
     private void search(String word) {
         WORD = word;
         list = new ArrayList<>();
-        DBUtil.searchByWord(word, new TransactionListener() {
+        DBUtil.searchByWord(mContext,word, new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
 

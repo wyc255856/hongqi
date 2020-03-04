@@ -43,7 +43,7 @@ public class BaseModelItem extends LinearLayout {
     int resID;
     private NewsModel model;
     private void getFastNewsList(int id) {
-        DBUtil.getNewsListById(id, new TransactionListener() {
+        DBUtil.getNewsListById(mContext,id, new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
 

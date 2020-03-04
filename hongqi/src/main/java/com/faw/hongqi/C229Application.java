@@ -11,7 +11,6 @@ public class C229Application extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        FlowManager.init(this);
-        FileDownloader.setup(this);
+       C229API.init(this);
     }
 }

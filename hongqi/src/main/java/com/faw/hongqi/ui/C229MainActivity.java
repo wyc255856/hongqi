@@ -22,6 +22,7 @@ import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.widget.TabView;
 import com.google.gson.Gson;
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +43,7 @@ public class C229MainActivity extends BaseActivity {
     TabView tabView;
     View main_layout;
 
+    PullToRefreshRecyclerView pullToRefreshRecyclerView;
     @Override
     protected void initData() {
         requestWritePermission();
