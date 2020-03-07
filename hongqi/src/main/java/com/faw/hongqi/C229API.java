@@ -13,6 +13,7 @@ public class C229API {
         FlowManager.init(context);
         FileDownloader.setup(context);
         Constant.initData();
+
     }
 
     public static void openManual(Context context) {

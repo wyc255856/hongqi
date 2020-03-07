@@ -19,6 +19,7 @@ import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.LogUtil;
+import com.faw.hongqi.widget.HotWordView;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
@@ -37,6 +38,7 @@ public class SearchFragment extends BaseFragment {
     View delete_btn;
     RecyclerView recyclerView;
     public PtrrvAdapter mAdapter;
+    HotWordView hot_word_view;
     List<NewsModel> newsList = new ArrayList<>();
     public static String WORD = "";
 
@@ -58,8 +60,15 @@ public class SearchFragment extends BaseFragment {
         mAdapter = new PtrrvAdapter(mContext, R.layout.item_search, SearchHolder.class);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(mAdapter);
+        hot_word_view = view.findViewById(R.id.hot_word_view);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+        hot_word_view.setOnHotWordOnClickListener(new HotWordView.OnHotWordOnClickListener() {
+            @Override
+            public void onClickItem(String word) {
+                search_edit.setText(word);
+            }
+        });
     }
 
     @Override
@@ -78,6 +87,11 @@ public class SearchFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 if (s != null && !"".equals(s.toString())) {
                     delete_btn.setVisibility(View.VISIBLE);
                     search(s.toString());
@@ -86,20 +100,18 @@ public class SearchFragment extends BaseFragment {
                     delete_btn.setVisibility(View.GONE);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
     }
 
     List<CategoryModel> list;
 
     private void search(String word) {
+        recyclerView.setVisibility(View.VISIBLE);
+        hot_word_view.setVisibility(View.GONE);
+        DBUtil.insertHotWord(word);
         WORD = word;
         list = new ArrayList<>();
-        DBUtil.searchByWord(mContext,word, new TransactionListener() {
+        DBUtil.searchByWord(mContext, word, new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
 

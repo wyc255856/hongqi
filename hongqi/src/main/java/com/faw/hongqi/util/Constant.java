@@ -2,6 +2,7 @@ package com.faw.hongqi.util;
 
 import android.content.Context;
 
+import com.faw.hongqi.model.HotWord;
 import com.faw.hongqi.model.NewsModel_Table;
 import com.raizlabs.android.dbflow.sql.language.property.IntProperty;
 
@@ -38,6 +39,25 @@ public class Constant {
     public static IntProperty getCurrentIntProperty(Context context) {
         String modle=SharedpreferencesUtil.getCarModel(context);
         return intPropertyList.get(modle);
+    }
+
+
+    public static void initHotWord(){
+        HotWord hotWord1=new HotWord();
+        hotWord1.setWord("爆胎");
+        hotWord1.save();
+
+        HotWord hotWord2=new HotWord();
+        hotWord2.setWord("雾灯");
+        hotWord2.save();
+
+        HotWord hotWord3=new HotWord();
+        hotWord3.setWord("安全带");
+        hotWord3.save();
+
+        HotWord hotWord4=new HotWord();
+        hotWord4.setWord("方向盘");
+        hotWord4.save();
     }
 
 }

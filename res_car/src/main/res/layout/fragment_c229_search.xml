@@ -50,13 +50,21 @@
         </RelativeLayout>
         <!--        android:scrollbarThumbVertical="#bfbfbf"-->
         <!--        android:scrollbarTrackVertical="#393c41"-->
+
+        <com.faw.hongqi.widget.HotWordView
+            android:id="@+id/hot_word_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ptrrv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="85dp"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
