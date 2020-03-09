@@ -16,6 +16,7 @@ import com.faw.hongqi.model.VersionModel;
 import com.faw.hongqi.model.VersionUpdateModel;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
+import com.faw.hongqi.util.LoadAndUnzipUtil;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.NetWorkCallBack;
 import com.faw.hongqi.util.PhoneUtil;
@@ -41,43 +42,50 @@ public class C229MainActivity extends BaseActivity {
     private String currentTag;
     TabView tabView;
     View main_layout;
+    private VersionModel bean = null;
 
     @Override
     protected void initData() {
         requestWritePermission();
-        SharedpreferencesUtil.setVersionCode(C229MainActivity.this, PhoneUtil.getVersionName(C229MainActivity.this));
+        VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
         if ("update".equals(getIntent().getStringExtra("tag"))) {
-            if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon")) {
-                //增量更新
-                new Thread() {
-                    @Override
-                    public void run() {
-                        PhoneUtil.requestGet("https://www.haoweisys.com/hs5_admin/index.php?m=home&c=index&a=get_new_info", new NetWorkCallBack() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                final VersionModel model = new Gson().fromJson((String) data, VersionModel.class);
+            goC229LoadAndUnzipFileActivity(C229MainActivity.this, model);
+        } else {
+            final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
+            //增量更新
+            new Thread() {
+                @Override
+                public void run() {
+                    PhoneUtil.requestGet("http://www.haoweisys.com/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id, new NetWorkCallBack() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            bean = new Gson().fromJson((String) data, VersionModel.class);
+                            if ("".equals(bean.getVersion())) {
+                                //如果相同版本无需更新
+                            } else {
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        for (int i = 0; i < model.getZip_address().size(); i++) {
-
+                                        for (int i = 0; i < bean.getZip_address().size(); i++) {
+                                            LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i));
                                         }
+                                        SharedpreferencesUtil.setVersionCode(C229MainActivity.this, bean.getVersion());
+                                        //判断路径是否有增量更新文件夹如果有下载json文件，并删除文件夹及内容
+                                        LoadAndUnzipUtil.deleteDirectory(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+                                                + File.separator + "HONGQIH9");
+                                        LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews());
+                                        LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
                                     }
                                 });
                             }
+                        }
 
-                            @Override
-                            public void onFail(Object error) {
-
-                            }
-                        });
-                    }
-                }.start();
-            } else {
-                goC229LoadAndUnzipFileActivity(C229MainActivity.this);
-                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "version");
-            }
-        } else {
-            //不需要更新
+                        @Override
+                        public void onFail(Object error) {
+                            LogUtil.logError("error======" + error.toString());
+                        }
+                    });
+                }
+            }.start();
         }
 
     }

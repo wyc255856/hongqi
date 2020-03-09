@@ -9,6 +9,7 @@ import com.faw.hongqi.model.CategoryModel_Table;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.NewsModel_Table;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.util.TestUtil;
@@ -45,7 +46,37 @@ public class DBUtil {
             }.start();
         }
     }
+    public static void initDataNet(final Context context, final String tag) {
 
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+//                    Delete.table(NewsModel.class);
+//                    Delete.table(CategoryModel.class);
+                Constant.initHotWord();
+                if ("category".equals(tag)){
+                    //TODO 插入category
+                    SQLite.delete(CategoryModel.class)
+                            .where()
+                            .async().execute();
+                    insertCategory(context);
+                }else if ("news".equals(tag)){
+                    //TODO 插入news
+                    SQLite.delete(NewsModel.class)
+                            .where()
+                            .async().execute();
+                    insertNews(context);
+
+                }else{
+
+                }
+
+
+            }
+        }.start();
+
+    }
     /**
      * 获取w
      *

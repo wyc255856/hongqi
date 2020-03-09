@@ -3,6 +3,7 @@ package com.faw.hongqi.util;
 import android.app.Activity;
 import android.util.Log;
 
+import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.ui.C229LoadAndUnzipFileActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
@@ -29,7 +30,7 @@ public class LoadAndUnzipUtil {
             + File.separator + "MyFolder";
     private static String TAG = LoadAndUnzipUtil.class.getSimpleName();
     private static String fileName;
-    public static void startDownload(final Activity content,String downloadUrl) {
+    public static void startDownload(final Activity context,String downloadUrl) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -50,10 +51,15 @@ public class LoadAndUnzipUtil {
                         Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
-                        content.runOnUiThread(new Runnable() {
+                        context.runOnUiThread(new Runnable() {
                             public void run() {
                                 //下载完成
-                                unZipFile(new File(saveZipFilePath + File.separator + "images.zip"), saveZipFilePath);
+//                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+//                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
+//                                if (true){
+//                                    DBUtil.initData(context);
+//                                }
+                                unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath);
                             }
                         });
                         super.blockComplete(task);
@@ -79,8 +85,114 @@ public class LoadAndUnzipUtil {
                 });
         singleTaskId = singleTask.start();
     }
+    public static void startDownloadNews(final Activity context,String downloadUrl) {
+        singleTask = FileDownloader.getImpl().create(downloadUrl)
+                .setPath(saveZipFilePath, true)
+                .setCallbackProgressTimes(300)
+                .setMinIntervalUpdateSpeed(400)
+                .setListener(new FileDownloadSampleListener() {
+                    @Override
+                    protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        super.pending(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        Log.e(TAG, "----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
+                                + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
+                        super.progress(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void blockComplete(BaseDownloadTask task) {
+                        Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
+                                ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
+                        fileName = task.getFilename();
+                        context.runOnUiThread(new Runnable() {
+                            public void run() {
+                                //下载完成
+                                DBUtil.initDataNet(context,"news");
+//                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+//                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
+                            }
+                        });
+                        super.blockComplete(task);
+                    }
+                    @Override
+                    protected void completed(BaseDownloadTask task) {
+                        Log.e(TAG, "---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
+                        super.completed(task);
+                    }
+                    @Override
+                    protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        super.paused(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void error(BaseDownloadTask task, Throwable e) {
+                        Log.e(TAG, "--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
+                        super.error(task, e);
+                    }
+                    @Override
+                    protected void warn(BaseDownloadTask task) {
+                        super.warn(task);
+                    }
+                });
+        singleTaskId = singleTask.start();
+
+    }
+    public static void startDownloadCategory(final Activity context,String downloadUrl) {
+        singleTask = FileDownloader.getImpl().create(downloadUrl)
+                .setPath(saveZipFilePath, true)
+                .setCallbackProgressTimes(300)
+                .setMinIntervalUpdateSpeed(400)
+                .setListener(new FileDownloadSampleListener() {
+                    @Override
+                    protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        super.pending(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        Log.e(TAG, "----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
+                                + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
+                        super.progress(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void blockComplete(BaseDownloadTask task) {
+                        Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
+                                ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
+                        fileName = task.getFilename();
+                        context.runOnUiThread(new Runnable() {
+                            public void run() {
+                                //下载完成
+                                DBUtil.initDataNet(context,"category");
+//                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
+//                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
+                            }
+                        });
+                        super.blockComplete(task);
+                    }
+                    @Override
+                    protected void completed(BaseDownloadTask task) {
+                        Log.e(TAG, "---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
+                        super.completed(task);
+                    }
+                    @Override
+                    protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        super.paused(task, soFarBytes, totalBytes);
+                    }
+                    @Override
+                    protected void error(BaseDownloadTask task, Throwable e) {
+                        Log.e(TAG, "--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
+                        super.error(task, e);
+                    }
+                    @Override
+                    protected void warn(BaseDownloadTask task) {
+                        super.warn(task);
+                    }
+                });
+        singleTaskId = singleTask.start();
+//        DBUtil.initData(context);
+    }
     /**
-     * zipFile 压缩文件
+     * zipFile 解压文件
      * folderPath 解压后的文件路径
      */
     private static void unZipFile(File zipFile, String folderPath) {
@@ -117,16 +229,46 @@ public class LoadAndUnzipUtil {
         //判断是否有未解压的zip包
 //        SharedpreferencesUtil.setIsUnzip(C229LoadAndUnzipFileActivity.this, "true");
 //        SharedpreferencesUtil.setVersionCode(C229LoadAndUnzipFileActivity.this, "code");
-        //解压完成之后删除压缩包
         deleteDir(zipFile);
-        //将下载下来的文件统一复制到另一个文件夹
         copyFolder(saveZipFilePathOld, saveZipFilePathNew);
     }
-
     private static String saveZipFilePathOld = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "MyFolder" + File.separator + "images";
+            + File.separator + "HONGQIH9"+File.separator + "standard"+File.separator + "images";
     private static String saveZipFilePathNew = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "MyFolder" + File.separator + "NewFile"+ File.separator + "images";
+            + File.separator + "MyFolder" + File.separator + "images";
+    public static void copyFolder(String oldPath, String newPath) {
+        try {
+            (new File(newPath)).mkdirs();
+            File a = new File(oldPath);
+            String[] file = a.list();
+            File temp = null;
+            for (int i = 0; i < file.length; i++) {
+                if (oldPath.endsWith(File.separator)) {
+                    temp = new File(oldPath + file[i]);
+                } else {
+                    temp = new File(oldPath + File.separator + file[i]);
+                }
+                if (temp.isFile()) {
+                    FileInputStream input = new FileInputStream(temp);
+                    FileOutputStream output = new FileOutputStream(newPath + "/" +
+                            (temp.getName()).toString());
+                    byte[] b = new byte[1024 * 5];
+                    int len;
+                    while ((len = input.read(b)) != -1) {
+                        output.write(b, 0, len);
+                    }
+                    output.flush();
+                    output.close();
+                    input.close();
+                }
+                if (temp.isDirectory()) {
+                    copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i]);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static File getRealFileName(String baseDir, String absFileName) {
         String[] dirs = absFileName.split("/");
@@ -172,38 +314,70 @@ public class LoadAndUnzipUtil {
         }
         file.delete();
     }
-
-    public static void copyFolder(String oldPath, String newPath) {
-        try {
-            (new File(newPath)).mkdirs();
-            File a = new File(oldPath);
-            String[] file = a.list();
-            File temp = null;
-            for (int i = 0; i < file.length; i++) {
-                if (oldPath.endsWith(File.separator)) {
-                    temp = new File(oldPath + file[i]);
-                } else {
-                    temp = new File(oldPath + File.separator + file[i]);
-                }
-                if (temp.isFile()) {
-                    FileInputStream input = new FileInputStream(temp);
-                    FileOutputStream output = new FileOutputStream(newPath + "/" +
-                            (temp.getName()).toString());
-                    byte[] b = new byte[1024 * 5];
-                    int len;
-                    while ((len = input.read(b)) != -1) {
-                        output.write(b, 0, len);
-                    }
-                    output.flush();
-                    output.close();
-                    input.close();
-                }
-                if (temp.isDirectory()) {
-                    copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i]);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    /** 删除目录及目录下的文件
+     * @param filePath 要删除的目录的文件路径
+     * @return 目录删除成功返回true，否则返回false
+     */
+    public static boolean deleteDirectory(String filePath) {
+        // 如果dir不以文件分隔符结尾，自动添加文件分隔符
+        if (!filePath.endsWith(File.separator))
+            filePath = filePath + File.separator;
+        File dirFile = new File(filePath);
+        // 如果dir对应的文件不存在，或者不是一个目录，则退出
+        if ((!dirFile.exists()) || (!dirFile.isDirectory())) {
+//            Toast.makeText(getApplicationContext(), "删除目录失败：" + filePath + "不存在！", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        boolean flag = true;
+        // 删除文件夹中的所有文件包括子目录
+        File[] files = dirFile.listFiles();
+        for (File file : files) {
+            // 删除子文件
+            if (file.isFile()) {
+                flag = deleteSingleFile(file.getAbsolutePath());
+                if (!flag)
+                    break;
+            }
+            // 删除子目录
+            else if (file.isDirectory()) {
+                flag = deleteDirectory(file
+                        .getAbsolutePath());
+                if (!flag)
+                    break;
+            }
+        }
+        if (!flag) {
+//            Toast.makeText(getApplicationContext(), "删除目录失败！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // 删除当前目录
+        if (dirFile.delete()) {
+            Log.e("--Method--", "Copy_Delete.deleteDirectory: 删除目录" + filePath + "成功！");
+            return true;
+        } else {
+//            Toast.makeText(getApplicationContext(), "删除目录：" + filePath + "失败！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+    /** 删除单个文件
+     * @param filePath$Name 要删除的文件的文件名
+     * @return 单个文件删除成功返回true，否则返回false
+     */
+    private static boolean deleteSingleFile(String filePath$Name) {
+        File file = new File(filePath$Name);
+        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
+        if (file.exists() && file.isFile()) {
+            if (file.delete()) {
+                Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "成功！");
+                return true;
+            } else {
+//                Toast.makeText(getApplicationContext(), "删除单个文件" + filePath$Name + "失败！", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } else {
+//            Toast.makeText(getApplicationContext(), "删除单个文件失败：" + filePath$Name + "不存在！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
     }
 }
