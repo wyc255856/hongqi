@@ -1,5 +1,6 @@
 package com.faw.hongqi.fragment;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -7,19 +8,30 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.AppUtil;
 import com.faw.hongqi.util.Constant;
+import com.faw.hongqi.util.FileUtil;
+import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.ResUtil;
 import com.faw.hongqi.widget.HomeModelHotPointView;
+import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
+import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelsFragment extends BaseFragment implements View.OnTouchListener {
     ImageView car_model;
     HomeModelHotPointView homeModelHotPointView;
+    String path = "/storage/emulated/0/images/2019-04-04/5ca59cdfdcf78.png";
 
     @Override
     protected int getLayoutId() {
@@ -33,6 +45,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
 
     @Override
     protected void initView(View view) {
+
+
         car_model = view.findViewById(R.id.car_model);
         homeModelHotPointView = view.findViewById(R.id.home_model_hot_point_view);
         initPics();
@@ -54,8 +68,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
 
                     int screenWidth = PhoneUtil.getDisplayWidth(mContext);
 //                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
-                    lp.width = screenWidth-PhoneUtil.dip2px(mContext, (float) (screenWidth*0.1)/2);
-                    lp.height = (int) ( lp.width * 0.46785);
+                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
+                    lp.height = (int) (lp.width * 0.46785);
                 } else {
                     lp.width = 1440;
                     lp.height = 675;
@@ -77,8 +91,8 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                     //TODO 手机尺寸适配
                     int screenWidth = PhoneUtil.getDisplayWidth(mContext);
 //                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
-                    lp.width = screenWidth-PhoneUtil.dip2px(mContext, (float) (screenWidth*0.1)/2);
-                    lp.height = (int) ( lp.width * 0.46785);
+                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
+                    lp.height = (int) (lp.width * 0.46785);
                     homeModelHotPointView.setItem(lp.width);
                 } else {
                     lp.width = PhoneUtil.getDisplayWidth(mContext);

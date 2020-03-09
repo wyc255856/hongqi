@@ -20,7 +20,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.faw.hongqi.model.ContentItemModel;
 import com.faw.hongqi.util.Constant;
@@ -65,17 +67,25 @@ public abstract class BaseContentView extends LinearLayout {
 
         textView.setText(Html.fromHtml(text));
     }
-
+    //设置图片圆角角度
+    RoundedCorners roundedCorners= new RoundedCorners(20);
+    //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+    RequestOptions options=RequestOptions.bitmapTransform(roundedCorners);
     public void setImage(Context mContext, ImageView imageView, String fileName) {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-            File file = new File(FileUtil.getResPath() + fileName);
+        String url=(FileUtil.getResPath() + fileName).replace("\"/HONGQIH9/standard\"","");
+            File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
             if (file.exists())
-                Glide.with(mContext)
-                        .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
-                        .into(imageView);
+//                Glide.with(mContext)
+//                        .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
+//                        .into(imageView);
+
+        Glide.with(mContext)
+                .load(Uri.fromFile(file)).apply(options)
+                .into(imageView);
 //        }
 
 
@@ -88,7 +98,8 @@ public abstract class BaseContentView extends LinearLayout {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-            File file = new File(FileUtil.getResPath() + fileName);
+        String url=(FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard","");
+            File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
             if (file.exists())
                 Glide.with(mContext).asBitmap()

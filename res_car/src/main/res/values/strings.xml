@@ -11,7 +11,6 @@
     <string name="model_item_text_3">电动后备箱</string>
 
 
-
     <string name="download_assest_text_wifi">当前非WiFi网络是否继续下载</string>
     <string name="download_assest_text_yes">是</string>
     <string name="download_assest_text_no">否</string>
@@ -20,4 +19,6 @@
     <string name="download_assest_text_unzip">正在解压,请勿退出</string>
     <string name="download_assest_text_check">正在验证资源文件完整性</string>
     <string name="download_assest_text_lianj">点击重试</string>
+
+    <string name="search_hot_title">高频搜索</string>
 </resources>

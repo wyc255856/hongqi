@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.faw.hongqi.R;
 import com.faw.hongqi.event.BaseEvent;
 import com.faw.hongqi.event.SecondaryOnclickEvent;
@@ -65,10 +67,6 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
                 this, true);
         imageView = findViewById(R.id.imageView);
         title = findViewById(R.id.title);
-
-//        Glide.with(mContext).load(R.drawable.c229_point).into(point_view_1_point1);
-//        Glide.with(mContext).load(R.drawable.c229_point)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL).into(point_view_1_point1);
         setOnClickListener(this);
     }
 
@@ -78,25 +76,15 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
         data = model;
         data.setStatus(index);
         this.index = index;
-        if (!TextUtils.isEmpty(model.getImage1())) {
-            String url = FileUtil.getResPath() + model.getImage1();
-            LogUtil.logError("image url = " + url);
-//            Glide.with(mContext).load(url).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageView);
-//            Bitmap bitmap = FileUtil.getLoacalBitmap(url);
-//            LogUtil.logError("bitmap = " + bitmap);
-//            imageView.setImageBitmap(bitmap);
-            File file = new File(FileUtil.getResPath() + model.getImage1());
+        String url = (FileUtil.getResPath() + model.getHead_image()).replace("/HONGQIH9/standard","");
+        LogUtil.logError("image url = " + url);
+        if (!TextUtils.isEmpty(model.getHead_image())) {
+
+            File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
             Glide.with(mContext)
-                    .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 4))
-                    .into(imageView);
-        } else {
-            String url = "images/2019-04-26/5cc2b440a0ab1.png";
-            Glide.with(mContext)
-                    .load(Uri.fromFile(new File(FileUtil.getResPath() + url))).transform(new CenterCrop(), new GlideRoundTransform(mContext, 4))
-                    .into(imageView);
-//            imageView.setImageBitmap(getBitmap(url));
-//            imageView.setImageBitmap(FileUtil.getLoacalBitmap(FileUtil.getResPath() + url));
+                    .load(Uri.fromFile(file)).apply(new RequestOptions()
+                    .transform(new GlideRoundTransform(mContext, 25))).into(imageView);
         }
         title.setText(model.getTitle() + "");
     }
@@ -123,15 +111,5 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
         EventBus.getDefault().unregister(this);
     }
 
-    private Bitmap getBitmap(String fileName) {
-        Bitmap bitmap = null;
-        AssetManager assetManager = mContext.getAssets();
-        try {
-            InputStream inputStream = assetManager.open(fileName);//filename是assets目录下的图片名
-            bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
+
 }

@@ -13,19 +13,26 @@ import java.io.FileNotFoundException;
 public class FileUtil {
 
     public static String getResPath() {
-        if(Constant.IS_PHONE){
+        if (Constant.IS_PHONE) {
             //TODO 修改成手机的资源地址
             String path = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
                     + File.separator + "MyFolder";
-            return path+"/";
-        }else {
+            return path + "/";
+        } else {
             String path = Environment.getExternalStorageDirectory().getPath();
-            return path+"/";
+            if(Constant.TEST){
+                path = "/vendor/mnt/presetdata/manual";
+            }else {
+                path = Environment.getExternalStorageDirectory().getPath();
+            }
+            return path + "/";
         }
 
     }
+
     /**
      * 加载本地图片
+     *
      * @param url
      * @return
      */

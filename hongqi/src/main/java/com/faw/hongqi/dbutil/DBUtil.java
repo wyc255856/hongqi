@@ -6,6 +6,8 @@ import com.faw.hongqi.R;
 import com.faw.hongqi.model.CategoryListModel;
 import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.CategoryModel_Table;
+import com.faw.hongqi.model.HotWord_Table;
+import com.faw.hongqi.model.HotWord;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.NewsModel_Table;
@@ -36,6 +38,7 @@ public class DBUtil {
                     super.run();
 //                    Delete.table(NewsModel.class);
 //                    Delete.table(CategoryModel.class);
+                    Constant.initHotWord();
                     //TODO 插入category
                     insertCategory(context);
                     //TODO 插入news
@@ -126,12 +129,12 @@ public class DBUtil {
                 .async().queryList(transactionListener);
     }
 
-    public static void getNewsListById(int id, TransactionListener transactionListener) {
+    public static void getNewsListById(Context context, int id, TransactionListener transactionListener) {
         LogUtil.logError("fast id = " + id);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.caid.eq(10077))
-                .and(NewsModel_Table.id.eq(1064))
+                .where(NewsModel_Table.id.eq(1064))
+                .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);
     }
 
@@ -148,22 +151,25 @@ public class DBUtil {
                 .from(CategoryModel.class)
                 .where(CategoryModel_Table.parentid.eq(1855))
 //                .where()
+
                 .async().queryList(transactionListener);
     }
 
-    public static void getNewsListByCatId(int catid, TransactionListener transactionListener) {
+    public static void getNewsListByCatId(Context context, int catid, TransactionListener transactionListener) {
         LogUtil.logError("fast catid = " + catid);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.caid.eq(catid))
+                .where(NewsModel_Table.catid.eq(catid))
 //                .where()
+                .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);
     }
 
-    public static void searchByWord(String word, TransactionListener transactionListener) {
+    public static void searchByWord(Context context, String word, TransactionListener transactionListener) {
         SQLite.select()
                 .from(NewsModel.class)
                 .where(NewsModel_Table.title.like("%" + word + "%"))
+                .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);
 
 
@@ -174,6 +180,15 @@ public class DBUtil {
 //                .async().queryList(transactionListener);
     }
 
+    public static void getHotWordList(Context context, TransactionListener transactionListener) {
+        SQLite.select()
+                .from(HotWord.class)
+                .where()
+                .orderBy(HotWord_Table.id, false)
+                .limit(4)
+                .async().queryList(transactionListener);
+    }
+
     public static NewsModel getTestModel(Context context) {
         String json = TestUtil.readTextFileFromRawResourceId(context, R.raw.test);
         NewsModel menuListModel = new Gson().fromJson(json, NewsModel.class);
@@ -181,5 +196,11 @@ public class DBUtil {
             return menuListModel;
         }
         return null;
+    }
+
+    public static void insertHotWord(String word) {
+        HotWord hotWord = new HotWord();
+        hotWord.setWord(word);
+        hotWord.save();
     }
 }

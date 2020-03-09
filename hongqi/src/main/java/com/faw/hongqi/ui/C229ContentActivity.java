@@ -17,6 +17,7 @@ import com.faw.hongqi.model.ContentItemModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.widget.CirclePageIndicator;
+import com.faw.hongqi.widget.LinePageIndicator;
 //import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import androidx.viewpager.widget.ViewPager;
 public class C229ContentActivity extends BaseActivity {
 
     ViewPager viewPager;
-    CirclePageIndicator circleView;
+    LinePageIndicator circleView;
     PlanePagerAdapter adapter;
     ArrayList<BaseFragment> _dataList = new ArrayList<>();
 

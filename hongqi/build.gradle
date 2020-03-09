@@ -12,6 +12,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [ targetModuleName : 'hongqi' ]
+//            }
+//        }
     }
 
     buildTypes {
@@ -35,9 +40,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 
-    api project(path: ':res_phone')
+//    api project(path: ':res_phone')
 //    api project(path: ':e115_res_phone')
-//    implementation project(path: ':res_car')
+    implementation project(path: ':res_car')
 
 
 

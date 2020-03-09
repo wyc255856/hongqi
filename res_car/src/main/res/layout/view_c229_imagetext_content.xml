@@ -23,10 +23,17 @@
             android:layout_marginRight="45dp"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
             <TextView
                 android:id="@+id/text_content"
                 style="@style/text_32_white"></TextView>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

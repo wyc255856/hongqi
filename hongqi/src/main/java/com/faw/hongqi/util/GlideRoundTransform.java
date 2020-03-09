@@ -10,13 +10,13 @@ import android.graphics.RectF;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 
 import java.security.MessageDigest;
 
 import androidx.annotation.NonNull;
 
 public class GlideRoundTransform extends BitmapTransformation {
-
     private static float radius = 0f;
 
     public GlideRoundTransform(Context context) {
@@ -25,12 +25,13 @@ public class GlideRoundTransform extends BitmapTransformation {
 
     public GlideRoundTransform(Context context, int dp) {
         super();
-        radius = Resources.getSystem().getDisplayMetrics().density * dp;
+        this.radius = Resources.getSystem().getDisplayMetrics().density * dp;
     }
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-        return roundCrop(pool, toTransform);
+        Bitmap bitmap = TransformationUtils.centerCrop(pool, toTransform, outWidth, outHeight);
+        return roundCrop(pool, bitmap);
     }
 
     private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
@@ -55,7 +56,7 @@ public class GlideRoundTransform extends BitmapTransformation {
     }
 
     @Override
-    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
 
     }
 }

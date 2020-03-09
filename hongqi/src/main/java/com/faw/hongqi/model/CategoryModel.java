@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @ModelContainer
 @Table(database = CarDatabase.class)
 public class CategoryModel extends BaseModel {
-    @PrimaryKey(autoincrement = true)
+    @PrimaryKey(autoincrement = false)
     private int catid;
     @Column
     private int caid;

@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.fragment.BaseFragment;
+import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.VersionModel;
 import com.faw.hongqi.model.VersionUpdateModel;
 import com.faw.hongqi.util.FileUtil;
@@ -23,13 +25,17 @@ import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.widget.TabView;
 import com.google.gson.Gson;
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
+import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
+import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
@@ -44,13 +50,12 @@ public class C229MainActivity extends BaseActivity {
     View main_layout;
     private VersionModel bean = null;
 
+    PullToRefreshRecyclerView pullToRefreshRecyclerView;
     @Override
     protected void initData() {
         requestWritePermission();
         VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
-        if ("update".equals(getIntent().getStringExtra("tag"))) {
-            goC229LoadAndUnzipFileActivity(C229MainActivity.this, model);
-        } else {
+
             final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
             //增量更新
             new Thread() {
@@ -86,8 +91,6 @@ public class C229MainActivity extends BaseActivity {
                     });
                 }
             }.start();
-        }
-
     }
 
     @Override
