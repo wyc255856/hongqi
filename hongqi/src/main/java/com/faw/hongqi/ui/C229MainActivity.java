@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.fragment.BaseFragment;
+import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.VersionModel;
 import com.faw.hongqi.model.VersionUpdateModel;
 import com.faw.hongqi.util.FileUtil;
@@ -24,12 +26,15 @@ import com.faw.hongqi.widget.TabView;
 import com.google.gson.Gson;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
+import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
+import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;

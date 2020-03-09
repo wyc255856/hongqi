@@ -21,7 +21,12 @@
         <item name="android:textColor">@color/theme1_text_color_gray</item>
         <item name="android:textSize">28sp</item>
     </style>
-
+    <style name="text_28_gray1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/theme1_text_color_gray1</item>
+        <item name="android:textSize">28sp</item>
+    </style>
     <style name="text_28_blue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -42,7 +47,12 @@
         <item name="android:textColor">@color/theme1_text_color_gray</item>
         <item name="android:textSize">32sp</item>
     </style>
-
+    <style name="text_32_gray1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/theme1_text_color_gray1</item>
+        <item name="android:textSize">32sp</item>
+    </style>
     <style name="text_32_blue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -63,7 +73,12 @@
         <item name="android:textColor">@color/theme1_text_color_gray</item>
         <item name="android:textSize">36sp</item>
     </style>
-
+    <style name="text_36_gray1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/theme1_text_color_gray1</item>
+        <item name="android:textSize">36sp</item>
+    </style>
     <style name="text_36_blue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

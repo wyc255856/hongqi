@@ -103,8 +103,7 @@ public class DBUtil {
         LogUtil.logError("fast id = " + id);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.caid.eq(10077))
-                .and(NewsModel_Table.id.eq(1064))
+                .where(NewsModel_Table.id.eq(1064))
                 .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);
     }
@@ -130,7 +129,7 @@ public class DBUtil {
         LogUtil.logError("fast catid = " + catid);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.caid.eq(catid))
+                .where(NewsModel_Table.catid.eq(catid))
 //                .where()
                 .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);

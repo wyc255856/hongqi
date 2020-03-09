@@ -75,7 +75,8 @@ public abstract class BaseContentView extends LinearLayout {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-            File file = new File(FileUtil.getResPath() + fileName);
+        String url=(FileUtil.getResPath() + fileName).replace("\"/HONGQIH9/standard\"","");
+            File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
             if (file.exists())
 //                Glide.with(mContext)
@@ -97,7 +98,8 @@ public abstract class BaseContentView extends LinearLayout {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-            File file = new File(FileUtil.getResPath() + fileName);
+        String url=(FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard","");
+            File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
             if (file.exists())
                 Glide.with(mContext).asBitmap()

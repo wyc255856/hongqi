@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.AppUtil;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
@@ -19,6 +21,8 @@ import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.ResUtil;
 import com.faw.hongqi.widget.HomeModelHotPointView;
+import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
+import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
 import java.io.File;
 import java.util.ArrayList;
