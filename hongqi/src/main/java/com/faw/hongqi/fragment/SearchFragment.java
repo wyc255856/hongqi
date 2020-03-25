@@ -77,6 +77,9 @@ public class SearchFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 search_edit.setText("");
+                recyclerView.setVisibility(View.GONE);
+                hot_word_view.setVisibility(View.VISIBLE);
+                hot_word_view.initWord();
             }
         });
         search_edit.addTextChangedListener(new TextWatcher() {

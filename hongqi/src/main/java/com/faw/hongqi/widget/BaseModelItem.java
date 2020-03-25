@@ -42,7 +42,7 @@ public class BaseModelItem extends LinearLayout {
     protected PointView pointView;
     int resID;
     private NewsModel model;
-    private void getFastNewsList(int id) {
+    private void getFastNewsList(String  id) {
         DBUtil.getNewsListById(mContext,id, new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
@@ -83,7 +83,7 @@ public class BaseModelItem extends LinearLayout {
         initView(context, id, text, icon);
     }
 
-    private void initView(final Context context, String id, String text, int icon) {
+    private void initView(final Context context, final String id, String text, int icon) {
         // TODO Auto-generated method stub
         this.mContext = (Activity) context;
         LayoutInflater.from(context).inflate(R.layout.view_model_item,
@@ -99,7 +99,7 @@ public class BaseModelItem extends LinearLayout {
             @Override
             public void onClick(View v) {
                 //TODO 跳转到内容页
-                getFastNewsList(1152);
+                getFastNewsList( id );
             }
         });
     }

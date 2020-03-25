@@ -1,6 +1,7 @@
 package com.faw.hongqi.util;
 
 import android.app.Activity;
+import android.os.Environment;
 import android.util.Log;
 
 import com.faw.hongqi.dbutil.DBUtil;
@@ -26,11 +27,13 @@ import java.util.zip.ZipFile;
 public class LoadAndUnzipUtil {
     static BaseDownloadTask singleTask;
     public static int singleTaskId = 0;
-    private static String saveZipFilePath = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "MyFolder";
+    public static int unzip_size = 0;
+    public static int unzip_size_index = 0;
+    private static String saveZipFilePath = FileUtil.getDownloadResPath() + File.separator + "imagesnew";
     private static String TAG = LoadAndUnzipUtil.class.getSimpleName();
     private static String fileName;
-    public static void startDownload(final Activity context,String downloadUrl) {
+
+    public static void startDownload(final Activity context, String downloadUrl) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -40,44 +43,50 @@ public class LoadAndUnzipUtil {
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.pending(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        Log.e(TAG, "----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
+                        LogUtil.logError("----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
                                 + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
                         super.progress(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void blockComplete(BaseDownloadTask task) {
-                        Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
+                        LogUtil.logError("----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
-                        context.runOnUiThread(new Runnable() {
-                            public void run() {
-                                //下载完成
+//                        context.runOnUiThread(new Runnable() {
+//                            public void run() {
+                        //下载完成
 //                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
 //                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
 //                                if (true){
 //                                    DBUtil.initData(context);
 //                                }
-                                unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath);
-                            }
-                        });
+                        unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath);
+//                            }
+//                        });
                         super.blockComplete(task);
                     }
+
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        Log.e(TAG, "---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
+                        LogUtil.logError("---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
                         super.completed(task);
                     }
+
                     @Override
                     protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.paused(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        Log.e(TAG, "--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
+                        LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
                     }
+
                     @Override
                     protected void warn(BaseDownloadTask task) {
                         super.warn(task);
@@ -85,7 +94,8 @@ public class LoadAndUnzipUtil {
                 });
         singleTaskId = singleTask.start();
     }
-    public static void startDownloadNews(final Activity context,String downloadUrl) {
+
+    public static void startDownloadNews(final Activity context, String downloadUrl) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -95,41 +105,47 @@ public class LoadAndUnzipUtil {
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.pending(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        Log.e(TAG, "----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
+                        LogUtil.logError("----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
                                 + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
                         super.progress(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void blockComplete(BaseDownloadTask task) {
-                        Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
+                        LogUtil.logError("----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
-                        context.runOnUiThread(new Runnable() {
-                            public void run() {
-                                //下载完成
-                                DBUtil.initDataNet(context,"news");
+//                        context.runOnUiThread(new Runnable() {
+//                            public void run() {
+                        //下载完成
+                        DBUtil.initDataNet(context, "news");
 //                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
 //                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
-                            }
-                        });
+//                            }
+//                        });
                         super.blockComplete(task);
                     }
+
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        Log.e(TAG, "---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
+                        LogUtil.logError("---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
                         super.completed(task);
                     }
+
                     @Override
                     protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.paused(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        Log.e(TAG, "--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
+                        LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
                     }
+
                     @Override
                     protected void warn(BaseDownloadTask task) {
                         super.warn(task);
@@ -138,7 +154,8 @@ public class LoadAndUnzipUtil {
         singleTaskId = singleTask.start();
 
     }
-    public static void startDownloadCategory(final Activity context,String downloadUrl) {
+
+    public static void startDownloadCategory(final Activity context, String downloadUrl) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -148,41 +165,47 @@ public class LoadAndUnzipUtil {
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.pending(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                        Log.e(TAG, "----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
+                        LogUtil.logError("----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
                                 + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
                         super.progress(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void blockComplete(BaseDownloadTask task) {
-                        Log.e(TAG, "----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
+                        LogUtil.logError("----------->blockComplete taskId:" + task.getId() + ",filePath:" + task.getPath() +
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
-                        context.runOnUiThread(new Runnable() {
-                            public void run() {
-                                //下载完成
-                                DBUtil.initDataNet(context,"category");
+//                        context.runOnUiThread(new Runnable() {
+//                            public void run() {
+                        //下载完成
+                        DBUtil.initDataNet(context, "category");
 //                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
 //                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
-                            }
-                        });
+//                            }
+//                        });
                         super.blockComplete(task);
                     }
+
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        Log.e(TAG, "---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
+                        LogUtil.logError("---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
                         super.completed(task);
                     }
+
                     @Override
                     protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.paused(task, soFarBytes, totalBytes);
                     }
+
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
-                        Log.e(TAG, "--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
+                        LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
                     }
+
                     @Override
                     protected void warn(BaseDownloadTask task) {
                         super.warn(task);
@@ -191,6 +214,7 @@ public class LoadAndUnzipUtil {
         singleTaskId = singleTask.start();
 //        DBUtil.initData(context);
     }
+
     /**
      * zipFile 解压文件
      * folderPath 解压后的文件路径
@@ -212,7 +236,7 @@ public class LoadAndUnzipUtil {
                     continue;
                 }
                 OutputStream os = new BufferedOutputStream(new FileOutputStream(getRealFileName(folderPath, ze.getName())));
-                Log.e(TAG, "---->getRealFileName(folderPath,ze.getName()): " + getRealFileName(folderPath, ze.getName()).getPath() + "  name:" + getRealFileName(folderPath, ze.getName()).getName());
+                LogUtil.logError("---->getRealFileName(folderPath,ze.getName()): " + getRealFileName(folderPath, ze.getName()).getPath() + "  name:" + getRealFileName(folderPath, ze.getName()).getName());
                 InputStream is = new BufferedInputStream(zfile.getInputStream(ze));
                 int readLen = 0;
                 while ((readLen = is.read(buf, 0, 1024)) != -1) {
@@ -223,32 +247,44 @@ public class LoadAndUnzipUtil {
                 os.close();
             }
             zfile.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         //判断是否有未解压的zip包
 //        SharedpreferencesUtil.setIsUnzip(C229LoadAndUnzipFileActivity.this, "true");
 //        SharedpreferencesUtil.setVersionCode(C229LoadAndUnzipFileActivity.this, "code");
-        deleteDir(zipFile);
-        copyFolder(saveZipFilePathOld, saveZipFilePathNew);
+
+        unzip_size_index++;
+        LogUtil.logError("unzip_size_index = " + unzip_size_index);
+//        deleteDir(zipFile);
+        if (unzip_size_index == unzip_size) {
+            copyFolder(saveZipFilePathOld, saveZipFilePathNew);
+            deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "HONGQIH9"));
+            deleteDir(new File(saveZipFilePath));
+        }
     }
-    private static String saveZipFilePathOld = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "HONGQIH9"+File.separator + "standard"+File.separator + "images";
-    private static String saveZipFilePathNew = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-            + File.separator + "MyFolder" + File.separator + "images";
+
+    private static String saveZipFilePathOld = FileUtil.getDownloadResPath() + File.separator + "HONGQIH9" + File.separator + "standard" + File.separator + "images";
+    private static String saveZipFilePathNew = FileUtil.getDownloadResPath() + File.separator + "images";
+
     public static void copyFolder(String oldPath, String newPath) {
         try {
             (new File(newPath)).mkdirs();
             File a = new File(oldPath);
             String[] file = a.list();
             File temp = null;
+
             for (int i = 0; i < file.length; i++) {
                 if (oldPath.endsWith(File.separator)) {
                     temp = new File(oldPath + file[i]);
                 } else {
                     temp = new File(oldPath + File.separator + file[i]);
                 }
+
                 if (temp.isFile()) {
+                    LogUtil.logError("正在复制文件temp = " + temp + "到 新路径 " + newPath + "/" +
+                            (temp.getName()).toString());
                     FileInputStream input = new FileInputStream(temp);
                     FileOutputStream output = new FileOutputStream(newPath + "/" +
                             (temp.getName()).toString());
@@ -262,6 +298,7 @@ public class LoadAndUnzipUtil {
                     input.close();
                 }
                 if (temp.isDirectory()) {
+                    LogUtil.logError("正在创建目录 = " + newPath + "/" + file[i]);
                     copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i]);
                 }
             }
@@ -314,7 +351,10 @@ public class LoadAndUnzipUtil {
         }
         file.delete();
     }
-    /** 删除目录及目录下的文件
+
+    /**
+     * 删除目录及目录下的文件
+     *
      * @param filePath 要删除的目录的文件路径
      * @return 目录删除成功返回true，否则返回false
      */
@@ -352,14 +392,17 @@ public class LoadAndUnzipUtil {
         }
         // 删除当前目录
         if (dirFile.delete()) {
-            Log.e("--Method--", "Copy_Delete.deleteDirectory: 删除目录" + filePath + "成功！");
+            LogUtil.logError("Copy_Delete.deleteDirectory: 删除目录" + filePath + "成功！");
             return true;
         } else {
 //            Toast.makeText(getApplicationContext(), "删除目录：" + filePath + "失败！", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
-    /** 删除单个文件
+
+    /**
+     * 删除单个文件
+     *
      * @param filePath$Name 要删除的文件的文件名
      * @return 单个文件删除成功返回true，否则返回false
      */
@@ -368,7 +411,7 @@ public class LoadAndUnzipUtil {
         // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
         if (file.exists() && file.isFile()) {
             if (file.delete()) {
-                Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "成功！");
+                LogUtil.logError("Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "成功！");
                 return true;
             } else {
 //                Toast.makeText(getApplicationContext(), "删除单个文件" + filePath$Name + "失败！", Toast.LENGTH_SHORT).show();

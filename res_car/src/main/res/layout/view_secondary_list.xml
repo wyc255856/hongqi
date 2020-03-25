@@ -21,8 +21,7 @@
                 <View
                     android:id="@+id/cecondary_seek_bg"
                     android:layout_width="99dp"
-                    android:layout_height="528dp"
-                    android:background="@mipmap/fast_list_item_bg_1" />
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:id="@+id/item_layout"

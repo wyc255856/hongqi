@@ -12,6 +12,7 @@ import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.NewsModel_Table;
 import com.faw.hongqi.util.Constant;
+import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.util.TestUtil;
@@ -26,6 +27,7 @@ import com.raizlabs.android.dbflow.sql.language.NameAlias;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.io.File;
 import java.util.List;
 
 public class DBUtil {
@@ -63,13 +65,13 @@ public class DBUtil {
                     SQLite.delete(CategoryModel.class)
                             .where()
                             .async().execute();
-                    insertCategory(context);
+                    insertLocalCategory(context);
                 }else if ("news".equals(tag)){
                     //TODO 插入news
                     SQLite.delete(NewsModel.class)
                             .where()
                             .async().execute();
-                    insertNews(context);
+                    insertLocalNews(context);
 
                 }else{
 
@@ -94,7 +96,33 @@ public class DBUtil {
         }
         return null;
     }
+    /**
+     * 获取w
+     *
+     * @return
+     */
+    private static NewsListModel getLocalList(Context context) {
+        String json = TestUtil.readTextFile(context, FileUtil.getDownloadResPath() + File.separator + "imagesnew"
+                + "/news.json");
+        NewsListModel menuListModel = new Gson().fromJson(json, NewsListModel.class);
+        if (menuListModel != null) {
+            LogUtil.logError("数据长度" + menuListModel.getRECORDS().size());
+            return menuListModel;
+        }
+        return null;
+    }
 
+
+    private static CategoryListModel getLocalCategoryList(Context context) {
+        String json = TestUtil.readTextFile(context, FileUtil.getDownloadResPath() + File.separator + "imagesnew"
+                + "/category.json");
+        CategoryListModel menuListModel = new Gson().fromJson(json, CategoryListModel.class);
+        if (menuListModel != null) {
+            LogUtil.logError("数据长度" + menuListModel.getRECORDS().size());
+            return menuListModel;
+        }
+        return null;
+    }
 
     private static CategoryListModel getCategoryList(Context context) {
         String json = TestUtil.readTextFileFromRawResourceId(context, R.raw.zy_category);
@@ -122,6 +150,25 @@ public class DBUtil {
         LogUtil.logError("消耗了" + (System.currentTimeMillis() - startTime) + "毫秒");
     }
 
+
+
+    private static void insertLocalNews(Context context) {
+        long startTime = System.currentTimeMillis();
+        LogUtil.logError("开始入库news表");
+        TransactionManager.getInstance().addTransaction(new SaveModelTransaction<>(ProcessModelInfo.withModels(getLocalList(context).getRECORDS())));
+        LogUtil.logError("news表入库结束");
+        LogUtil.logError("消耗了" + (System.currentTimeMillis() - startTime) + "毫秒");
+    }
+
+    private static void insertLocalCategory(Context context) {
+        long startTime = System.currentTimeMillis();
+        LogUtil.logError("开始入库Category表");
+        TransactionManager.getInstance().addTransaction(new SaveModelTransaction<>(ProcessModelInfo.withModels(getLocalCategoryList(context).getRECORDS())));
+        LogUtil.logError("Category表入库结束");
+        LogUtil.logError("消耗了" + (System.currentTimeMillis() - startTime) + "毫秒");
+    }
+
+
     public static void getAllNews(TransactionListener transactionListener) {
         SQLite.select()
                 .from(NewsModel.class)
@@ -129,11 +176,11 @@ public class DBUtil {
                 .async().queryList(transactionListener);
     }
 
-    public static void getNewsListById(Context context, int id, TransactionListener transactionListener) {
+    public static void getNewsListById(Context context, String id, TransactionListener transactionListener) {
         LogUtil.logError("fast id = " + id);
         SQLite.select()
                 .from(NewsModel.class)
-                .where(NewsModel_Table.id.eq(1064))
+                .where(NewsModel_Table.id.eq(id))
                 .and(Constant.getCurrentIntProperty(context).eq(1))
                 .async().queryList(transactionListener);
     }

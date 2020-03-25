@@ -28,6 +28,7 @@ import com.faw.hongqi.model.ContentItemModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.GlideRoundTransform;
+import com.faw.hongqi.util.LogUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -67,25 +68,29 @@ public abstract class BaseContentView extends LinearLayout {
 
         textView.setText(Html.fromHtml(text));
     }
+
     //设置图片圆角角度
-    RoundedCorners roundedCorners= new RoundedCorners(20);
+    RoundedCorners roundedCorners = new RoundedCorners(20);
     //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-    RequestOptions options=RequestOptions.bitmapTransform(roundedCorners);
+    RequestOptions options = RequestOptions.bitmapTransform(roundedCorners);
+
     public void setImage(Context mContext, ImageView imageView, String fileName) {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-        String url=(FileUtil.getResPath() + fileName).replace("\"/HONGQIH9/standard\"","");
-            File file = new File(url);
+        String url = (FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard", "");
+        LogUtil.logError("file url = " + url);
+        File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
-            if (file.exists())
+        if (file.exists()) {
 //                Glide.with(mContext)
 //                        .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
 //                        .into(imageView);
-
-        Glide.with(mContext)
-                .load(Uri.fromFile(file)).apply(options)
-                .into(imageView);
+            LogUtil.logError("file url = " + file.exists());
+            Glide.with(mContext)
+                    .load(Uri.fromFile(file)).apply(new RequestOptions()
+                    .transform(new GlideRoundTransform(mContext, 25))).into(imageView);
+        }
 //        }
 
 
@@ -98,13 +103,18 @@ public abstract class BaseContentView extends LinearLayout {
 //        if(Constant.TEST){
 //            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
 //        }else {
-        String url=(FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard","");
-            File file = new File(url);
+        String url = (FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard", "");
+
+        File file = new File(url);
 //            LogUtil.logError("file url = " + file.exists());
-            if (file.exists())
-                Glide.with(mContext).asBitmap()
-                        .load(Uri.fromFile(file))
-                        .into(imageView);
+        LogUtil.logError("file url = " + url);
+        if (file.exists()) {
+            LogUtil.logError("file url = " + file.exists());
+
+            Glide.with(mContext).asBitmap()
+                    .load(Uri.fromFile(file))
+                    .into(imageView);
+        }
 //        }
 
 //        Bitmap bitmap = getBitmap(mContext, fileName);

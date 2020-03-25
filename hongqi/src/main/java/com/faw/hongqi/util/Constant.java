@@ -21,7 +21,7 @@ public class Constant {
     public final static boolean IS_PHONE = false;//判断包是否是手机应用
 
     public final static boolean DEBUG = true;//是否是调试包
-    public final static boolean TEST = false;//是否是不带资源的测试包
+    public final static boolean TEST = true;//是否是不带资源的测试包
 
     private static Map<String, IntProperty> intPropertyList = new HashMap<>();
 

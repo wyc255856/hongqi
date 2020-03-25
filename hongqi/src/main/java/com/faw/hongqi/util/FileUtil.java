@@ -29,7 +29,18 @@ public class FileUtil {
         }
 
     }
+    public static String getDownloadResPath() {
 
+            String path = Environment.getExternalStorageDirectory().getPath();
+            if(Constant.TEST){
+                path = "/vendor/mnt/presetdata/manual";
+            }else {
+                path = Environment.getExternalStorageDirectory().getPath();
+            }
+            return path ;
+
+
+    }
     /**
      * 加载本地图片
      *
@@ -45,5 +56,21 @@ public class FileUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static void deleteDir(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        if (file.isDirectory()) {
+            File[] childFiles = file.listFiles();
+            if (childFiles == null || childFiles.length == 0) {
+                file.delete();
+            }
+            for (int index = 0; index < childFiles.length; index++) {
+                deleteDir(childFiles[index]);
+            }
+        }
+        file.delete();
     }
 }

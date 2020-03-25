@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -51,46 +53,12 @@ public class C229MainActivity extends BaseActivity {
     private VersionModel bean = null;
 
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
+
     @Override
     protected void initData() {
         requestWritePermission();
-        VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
 
-            final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
-            //增量更新
-            new Thread() {
-                @Override
-                public void run() {
-                    PhoneUtil.requestGet("http://www.haoweisys.com/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id, new NetWorkCallBack() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            bean = new Gson().fromJson((String) data, VersionModel.class);
-                            if ("".equals(bean.getVersion())) {
-                                //如果相同版本无需更新
-                            } else {
-                                runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        for (int i = 0; i < bean.getZip_address().size(); i++) {
-                                            LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i));
-                                        }
-                                        SharedpreferencesUtil.setVersionCode(C229MainActivity.this, bean.getVersion());
-                                        //判断路径是否有增量更新文件夹如果有下载json文件，并删除文件夹及内容
-                                        LoadAndUnzipUtil.deleteDirectory(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
-                                                + File.separator + "HONGQIH9");
-                                        LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews());
-                                        LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onFail(Object error) {
-                            LogUtil.logError("error======" + error.toString());
-                        }
-                    });
-                }
-            }.start();
+        deleteFile();
     }
 
     @Override
@@ -115,6 +83,18 @@ public class C229MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+//                try {
+//                    String command = "chmod 777 " + "/vendor/mnt/presetdata/manual/images";
+//                    Log.i("zyl", "command = " + command);
+//                    Runtime runtime = Runtime.getRuntime();
+//
+//                    Process proc = runtime.exec(command);
+//                } catch (IOException e) {
+//                    Log.i("zyl","chmod fail!!!!");
+//                    e.printStackTrace();
+//                }
+
+//                new File( "/vendor/mnt/presetdata/manual/images/2020-03-18").mkdir();
             }
         });
     }
@@ -189,7 +169,7 @@ public class C229MainActivity extends BaseActivity {
     private void requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS}, WRITE_PERMISSION);
             }
         }
     }
@@ -211,5 +191,55 @@ public class C229MainActivity extends BaseActivity {
             return false;
         }
         return true;
+    }
+
+    public void deleteFile() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                LoadAndUnzipUtil.unzip_size = 0;
+                LoadAndUnzipUtil.unzip_size_index = 0;
+//                FileUtil.deleteDir(new File(FileUtil.getDownloadResPath()
+//                        + File.separator + "imagesnew" + "/news.json"));
+//                FileUtil.deleteDir(new File(FileUtil.getDownloadResPath()
+//                        + File.separator + "imagesnew" + "/category.json"));
+                VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
+//                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "6");
+                final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
+                final String url = "http://www.haoweisys.com/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id;
+                LogUtil.logError("url = " + url);
+                PhoneUtil.requestGet(url, new NetWorkCallBack() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        LogUtil.logError("data = " + data);
+                        bean = new Gson().fromJson((String) data, VersionModel.class);
+                        if ("".equals(bean.getVersion())) {
+                            //如果相同版本无需更新
+                        } else {
+//                            runOnUiThread(new Runnable() {
+//                                public void run() {
+                            LoadAndUnzipUtil.unzip_size = bean.getZip_address().size();
+                            for (int i = 0; i < bean.getZip_address().size(); i++) {
+                                LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i));
+                            }
+                            SharedpreferencesUtil.setVersionCode(C229MainActivity.this, bean.getVersion());
+                            //判断路径是否有增量更新文件夹如果有下载json文件，并删除文件夹及内容
+//                            FileUtil.deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "horizon"
+//                                    + File.separator + "HONGQIH9"));
+                            LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews());
+                            LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
+//                                }
+//                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Object error) {
+                        LogUtil.logError("error======" + error.toString());
+                    }
+                });
+            }
+        }.start();
     }
 }

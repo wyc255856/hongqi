@@ -163,7 +163,7 @@ public class ManualFragment extends BaseFragment {
 //        for (int i = 0; i < 5; i++) {
 //            testlist.add(list.get(i));
 //        }
-        list = list.subList(0, 5);
+//        list = list.subList(0, 5);
 //        secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         startTime = System.currentTimeMillis();

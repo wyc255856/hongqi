@@ -62,6 +62,10 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         view_layout.setVisibility(GONE);
     }
 
+    public boolean isShow() {
+        return view_layout.getVisibility() == VISIBLE;
+    }
+
     public void showHotPointViewByResId(int resID) {
         //index 0:轮胎，1：远光灯，2，后备箱
         view_layout.setVisibility(VISIBLE);
@@ -274,19 +278,19 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
 
 
     double k;
-    public static  final double WIDTH = 1920;//手机端模型图片宽度常量
+    public static final double WIDTH = 1920;//手机端模型图片宽度常量
 
     List<BaseModelItem> view_list = new ArrayList<>();
 
     public void setItem(double width) {
         if (Constant.IS_PHONE) {
-            k =width/WIDTH;
+            k = width / WIDTH;
         } else {
             k = 1;
         }
-        BaseModelItem baseModelItem1 = new BaseModelItem(mContext, "1064", mContext.getString(R.string.model_item_text_1), R.mipmap.test_point_view_icon_2);
-        BaseModelItem baseModelItem2 = new BaseModelItem(mContext, "906", mContext.getString(R.string.model_item_text_2), R.mipmap.test_point_view_icon_l);
-        BaseModelItem baseModelItem3 = new BaseModelItem(mContext, "1152", mContext.getString(R.string.model_item_text_3), R.mipmap.test_point_view_icon_3);
+        BaseModelItem baseModelItem1 = new BaseModelItem(mContext, "42", mContext.getString(R.string.model_item_text_1), R.mipmap.test_point_view_icon_2);
+        BaseModelItem baseModelItem2 = new BaseModelItem(mContext, "16", mContext.getString(R.string.model_item_text_2), R.mipmap.test_point_view_icon_l);
+        BaseModelItem baseModelItem3 = new BaseModelItem(mContext, "36", mContext.getString(R.string.model_item_text_3), R.mipmap.test_point_view_icon_3);
 
 
         view_list.add(baseModelItem1);

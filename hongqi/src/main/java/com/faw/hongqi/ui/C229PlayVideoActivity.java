@@ -1,6 +1,10 @@
 package com.faw.hongqi.ui;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +21,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.faw.hongqi.R;
+import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.model.InteractiveVideoModel;
+import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.view.SpreadView;
@@ -51,6 +57,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     BigPointView spreadView;
     public static final int UPDATE_TIME = 0x0001;
     public static final int HIDE_CONTROL = 0x0002;
+
+    NewsModel newsModel;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -100,7 +108,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     private void initPlayer() {
         mPlayer = new MediaPlayer();
-
+        mAm = (AudioManager) getSystemService(AUDIO_SERVICE);
         mPlayer.setOnCompletionListener(this);
         mPlayer.setOnErrorListener(this);
         mPlayer.setOnInfoListener(this);
@@ -132,7 +140,9 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     @Override
     protected void initData() {
         initInteractive();
-        path = FileUtil.getResPath() + "images/2019-03-12/5c870f97c6e23.mp4";
+        newsModel = (NewsModel) getIntent().getSerializableExtra("data");
+        path = (FileUtil.getResPath() + newsModel.getVideo1()).replace("/HONGQIH9/standard", "");
+        Log.i("playPath", path);
         setContentView(R.layout.activity_c229_play_video);
         initViews();
         initSurfaceView();
@@ -219,22 +229,24 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     }
 
     private void play() {
-        if (mPlayer == null) {
-            return;
-        }
-        Log.i("playPath", path);
-        if (mPlayer.isPlaying()) {
-            mPlayer.pause();
-            mHandler.removeMessages(UPDATE_TIME);
+        if (requestFocus()) {
+            if (mPlayer == null) {
+                return;
+            }
+            Log.i("playPath", path);
+            if (mPlayer.isPlaying()) {
+                mPlayer.pause();
+                mHandler.removeMessages(UPDATE_TIME);
 //            mHandler.removeMessages(HIDE_CONTROL);
-            playOrPauseIv.setVisibility(View.VISIBLE);
-            playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
-        } else {
-            mPlayer.start();
-            mHandler.sendEmptyMessageDelayed(UPDATE_TIME, 500);
+                playOrPauseIv.setVisibility(View.VISIBLE);
+                playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
+            } else {
+                mPlayer.start();
+                mHandler.sendEmptyMessageDelayed(UPDATE_TIME, 500);
 //            mHandler.sendEmptyMessageDelayed(HIDE_CONTROL, 5000);
-            playOrPauseIv.setVisibility(View.INVISIBLE);
-            playOrPauseIv.setImageResource(android.R.drawable.ic_media_pause);
+                playOrPauseIv.setVisibility(View.INVISIBLE);
+                playOrPauseIv.setImageResource(android.R.drawable.ic_media_pause);
+            }
         }
     }
 
@@ -259,17 +271,21 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         if (id == R.id.playOrPause) {
             play();
         } else if (id == R.id.root_rl) {
-            mPlayer.pause();
-            mHandler.removeMessages(UPDATE_TIME);
-//            mHandler.removeMessages(HIDE_CONTROL);
-            playOrPauseIv.setVisibility(View.VISIBLE);
-            playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
-            isShow = true;
-//        mHandler.removeMessages(HIDE_CONTROL);
-            mHandler.sendEmptyMessage(UPDATE_TIME);
-//            showControl();
+            pause();
 
         }
+    }
+
+    private void pause() {
+        mPlayer.pause();
+        mHandler.removeMessages(UPDATE_TIME);
+//            mHandler.removeMessages(HIDE_CONTROL);
+        playOrPauseIv.setVisibility(View.VISIBLE);
+        playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
+        isShow = true;
+//        mHandler.removeMessages(HIDE_CONTROL);
+        mHandler.sendEmptyMessage(UPDATE_TIME);
+//            showControl();
     }
 
     /**
@@ -408,4 +424,65 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         }
 
     }
+
+    public static void goVideoActivity(Context context, NewsModel newsModel) {
+//        if (Constant.TEST) {
+//            newsModel = DBUtil.getTestModel(context);
+//        }
+        Intent intent = new Intent(context, C229PlayVideoActivity.class);
+        intent.putExtra("data", newsModel);
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(R.anim.in,
+                R.anim.out);
+
+    }
+
+
+
+    private AudioManager mAm;
+
+    /**
+     * 请求语音焦点
+     * @return
+     */
+    private boolean requestFocus() {
+        int result = mAm.requestAudioFocus(afChangeListener,
+                AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN);
+        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
+
+    }
+
+
+    AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+
+        public void onAudioFocusChange(int focusChange) {
+
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+
+                pause();
+
+
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                play();
+
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                mAm.abandonAudioFocus(afChangeListener);
+                stop();
+            }
+
+        }
+
+    };
+
+    private void stop() {
+
+        if (mPlayer != null) {
+
+            mPlayer.stop();
+
+        }
+
+    }
+
 }

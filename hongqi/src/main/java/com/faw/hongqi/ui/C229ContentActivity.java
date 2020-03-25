@@ -174,9 +174,9 @@ public class C229ContentActivity extends BaseActivity {
     }
 
     public static void goContentActivity(Context context, NewsModel newsModel) {
-        if (Constant.TEST) {
-            newsModel = DBUtil.getTestModel(context);
-        }
+//        if (Constant.TEST) {
+////            newsModel = DBUtil.getTestModel(context);
+////        }
         Intent intent = new Intent(context, C229ContentActivity.class);
         intent.putExtra("data", newsModel);
         context.startActivity(intent);
