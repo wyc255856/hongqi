@@ -44,6 +44,9 @@ public class C229ContentActivity extends BaseActivity {
         changeModelToList();
         circleView = findViewById(R.id.circleView);
         viewPager = findViewById(R.id.viewpager);
+        if(data_list.size()==1){
+            circleView.setVisibility(View.GONE);
+        }
         for (int i = 0; i < data_list.size(); i++) {
             ContentItemModel contentItemModel = data_list.get(i);
             Bundle bundle = new Bundle();
