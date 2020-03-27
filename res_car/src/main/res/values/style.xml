@@ -147,5 +147,8 @@
         <!--扩散延迟间隔-->
         <attr name="spread_delay_milliseconds" format="integer" />
     </declare-styleable>
-
+    <style name="Theme.NoBackgroundAndTitleMain" parent="android:Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 </resources>

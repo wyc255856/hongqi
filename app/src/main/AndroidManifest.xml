@@ -40,7 +40,7 @@
         <activity
             android:name="com.faw.hongqi.ui.C229MainActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent">
+            android:theme="@style/Theme.NoBackgroundAndTitleMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.faw.hongqicar.c229.voice"></action>
@@ -51,7 +51,7 @@
         <activity
             android:name="com.faw.hongqi.ui.C229ContentActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent" />
+            android:theme="@style/Theme.NoBackgroundAndTitleMain" />
         <activity
             android:name="com.faw.hongqi.ui.C229LoadAndUnzipFileActivity"
             android:screenOrientation="landscape"

@@ -95,10 +95,19 @@ public class BaseModelItem extends LinearLayout {
         if (!TextUtils.isEmpty(text)) {
             textView.setText(text);
         }
+//        textView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO 跳转到内容页
+//                getFastNewsList( id );
+//            }
+//        });
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 跳转到内容页
+                if (NoDoubleClickListener.isFastClick()) {
+                    return ;
+                }
                 getFastNewsList( id );
             }
         });

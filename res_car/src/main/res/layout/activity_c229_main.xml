@@ -25,7 +25,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="55dp"
             android:layout_marginTop="32dp"
-            android:src="@mipmap/theme1_c229_back_icon" />
+            android:src="@mipmap/c229_back_icon" />
 
 
         <com.faw.hongqi.widget.TabView

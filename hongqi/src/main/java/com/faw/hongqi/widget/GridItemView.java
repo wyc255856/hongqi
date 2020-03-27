@@ -67,7 +67,20 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
                 this, true);
         imageView = findViewById(R.id.imageView);
         title = findViewById(R.id.title);
-        setOnClickListener(this);
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NoDoubleClickListener.isFastClick()) {
+                    return ;
+                }
+                if (TextUtils.isEmpty(data.getVideo1())) {
+                    C229ContentActivity.goContentActivity(mContext, data);
+                } else {
+//            mContext.startActivity(new Intent(mContext, C229PlayVideoActivity.class));
+                    C229PlayVideoActivity.goVideoActivity(mContext,data);
+                }
+            }
+        });
     }
 
     public NewsModel data;
@@ -99,12 +112,7 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 //        EventBus.getDefault().post(new SecondaryOnclickEvent(SecondaryOnclickEvent.FAST, index));
-        if (TextUtils.isEmpty(data.getVideo1())) {
-            C229ContentActivity.goContentActivity(mContext, data);
-        } else {
-//            mContext.startActivity(new Intent(mContext, C229PlayVideoActivity.class));
-            C229PlayVideoActivity.goVideoActivity(mContext,data);
-        }
+
 
     }
 

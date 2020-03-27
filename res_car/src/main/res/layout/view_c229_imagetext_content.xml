@@ -15,7 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="95dp">
+        android:layout_marginRight="95dp"
+        android:scrollbarThumbVertical="@drawable/bg_scroll_bar"
+        android:scrollbarTrackVertical="@drawable/seek_blue_bg">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +31,8 @@
 
             <TextView
                 android:id="@+id/text_content"
-                android:layout_marginRight="45dp"
-                style="@style/text_32_white"></TextView>
+                style="@style/text_32_white"
+                android:layout_marginRight="45dp"></TextView>
 
             <View
                 android:layout_width="match_parent"

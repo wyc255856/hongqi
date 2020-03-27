@@ -13,6 +13,7 @@ import com.faw.hongqi.R;
 import com.faw.hongqi.fragment.SearchFragment;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.ui.C229ContentActivity;
+import com.faw.hongqi.widget.NoDoubleClickListener;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 
@@ -26,9 +27,18 @@ public class SearchHolder extends BaseHolder {
     public SearchHolder(View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.word);
+//        itemView.setOnClickListener(new {
+//            @Override
+//            public void onClick(View v) {
+//                C229ContentActivity.goContentActivity(mContext, bean);
+//            }
+//        });
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (NoDoubleClickListener.isFastClick()) {
+                    return ;
+                }
                 C229ContentActivity.goContentActivity(mContext, bean);
             }
         });
