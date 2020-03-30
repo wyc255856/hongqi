@@ -16,6 +16,7 @@
         android:layout_height="400dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="95dp"
+        android:fadeScrollbars="false"
         android:scrollbarThumbVertical="@drawable/bg_scroll_bar"
         android:scrollbarTrackVertical="@drawable/seek_blue_bg">
 

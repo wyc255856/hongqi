@@ -27,17 +27,17 @@
             android:layout_gravity="top"
             android:layout_marginLeft="13dp"
             android:layout_marginTop="13dp"
-            android:layout_marginRight="123dp"
+            android:layout_marginRight="13dp"
             android:background="@mipmap/content_top_bg" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="138dp"
+            android:layout_height="130dp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
             android:layout_marginBottom="23dp"
-            android:background="@mipmap/content_bottom_bg" />
+            android:background="@mipmap/content_bottom_bg3" />
 
         <!--        <View-->
         <!--            android:layout_width="match_parent"-->
@@ -55,15 +55,15 @@
 
         <FrameLayout
             android:id="@+id/back"
-            android:layout_width="40dp"
-            android:layout_height="41dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="40dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="27dp"
                 android:layout_height="41dp"
-                android:src="@mipmap/theme1_c229_back_icon" />
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/theme1_c229_back_selector" />
         </FrameLayout>
 
     </FrameLayout>
