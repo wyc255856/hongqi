@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="146dp"
         android:layout_marginRight="146dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="14dp"
         android:background="@mipmap/content_bg">
 
         <androidx.viewpager.widget.ViewPager
@@ -57,13 +57,26 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
             <ImageView
                 android:layout_width="27dp"
                 android:layout_height="41dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/theme1_c229_back_selector" />
+
+                <TextView
+                    android:id="@+id/tv_title_content"
+                    style="@style/text_32_white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
         </FrameLayout>
 
     </FrameLayout>

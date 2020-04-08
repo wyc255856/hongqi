@@ -290,33 +290,47 @@ img {
 .anim {
 	transform: scale(1) rotateY(0deg) rotateX(0deg);
 	position: absolute;
-	left: -22.5px;
-	top: -22.5px;
-	width: 45px;
-	height: 45px;
+	left: -.225rem;
+	top: -.225rem;
+	width: .45rem;
+	height: .45rem;
 	pointer-events: none;
+}
+
+.host_2 {
+	height: .45rem !important;
+	left: -.215rem !important;
+	top: -.205rem !important;
+	width: .45rem !important;
+}
+
+.host_1 {
+	height: .45rem !important;
+	left: -.215rem !important;
+	top: -.205rem !important;
+	width: .45rem !important;
 }
 
 .line {
 	position: absolute;
-	left: 40px;
-	    bottom: 55px;
+	left: .4rem;
+	bottom: .55rem;
 	z-index: 999;
 	width: 0px;
-	height: 44px;
+	height: .44rem;
 	background: url(../myprivate/line.png) no-repeat;
-	background-size: 70px 44px;
+	background-size: .7rem .44rem;
 	pointer-events: all;
 }
 
 .list {
 	transform: scale(1) rotateY(0deg) rotateX(0deg);
 	position: absolute;
-	left: 120px;
+	left: 1.2rem;
 	bottom: 0px;
 	z-index: 999;
-	width: 228px;
-	height: 255px;
+	width: 2.28rem;
+	height: 2.55rem;
 	background: url(../myprivate/modo.png) no-repeat;
 	background-size: 100% 100%;
 	color: beige;
@@ -324,14 +338,15 @@ img {
 	pointer-events: all;
 	display: none;
 }
+
 .list ul {
 	/* padding: 10px 0; */
 	left: 50%;
-	margin-left: -100px;
+	margin-left: -1rem;
 	position: absolute;
-	top: 17px;
-	width: 200px;
-	height: 210px;
+	top: .17rem;
+	width: 2rem;
+	height: 2.1rem;
 	/* overflow: hidden; */
 	overflow-y: scroll;
 	scrollbar-width: none;
@@ -339,49 +354,52 @@ img {
 	-ms-overflow-style: none;
 	/* IE 10+ */
 }
+
 .list ul::-webkit-scrollbar {
 	display: none;
 	/* Chrome Safari */
 }
+
 .list ul li {
 	width: 100%;
 	color: #bfbfbf;
-	font-size: 27px;
+	font-size: .27rem;
 	text-align: center;
-	height: 50px;
-	line-height: 50px;
+	height: .5rem;
+	line-height: .5rem;
 	cursor: pointer;
 	font-family: "思源黑体 CN";
 }
 
-/* .list ul li a {
+.list ul li:first-child {
+	color: #83baff;
+}
+
+
+.loding {
 	width: 100%;
-	color: #bfbfbf;
-	font-size: 27px;
-	text-align: center;
-	height: 50px;
-	line-height: 50px;
-	cursor: pointer;
-	font-family: "思源黑体 CN";
-} */
-
-/* .list ul li :hover {
-	color: #83baff;
-} */
-
-.list ul li:first-child{
-	color: #83baff;
+	height: 100%;
+	position: fixed;
+	z-index: 9999999;
+	background-color: rgba(0,0,0,0);
+	top: 0;
+	left: 0;
 }
 
-.host_wrapper_main {
-	top: 0px;
-	left: 0px;
-	width: 1280px;
-	height: 620px;
-	overflow: hidden;
+.item{
 	position: absolute;
-	user-select: none;
-	z-index: 4;
-	cursor: none;
-	/* pointer-events: none; */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	
+}
+.la-ball-grid-beat{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
 }
