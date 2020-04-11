@@ -1,46 +1,107 @@
 package com.faw.hongqi.fragment;
 
 import android.app.Activity;
+import android.os.Build;
+
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.faw.hongqi.R;
-import com.faw.hongqi.adaptar.PtrrvAdapter;
+import com.faw.hongqi.adaptar.SortAdapter;
 import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.event.BaseEvent;
 import com.faw.hongqi.event.SecondaryOnclickEvent;
-import com.faw.hongqi.event.SecondaryOnscollerEvent;
-import com.faw.hongqi.holder.ContentHolder;
 import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.PhoneUtil;
-import com.faw.hongqi.widget.SecondaryListView;
+import com.faw.hongqi.widget.CheckListener;
+import com.faw.hongqi.widget.ItemHeaderDecoration;
+import com.faw.hongqi.widget.RvListener;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class ManualFragment extends BaseFragment {
+public class ManualFragment extends BaseFragment implements CheckListener {
 
     List<CategoryModel> list = new ArrayList<>();
-    SecondaryListView secondaryListView;
-    RecyclerView recyclerView;
-    public PtrrvAdapter mAdapter;
     List<NewsListModel> newsList = new ArrayList<>();
+    /////
+    private RecyclerView rvSort;
+    private SortAdapter mSortAdapter;
+    private SortDetailFragment mSortDetailFragment;
+    private LinearLayoutManager mLinearLayoutManager;
+    private int targetPosition;//点击左边某一个具体的item的位置
+    private boolean isMoved;
+
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_c229_mauna;
+    }
+
+    public void createFragment() {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        mSortDetailFragment = new SortDetailFragment(newsList,list);
+        mSortDetailFragment.setListener(this);
+        fragmentTransaction.add(R.id.lin_fragment, mSortDetailFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void setChecked(int position, boolean isLeft) {
+        Log.d("p-------->", String.valueOf(position));
+        if (isLeft) {
+            mSortAdapter.setCheckedPosition(position);
+            //此处的位置需要根据每个分类的集合来进行计算
+            int count = 0;
+            for (int i = 0; i < position; i++) {
+                count += newsList.get(i).getRECORDS().size();
+            }
+            count += position;
+            mSortDetailFragment.setData(count);
+            ItemHeaderDecoration.setCurrentTag(String.valueOf(targetPosition));//凡是点击左边，将左边点击的位置作为当前的tag
+        } else {
+            if (isMoved) {
+                isMoved = false;
+            } else
+                mSortAdapter.setCheckedPosition(position);
+            ItemHeaderDecoration.setCurrentTag(String.valueOf(position));//如果是滑动右边联动左边，则按照右边传过来的位置作为tag
+
+        }
+        moveToCenter(position);
+
+
+    }
+    @Override
+    public void check(int position, boolean isScroll) {
+        setChecked(position, isScroll);
+    }
+
+    //将当前选中的item居中
+    private void moveToCenter(int position) {
+        //将点击的position转换为当前屏幕上可见的item的位置以便于计算距离顶部的高度，从而进行移动居中
+        View childAt = rvSort.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
+        if (childAt != null) {
+            int y = (childAt.getTop() - (rvSort.getHeight() / 2)+PhoneUtil.dip2px(getActivity(),60f));
+            rvSort.smoothScrollBy(0, y);
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -75,70 +136,32 @@ public class ManualFragment extends BaseFragment {
         });
 
     }
+    private void initData1() {
+        List<String> lists = new ArrayList<>();
+        //初始化左侧列表数据
+        for (int i = 0; i < list.size(); i++) {
+            lists.add(list.get(i).getCatname());
+        }
+        mSortAdapter = new SortAdapter(mContext, lists, new RvListener() {
+            @Override
+            public void onItemClick(int id, int position) {
+                if (mSortDetailFragment != null) {
+                    isMoved = true;
+                    targetPosition = position;
+                    setChecked(position, true);
+                }
+            }
+        });
+        rvSort.setAdapter(mSortAdapter);
+        createFragment();
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView(View view) {
-        secondaryListView = view.findViewById(R.id.secondary_list_view);
-        recyclerView = view.findViewById(R.id.ptrrv);
-        //        recyclerView.removeHeader();
-//        recyclerView.setSwipeEnable(true);
-        mAdapter = new PtrrvAdapter(mContext, R.layout.item_list, ContentHolder.class);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-//        recyclerView.onFinishLoading(true, false);
-        recyclerView.setAdapter(mAdapter);
-
-
-        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
-            @Override
-            public void onChildViewAttachedToWindow(@NonNull View view) {
-                int index = Integer.valueOf((String) view.getTag());
-                LogUtil.logError("onChildViewAttachedToWindow index = " + index);
-            }
-
-            @Override
-            public void onChildViewDetachedFromWindow(@NonNull View view) {
-                int index = Integer.valueOf((String) view.getTag());
-                LogUtil.logError("onChildViewDetachedFromWindow index = " + index);
-            }
-        });
-        recyclerView.setOnFlingListener(new RecyclerView.OnFlingListener() {
-            @Override
-            public boolean onFling(int velocityX, int velocityY) {
-                return false;
-            }
-        });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                LogUtil.logError("onScrollStateChanged newState = " + newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-//                if (isBanScorller) {
-//
-//                } else {
-                dyCount += dy;
-                LogUtil.logError("onScrolled dyCount = " + dyCount);
-                refreshMenueState();
-                if (recyclerView.canScrollVertically(1)) {
-                } else {
-                    //滑动到底部
-                    EventBus.getDefault().post(new SecondaryOnscollerEvent(SecondaryOnclickEvent.MANUAL, list.size() - 1));
-                }
-                if (recyclerView.canScrollVertically(-1)) {
-                } else {
-                    //滑动到顶部
-                    EventBus.getDefault().post(new SecondaryOnscollerEvent(SecondaryOnclickEvent.MANUAL, 0));
-                }
-//                }
-
-
-            }
-        });
+        rvSort = view.findViewById(R.id.rv_sort);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        rvSort.setLayoutManager(mLinearLayoutManager);
     }
 
     int dyCount = 0;
@@ -159,13 +182,8 @@ public class ManualFragment extends BaseFragment {
     long startTime = 0;
 
     private void initList() {
-//        List<CategoryModel> testlist = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            testlist.add(list.get(i));
-//        }
-//        list = list.subList(0, 5);
+        list = list.subList(0, 12);
 //        secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
-        secondaryListView.setDataList(list, SecondaryOnclickEvent.MANUAL);
         startTime = System.currentTimeMillis();
         getFastNewsList();
 
@@ -173,8 +191,6 @@ public class ManualFragment extends BaseFragment {
 
     //是否禁止监听scoller事件
     private boolean isBanScorller = false;
-
-
     private int oldScollerDistance = 0;
 
     /**
@@ -203,28 +219,13 @@ public class ManualFragment extends BaseFragment {
                         isBanScorller = false;
                     }
                 }.start();
-
-//                if (secondaryOnclickEvent.getIndex() == 0) {
-//////                    recyclerView.scrollTo(0, 0);
-////                    recyclerView.scrollBy(0, 0 - oldScollerDistance);
-////                    oldScollerDistance = 0;
-////                } else {
-////                    int scrollerDistance = scrollerUpIndexs.get(secondaryOnclickEvent.getIndex() - 1);
-////                    LogUtil.logError("滑动距离 = " + scrollerDistance);
-////                    if (oldScollerDistance != scrollerDistance) {
-////                        recyclerView.scrollBy(0, scrollerDistance - oldScollerDistance);
-////                        oldScollerDistance = scrollerDistance;
-////                    }
-//////                    recyclerView.scrollTo(0, scrollerUpIndexs.get(secondaryOnclickEvent.getIndex()-1));
-////                }
                 if (secondaryOnclickEvent.getIndex() == 0) {
                     dyCount = 0;
                 } else {
                     dyCount = scrollerUpIndexs.get(secondaryOnclickEvent.getIndex() - 1);
                 }
 
-                recyclerView.scrollToPosition(secondaryOnclickEvent.getIndex());
-
+//                recyclerView.scrollToPosition(secondaryOnclickEvent.getIndex());
             }
         }
     }
@@ -233,7 +234,6 @@ public class ManualFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        secondaryListView.onDestory();
     }
 
     /**
@@ -288,7 +288,7 @@ public class ManualFragment extends BaseFragment {
     private void onDone() {
         LogUtil.logError("查询栏目数据耗时" + (System.currentTimeMillis() - startTime) + "毫秒");
         LogUtil.logError("查询栏目数据长度 = " + newsList.size());
-        mAdapter.refreshData(newsList);
+//        mAdapter.refreshData(newsList);
         int downIndex = 0;
 //        List<Integer> lines = new ArrayList<>();
         for (int i = 0; i < newsList.size(); i++) {
@@ -305,51 +305,6 @@ public class ManualFragment extends BaseFragment {
             LogUtil.logError("downIndex = " + downIndex);
             scrollerUpIndexs.add(downIndex);
         }
-
-
+        initData1();
     }
-
-    //记录上一次滑动切换的标记
-    int oldIndex = 0;
-
-    /**
-     * 更新左侧item选中状态
-     */
-    public void refreshMenueState() {
-        //当前中线的滑动距离
-        int scrollerLengh = dyCount + PhoneUtil.dip2px(mContext, 240f);
-        int index = 0;
-        for (int i = 0; i < scrollerUpIndexs.size(); i++) {
-            if (i + 1 != scrollerUpIndexs.size()) {
-                //判断当前中线滑动距离在哪段内容的范围内
-                if (scrollerLengh < scrollerUpIndexs.get(i + 1) && scrollerLengh > scrollerUpIndexs.get(i)) {
-                    index = i + 1;
-                    break;
-                }
-            }
-        }
-        //判断是否和上一次切换的标记一样 避免重复调用SecondaryOnscollerEvent事件
-        if (oldIndex != index) {
-            if (!isBanScorller) {
-
-                EventBus.getDefault().post(new SecondaryOnscollerEvent(SecondaryOnclickEvent.MANUAL, index));
-            }
-
-
-            if (index == 0) {
-//                    recyclerView.scrollTo(0, 0);
-                oldScollerDistance = 0;
-            } else {
-                int scrollerDistance = scrollerUpIndexs.get(index - 1);
-                if (oldScollerDistance != scrollerDistance) {
-                    LogUtil.logError("滑动距离 = " + scrollerDistance);
-                    oldScollerDistance = scrollerDistance;
-                }
-//                    recyclerView.scrollTo(0, scrollerUpIndexs.get(secondaryOnclickEvent.getIndex()-1));
-            }
-            oldIndex = index;
-        }
-
-    }
-
 }

@@ -18,19 +18,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.faw.hongqi.widget.SecondaryListView
-                android:id="@+id/secondary_list_view"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sort"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="150dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ptrrv"
+            <FrameLayout
+                android:id="@+id/lin_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="470dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
+
         </FrameLayout>
     </LinearLayout>
 

@@ -88,6 +88,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
             @Override
             public void onClick(View v) {
                 finish();
+                stop();
             }
         });
         spreadView.setOnClickListener(new View.OnClickListener() {

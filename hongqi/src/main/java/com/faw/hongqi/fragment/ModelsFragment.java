@@ -123,7 +123,6 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     public boolean onTouch(View view, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
                 leftScreen = false;
                 start = event.getX();
                 startTime = System.currentTimeMillis();
@@ -153,7 +152,12 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                 homeModelHotPointView.showHotPointViewByResId(pics.get(NowID - 1));
                 break;
             case MotionEvent.ACTION_MOVE:
-                homeModelHotPointView.hideAllView();
+                if(OldID != NowID){
+                    homeModelHotPointView.hideAllView();
+                }else {
+
+                }
+
                 int nowX = (int) event.getX();
                 //计算移动距离
                 float spec = nowX - start;
