@@ -33,7 +33,7 @@ public class SharedpreferencesUtil {
     public static String getVersionCode(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return sharedPreferences.getString(VERSION_CODE, "25");
+        return sharedPreferences.getString(VERSION_CODE, "27");
     }
 
     public static void setIsUnzip(Context context, String unzip) {

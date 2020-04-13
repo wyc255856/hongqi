@@ -193,7 +193,8 @@ public class C229MainActivity extends BaseActivity {
         return true;
     }
 
-    public void deleteFile() {
+    public void
+    deleteFile() {
         new Thread() {
             @Override
             public void run() {
@@ -205,7 +206,7 @@ public class C229MainActivity extends BaseActivity {
 //                FileUtil.deleteDir(new File(FileUtil.getDownloadResPath()
 //                        + File.separator + "imagesnew" + "/category.json"));
                 VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
-//                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "6");
+                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "28");
                 final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
                 final String url = "http://www.haoweisys.com/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id;
                 LogUtil.logError("url = " + url);

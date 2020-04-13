@@ -9,11 +9,12 @@ import android.widget.TextView;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.model.ContentItemModel;
+import com.faw.hongqi.widget.TypesetTextView;
 
 import androidx.annotation.Nullable;
 
 public class TextContentView extends BaseContentView {
-    TextView text_content;
+    TypesetTextView text_content;
     private Activity mContext;
 
     public TextContentView(Context context, AttributeSet attrs) {
