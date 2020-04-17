@@ -10,7 +10,7 @@ android {
     }
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.haowei.wyc.hongqicar1"
+        applicationId "com.haowei.wyc.hongqicar"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 8
