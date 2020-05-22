@@ -10,6 +10,7 @@ android {
     }
     compileSdkVersion 29
     defaultConfig {
+<<<<<<< HEAD
         applicationId "com.haowei.wyc.hongqicar"
         minSdkVersion 26
 
@@ -17,6 +18,13 @@ android {
 
         versionCode 14
         versionName "1.1.4"
+=======
+        applicationId "com.haowei.wyc.hongqicar2"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 8
+        versionName "1.0.8"
+>>>>>>> b7a925b8d04725fac9e9ddf7f948ef0ae52caba8
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.platform
     }

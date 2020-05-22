@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">电子手册</string>
+=======
+    <string name="app_name">E-guidesAPP_C2292</string>
+>>>>>>> b7a925b8d04725fac9e9ddf7f948ef0ae52caba8
 </resources>
