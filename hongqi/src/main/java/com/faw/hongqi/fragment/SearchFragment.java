@@ -98,9 +98,12 @@ public class SearchFragment extends BaseFragment {
                 if (s != null && !"".equals(s.toString())) {
                     delete_btn.setVisibility(View.VISIBLE);
                     search(s.toString());
-
+                    recyclerView.setVisibility(View.VISIBLE);
+                    hot_word_view.setVisibility(View.GONE);
                 } else {
                     delete_btn.setVisibility(View.GONE);
+                    hot_word_view.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
                 }
             }
         });

@@ -6,7 +6,10 @@ import android.util.Log;
 
 import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.ui.C229LoadAndUnzipFileActivity;
+import com.faw.hongqi.ui.C229MainActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
+import com.liulishuo.filedownloader.FileDownloadListener;
+import com.liulishuo.filedownloader.FileDownloadQueueSet;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
@@ -20,20 +23,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class LoadAndUnzipUtil {
     static BaseDownloadTask singleTask;
+    private static FileDownloadListener downloadListener;
+    // 多任务下载
     public static int singleTaskId = 0;
     public static int unzip_size = 0;
     public static int unzip_size_index = 0;
     private static String saveZipFilePath = FileUtil.getDownloadResPath() + File.separator + "imagesnew";
     private static String TAG = LoadAndUnzipUtil.class.getSimpleName();
+//    private String mSaveFolder =saveZipFilePath = FileUtil.getDownloadResPath() + File.separator + "imagesnew";
     private static String fileName;
-
-    public static void startDownload(final Activity context, String downloadUrl) {
+    private Activity mContext;
+    public static void startDownload(final Activity context, String downloadUrl,final String code) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -64,7 +72,7 @@ public class LoadAndUnzipUtil {
 //                                if (true){
 //                                    DBUtil.initData(context);
 //                                }
-                        unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath);
+                        unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath,context,code);
 //                            }
 //                        });
                         super.blockComplete(task);
@@ -95,7 +103,7 @@ public class LoadAndUnzipUtil {
         singleTaskId = singleTask.start();
     }
 
-    public static void startDownloadNews(final Activity context, String downloadUrl) {
+    public static void startDownloadNews(final Activity context, String downloadUrl, final String code) {
         singleTask = FileDownloader.getImpl().create(downloadUrl)
                 .setPath(saveZipFilePath, true)
                 .setCallbackProgressTimes(300)
@@ -121,6 +129,7 @@ public class LoadAndUnzipUtil {
 //                        context.runOnUiThread(new Runnable() {
 //                            public void run() {
                         //下载完成
+                        SharedpreferencesUtil.setVersionCode(context, code);
                         DBUtil.initDataNet(context, "news");
 //                                if (fileIsExists(FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "horizon"
 //                                        + File.separator + "MyFolder"+File.separator +"zy_news.json")){
@@ -142,6 +151,7 @@ public class LoadAndUnzipUtil {
 
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
+                        e.printStackTrace();
                         LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
                     }
@@ -219,7 +229,7 @@ public class LoadAndUnzipUtil {
      * zipFile 解压文件
      * folderPath 解压后的文件路径
      */
-    private static void unZipFile(File zipFile, String folderPath) {
+    private static void unZipFile(File zipFile, String folderPath,Activity context,String code) {
         try {
             ZipFile zfile = new ZipFile(zipFile);
             Enumeration zList = zfile.entries();
@@ -250,19 +260,14 @@ public class LoadAndUnzipUtil {
 
         } catch (IOException e) {
             e.printStackTrace();
+            LogUtil.logError("---->解压失败" + e.getLocalizedMessage());
         }
-        //判断是否有未解压的zip包
-//        SharedpreferencesUtil.setIsUnzip(C229LoadAndUnzipFileActivity.this, "true");
-//        SharedpreferencesUtil.setVersionCode(C229LoadAndUnzipFileActivity.this, "code");
 
-        unzip_size_index++;
         LogUtil.logError("unzip_size_index = " + unzip_size_index);
-//        deleteDir(zipFile);
-        if (unzip_size_index == unzip_size) {
-            copyFolder(saveZipFilePathOld, saveZipFilePathNew);
-            deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "HONGQIH9"));
-            deleteDir(new File(saveZipFilePath));
-        }
+        LogUtil.logError("unzip_size = " + unzip_size);
+        copyFolder(saveZipFilePathOld, saveZipFilePathNew);
+        deleteDir(zipFile);
+        SharedpreferencesUtil.setVersionCode(context, code);
     }
 
     private static String saveZipFilePathOld = FileUtil.getDownloadResPath() + File.separator + "HONGQIH9" + File.separator + "standard" + File.separator + "images";
@@ -302,8 +307,10 @@ public class LoadAndUnzipUtil {
                     copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i]);
                 }
             }
+            deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "HONGQIH9"));
         } catch (Exception e) {
             e.printStackTrace();
+            LogUtil.logError("copy异常 = " + e.getLocalizedMessage());
         }
     }
 
@@ -422,5 +429,150 @@ public class LoadAndUnzipUtil {
             return false;
         }
 
+    }
+    private static List<String> fileList = new ArrayList<>();
+    private static int index_id = 0;
+    private static boolean reuse = false;
+    //串行下载
+    public static FileDownloadListener createLis(final Activity context,final String code){
+        return new FileDownloadSampleListener(){
+            @Override
+            protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+                LogUtil.logError("pending taskId:"+task.getId()+",fileName:"+task.getFilename()+",soFarBytes:"+soFarBytes+",totalBytes:"+totalBytes+",percent:"+soFarBytes*1.0/totalBytes);
+
+            }
+
+            @Override
+            protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+                LogUtil.logError("progress taskId:"+task.getId()+",fileName:"+task.getFilename()+",soFarBytes:"+soFarBytes+",totalBytes:"+totalBytes+",percent:"+soFarBytes*1.0/totalBytes+",speed:"+task.getSpeed());
+            }
+
+            @Override
+            protected void blockComplete(BaseDownloadTask task) {
+                if(task.getListener() != downloadListener){
+                    return;
+
+                }
+                fileList.add(fileName);
+                index_id++;
+                 LogUtil.logError("解压filename:"+fileName);
+                fileName = task.getFilename();
+                unZipFile(new File(saveZipFilePath + File.separator + fileName), saveZipFilePath,context,code);
+                reuse = task.reuse();
+                LogUtil.logError("blockComplete taskId:"+task.getId()+",filePath:"+task.getPath()+",fileName:"+task.getFilename()+",speed:"+task.getSpeed()+",isReuse:"+task.reuse());
+            }
+
+            @Override
+            protected void completed(BaseDownloadTask task) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+
+                Log.d("feifei","completed taskId:"+task.getId()+",isReuse:"+task.reuse());
+            }
+
+            @Override
+            protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+                Log.d("feifei","paused taskId:"+task.getId()+",soFarBytes:"+soFarBytes+",totalBytes:"+totalBytes+",percent:"+soFarBytes*1.0/totalBytes);
+            }
+
+            @Override
+            protected void error(BaseDownloadTask task, Throwable e) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+                LogUtil.logError("error taskId:"+task.getId()+",e:"+e.getLocalizedMessage());
+            }
+
+            @Override
+            protected void warn(BaseDownloadTask task) {
+                if(task.getListener() != downloadListener){
+                    return;
+                }
+                Log.d("feifei","warn taskId:"+task.getId());
+            }
+        };
+    }
+
+    public static void start_multi(final Activity context, List<String> urlList,final String code){
+
+        downloadListener = createLis(context,code);
+        //(1) 创建 FileDownloadQueueSet
+        final FileDownloadQueueSet queueSet = new FileDownloadQueueSet(downloadListener);
+
+        //(2) 创建Task 队列
+        final List<BaseDownloadTask> tasks = new ArrayList<>();
+        for(int i = 0;i < urlList.size();i++){
+            if (!"".equals(urlList.get(i))){
+                tasks.add(FileDownloader.getImpl().create(urlList.get(i)).setPath(saveZipFilePath,true));
+            }
+        }
+
+
+        //(3) 设置参数
+
+        // 每个任务的进度 无回调
+        //queueSet.disableCallbackProgressTimes();
+        // do not want each task's download progress's callback,we just consider which task will completed.
+
+        queueSet.setCallbackProgressTimes(100);
+        queueSet.setCallbackProgressMinInterval(100);
+        //失败 重试次数
+        queueSet.setAutoRetryTimes(3);
+
+        //避免掉帧
+        FileDownloader.enableAvoidDropFrame();
+
+        //(4)串行下载
+        queueSet.downloadSequentially(tasks);
+
+        //(5)任务启动
+        queueSet.start();
+    }
+
+    public void stop_multi(){
+        FileDownloader.getImpl().pause(downloadListener);
+    }
+
+    public void deleteAllFile(){
+
+        //清除所有的下载任务
+        FileDownloader.getImpl().clearAllTaskData();
+
+        //清除所有下载的文件
+        int count = 0;
+        File file = new File(FileDownloadUtils.getDefaultSaveRootPath());
+        do {
+            if (!file.exists()) {
+                break;
+            }
+
+            if (!file.isDirectory()) {
+                break;
+            }
+
+            File[] files = file.listFiles();
+
+            if (files == null) {
+                break;
+            }
+
+            for (File file1 : files) {
+                count++;
+                file1.delete();
+            }
+
+        } while (false);
+        Log.d("feifei",String.format("Complete delete %d files"+count));
+//        Toast.makeText(this,String.format("Complete delete %d files", count), Toast.LENGTH_LONG).show();
     }
 }

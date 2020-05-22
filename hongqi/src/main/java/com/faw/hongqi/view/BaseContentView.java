@@ -1,6 +1,7 @@
 package com.faw.hongqi.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -8,7 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.text.Html;
 import android.util.AttributeSet;
@@ -17,13 +20,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.ImageViewState;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.faw.hongqi.model.ContentItemModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
@@ -38,6 +48,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public abstract class BaseContentView extends LinearLayout {
@@ -64,13 +75,15 @@ public abstract class BaseContentView extends LinearLayout {
         return bitmap;
     }
 
+
+
     public void setHtmlText(TextView textView, String text) {
 
         textView.setText(Html.fromHtml(text));
     }
 
     //设置图片圆角角度
-    RoundedCorners roundedCorners = new RoundedCorners(20);
+    RoundedCorners roundedCorners = new RoundedCorners(10);
     //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
     RequestOptions options = RequestOptions.bitmapTransform(roundedCorners);
 
@@ -81,7 +94,7 @@ public abstract class BaseContentView extends LinearLayout {
         String url = (FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard", "");
         LogUtil.logError("file url = " + url);
         File file = new File(url);
-//            LogUtil.logError("file url = " + file.exists());
+            LogUtil.logError("file url = " + file.exists());
         if (file.exists()) {
 //                Glide.with(mContext)
 //                        .load(Uri.fromFile(file)).transform(new CenterCrop(), new GlideRoundTransform(mContext, 10))
@@ -89,37 +102,58 @@ public abstract class BaseContentView extends LinearLayout {
             LogUtil.logError("file url = " + file.exists());
             Glide.with(mContext)
                     .load(Uri.fromFile(file)).apply(new RequestOptions()
-                    .transform(new GlideRoundTransform(mContext, 25))).into(imageView);
+                    .transform(new GlideRoundTransform(mContext, 10))).into(imageView);
         }
 //        }
+
+
 
 
 //        Bitmap bitmap = getBitmap(mContext, fileName);
 //        if (bitmap != null)
 //            imageView.setImageBitmap(getBitmap(mContext, fileName));
     }
+//    public void setLongImage(Context mContext, final ImageView imageView, String fileName) {
+//
+//        String url = (FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard", "");
+//        File file = new File(url);
+//        LogUtil.logError("file url = " + url);
+//////        if (file.exists()) {
+//        LogUtil.logError("file url = " + file.exists());
+//            Glide.with(mContext).asBitmap()
+//                    .load(Uri.fromFile(file))
+//                    .into(imageView);
+//
+////        LogUtil.logError("file url = " + imageView.getHeight()+"="+imageView.getMaxScale());
+//
+//
+//////        }
+//    }
+    public void setLongImage(Context mContext, final SubsamplingScaleImageView imageView, String fileName) {
 
-    public void setLongImage(Context mContext, final ImageView imageView, String fileName) {
-//        if(Constant.TEST){
-//            Glide.with(this).load("file:///android_asset/" + fileName).into(imageView);
-//        }else {
         String url = (FileUtil.getResPath() + fileName).replace("/HONGQIH9/standard", "");
-
         File file = new File(url);
-//            LogUtil.logError("file url = " + file.exists());
         LogUtil.logError("file url = " + url);
-        if (file.exists()) {
+////        if (file.exists()) {
             LogUtil.logError("file url = " + file.exists());
+//            Glide.with(mContext).asBitmap()
+//                    .load(Uri.fromFile(file))
+//                    .into(imageView);
 
-            Glide.with(mContext).asBitmap()
-                    .load(Uri.fromFile(file))
-                    .into(imageView);
-        }
-//        }
+//        LogUtil.logError("file url = " + imageView.getHeight()+"="+imageView.getMaxScale());
 
-//        Bitmap bitmap = getBitmap(mContext, fileName);
-//        if (bitmap != null)
-//            imageView.setImageBitmap(getBitmap(mContext, fileName));
+        imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
+        imageView.setZoomEnabled(false);
+        imageView.setMinScale(0.98f);//最小显示比例
+        imageView.setMaxScale(10.0f);//最大显示比例（太大了图片显示会失真，因为一般微博长图的宽度不会太宽）
+        Glide.with(this)
+                .load(Uri.fromFile(file)).downloadOnly(new SimpleTarget<File>() {
+            @Override
+            public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                imageView.setImage(ImageSource.uri(Uri.fromFile(resource)), new ImageViewState(0.98f, new PointF(0, 0), 0));
+            }
+        });
+////        }
     }
 
     @SuppressLint("WrongThread")

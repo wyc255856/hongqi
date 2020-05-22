@@ -1,9 +1,13 @@
 package com.faw.hongqi.ui;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -11,20 +15,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.faw.hongqi.C229Application;
 import com.faw.hongqi.R;
 import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.fragment.BaseFragment;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.VersionModel;
 import com.faw.hongqi.model.VersionUpdateModel;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.FragmentUtil;
 import com.faw.hongqi.util.LoadAndUnzipUtil;
 import com.faw.hongqi.util.LogUtil;
+import com.faw.hongqi.util.MyBroadcastReceiver;
 import com.faw.hongqi.util.NetWorkCallBack;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.widget.TabView;
+import com.faw.hqzl3.hqextendsproxy.HQExtendsProxy;
+import com.faw.hqzl3.hqextendsproxy.Interfaces.IExtendsListener;
 import com.google.gson.Gson;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
@@ -49,16 +58,34 @@ public class C229MainActivity extends BaseActivity {
     private BaseFragment currentFragment;
     private String currentTag;
     TabView tabView;
+
     View main_layout;
     private VersionModel bean = null;
-
+    private HQExtendsProxy mHQExtendsProxy;
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
-
     @Override
     protected void initData() {
         requestWritePermission();
-
+        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/news.json"));
+        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/category.json"));
         deleteFile();
+    }
+
+    public void deleteDir(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        if (file.isDirectory()) {
+            File[] childFiles = file.listFiles();
+            if (childFiles == null || childFiles.length == 0) {
+                file.delete();
+            }
+            for (int index = 0; index < childFiles.length; index++) {
+                deleteDir(childFiles[index]);
+            }
+        }
+        file.delete();
+        LogUtil.logError("data = " + "删除成功");
     }
 
     @Override
@@ -75,6 +102,7 @@ public class C229MainActivity extends BaseActivity {
         });
         main_layout = findViewById(R.id.main_layout);
         changeTabs("0");
+        setBreoadcast();
     }
 
     @Override
@@ -85,6 +113,7 @@ public class C229MainActivity extends BaseActivity {
                 finish();
 //                try {
 //                    String command = "chmod 777 " + "/vendor/mnt/presetdata/manual/images";
+
 //                    Log.i("zyl", "command = " + command);
 //                    Runtime runtime = Runtime.getRuntime();
 //
@@ -169,11 +198,17 @@ public class C229MainActivity extends BaseActivity {
     private void requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS}, WRITE_PERMISSION);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS}, WRITE_PERMISSION);
             }
         }
     }
 
+    private void setBreoadcast() {
+        BroadcastReceiver receiver=new MyBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.faw.hqzl3.tspservice.change.environment");
+        registerReceiver(receiver, filter);
+    }
     public static void goC229MainActivity(Context context, String tag) {
         Intent intent = new Intent(context, C229MainActivity.class);
         intent.putExtra("tag", tag);
@@ -189,26 +224,22 @@ public class C229MainActivity extends BaseActivity {
             }
         } catch (Exception e) {
             return false;
+
         }
         return true;
     }
 
-    public void
-    deleteFile() {
+    public void deleteFile() {
         new Thread() {
             @Override
             public void run() {
                 super.run();
                 LoadAndUnzipUtil.unzip_size = 0;
                 LoadAndUnzipUtil.unzip_size_index = 0;
-//                FileUtil.deleteDir(new File(FileUtil.getDownloadResPath()
-//                        + File.separator + "imagesnew" + "/news.json"));
-//                FileUtil.deleteDir(new File(FileUtil.getDownloadResPath()
-//                        + File.separator + "imagesnew" + "/category.json"));
                 VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
-                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "28");
+//                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "121");
                 final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
-                final String url = "http://www.haoweisys.com/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id;
+                final String url = Constant.BASE_URL+"/hongqih9_admin/index.php?m=home&c=index&a=get_new_info&version_no=" + id;
                 LogUtil.logError("url = " + url);
                 PhoneUtil.requestGet(url, new NetWorkCallBack() {
                     @Override
@@ -216,22 +247,18 @@ public class C229MainActivity extends BaseActivity {
                         LogUtil.logError("data = " + data);
                         bean = new Gson().fromJson((String) data, VersionModel.class);
                         if ("".equals(bean.getVersion())) {
+
                             //如果相同版本无需更新
                         } else {
-//                            runOnUiThread(new Runnable() {
-//                                public void run() {
                             LoadAndUnzipUtil.unzip_size = bean.getZip_address().size();
-                            for (int i = 0; i < bean.getZip_address().size(); i++) {
-                                LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i));
-                            }
-                            SharedpreferencesUtil.setVersionCode(C229MainActivity.this, bean.getVersion());
-                            //判断路径是否有增量更新文件夹如果有下载json文件，并删除文件夹及内容
-//                            FileUtil.deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "horizon"
-//                                    + File.separator + "HONGQIH9"));
-                            LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews());
+//                            for (int i = 0; i < bean.getZip_address().size(); i++) {
+//                              LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i),bean.getVersion());
+//                            }
+                            //队列
+                            LoadAndUnzipUtil.start_multi(C229MainActivity.this, bean.getZip_address(), bean.getVersion());
+
+                            LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews(), bean.getVersion());
                             LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
-//                                }
-//                            });
                         }
                     }
 

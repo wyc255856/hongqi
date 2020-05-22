@@ -16,9 +16,11 @@ import java.util.Map;
  */
 
 public class Constant {
-    public final static String BASE_URL = "http://59.110.156.116/app/";//万臣
+//    public static String BASE_URL = "http://www.e-guides.faw.cn";//正式环境
+    public static String BASE_URL = "http://www.haoweisys.com";//测试环境
 
     public final static boolean IS_PHONE = false;//判断包是否是手机应用
+    public final static boolean IS_PRO = false;//判断包是生产环境
 
     public final static boolean DEBUG = true;//是否是调试包
     public final static boolean TEST = true;//是否是不带资源的测试包
@@ -31,6 +33,7 @@ public class Constant {
         intPropertyList.put("C229_2", NewsModel_Table.sdhh);
         intPropertyList.put("C229_3", NewsModel_Table.sdzg);
         intPropertyList.put("C229_4", NewsModel_Table.zdss);
+
         intPropertyList.put("C229_5", NewsModel_Table.zdhh);
         intPropertyList.put("C229_6", NewsModel_Table.zdzg);
         intPropertyList.put("C229_7", NewsModel_Table.zdqj);

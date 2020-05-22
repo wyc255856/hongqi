@@ -5,13 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/avi"
+<!--    <com.wang.avi.AVLoadingIndicatorView-->
+<!--        android:id="@+id/avi"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        app:indicatorName="BallSpinFadeLoaderIndicator" />-->
+    <ProgressBar
         android:layout_width="100dp"
-        android:layout_height="100dp"
         android:layout_gravity="center"
-        app:indicatorName="BallSpinFadeLoaderIndicator" />
-
+        android:indeterminateDrawable="@drawable/loading_bg"
+        android:layout_height="100dp" />
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

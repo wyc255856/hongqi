@@ -54,6 +54,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     }
 
 
+
     @Override
     protected void initWidgetActions() {
         ViewTreeObserver vto = car_model.getViewTreeObserver();
@@ -72,6 +73,7 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
                     lp.height = (int) (lp.width * 0.46785);
                 } else {
                     lp.width = 1440;
+
                     lp.height = 675;
                 }
 

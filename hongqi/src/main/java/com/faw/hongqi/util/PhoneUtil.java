@@ -236,8 +236,8 @@ public class PhoneUtil {
             String requestUrl = baseUrl + tempParams.toString();
             URL url = new URL(requestUrl);
             HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-            urlConn.setConnectTimeout(5 * 1000);
-            urlConn.setReadTimeout(5 * 1000);
+            urlConn.setConnectTimeout(30 * 1000);
+            urlConn.setReadTimeout(30 * 1000);
             urlConn.setUseCaches(true);
             urlConn.setRequestMethod("GET");
             urlConn.setRequestProperty("Content-Type", "application/json");

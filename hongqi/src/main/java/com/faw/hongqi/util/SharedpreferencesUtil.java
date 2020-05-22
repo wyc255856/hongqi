@@ -11,6 +11,7 @@ public class SharedpreferencesUtil {
     static String PREFERENCES_NAME = "share";
     private static String IS_UPDATA_DB = "is_update_bd";
     static String VERSION_CODE = "version_code";
+    static String VERSION_TEST_CODE = "version_test_code";
     static String ISUNZIP = "is_unzip";
     private static String CAR_MODEL = "carmodel";
     public static Boolean isUploadBD(Context context) {
@@ -33,9 +34,18 @@ public class SharedpreferencesUtil {
     public static String getVersionCode(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return sharedPreferences.getString(VERSION_CODE, "27");
+        return sharedPreferences.getString(VERSION_CODE, "131");
     }
-
+    public static void setVersionTestCode(Context context, String versionCode) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
+                + PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        sharedPreferences.edit().putString(VERSION_TEST_CODE, versionCode).commit();
+    }
+    public static String getVersionTestCode(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
+                + PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        return sharedPreferences.getString(VERSION_TEST_CODE, "");
+    }
     public static void setIsUnzip(Context context, String unzip) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + PREFERENCES_NAME, Activity.MODE_PRIVATE);
@@ -60,6 +70,6 @@ public class SharedpreferencesUtil {
     public static String getCarModel(Context context ) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return sharedPreferences.getString(CAR_MODEL, "C229_1");
+        return sharedPreferences.getString(CAR_MODEL, "C229_2");
     }
 }

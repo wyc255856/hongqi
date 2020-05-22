@@ -161,6 +161,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         controlLl = (LinearLayout) findViewById(R.id.control_ll);
         interactive_layout = findViewById(R.id.interactive_layout);
         spreadView = findViewById(R.id.spreadView);
+        playOrPauseIv.setVisibility(View.GONE);
     }
 
     @Override
@@ -239,14 +240,14 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
                 mPlayer.pause();
                 mHandler.removeMessages(UPDATE_TIME);
 //            mHandler.removeMessages(HIDE_CONTROL);
-                playOrPauseIv.setVisibility(View.VISIBLE);
-                playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
+                playOrPauseIv.setVisibility(View.GONE);
+//                playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
             } else {
                 mPlayer.start();
                 mHandler.sendEmptyMessageDelayed(UPDATE_TIME, 500);
 //            mHandler.sendEmptyMessageDelayed(HIDE_CONTROL, 5000);
                 playOrPauseIv.setVisibility(View.INVISIBLE);
-                playOrPauseIv.setImageResource(android.R.drawable.ic_media_pause);
+//                playOrPauseIv.setImageResource(android.R.drawable.ic_media_pause);
             }
         }
     }
@@ -282,7 +283,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         mHandler.removeMessages(UPDATE_TIME);
 //            mHandler.removeMessages(HIDE_CONTROL);
         playOrPauseIv.setVisibility(View.VISIBLE);
-        playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
+//        playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
         isShow = true;
 //        mHandler.removeMessages(HIDE_CONTROL);
         mHandler.sendEmptyMessage(UPDATE_TIME);

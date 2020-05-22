@@ -6,9 +6,15 @@
     <string name="home_tab_manual_text">手册</string>
     <string name="home_tab_search_text">搜索</string>
 
-    <string name="model_item_text_1">轮胎和车轮</string>
-    <string name="model_item_text_2">智能远光灯</string>
-    <string name="model_item_text_3">电动后备箱</string>
+    <string name="model_item_text_1">轮胎/车轮</string>
+    <string name="model_item_text_2">发动机舱</string>
+    <string name="model_item_text_3">外后视镜</string>
+    <string name="model_item_text_4">刮水器</string>
+    <string name="model_item_text_5">天窗</string>
+    <string name="model_item_text_6">前照灯</string>
+    <string name="model_item_text_7">油箱盖</string>
+    <string name="model_item_text_8">行李箱盖</string>
+    <string name="model_item_text_9">车门</string>
 
 
     <string name="download_assest_text_wifi">当前非WiFi网络是否继续下载</string>

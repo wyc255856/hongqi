@@ -14,7 +14,7 @@ import com.faw.hongqi.widget.TypesetTextView;
 import androidx.annotation.Nullable;
 
 public class TextContentView extends BaseContentView {
-    TypesetTextView text_content;
+    TextView text_content;
     private Activity mContext;
 
     public TextContentView(Context context, AttributeSet attrs) {
@@ -38,6 +38,7 @@ public class TextContentView extends BaseContentView {
 
     @Override
     public void setContent(ContentItemModel data) {
-        setHtmlText(text_content, data.getContent());
+        String str = data.getContent().replaceAll("#","");
+        setHtmlText(text_content, str);
     }
 }

@@ -56,6 +56,7 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
 
     public GridItemView(Context context) {
         super(context);
+
         initView(context);
     }
 
@@ -97,7 +98,7 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
 //            LogUtil.logError("file url = " + file.exists());
             Glide.with(mContext)
                     .load(Uri.fromFile(file)).apply(new RequestOptions()
-                    .transform(new GlideRoundTransform(mContext, 25))).into(imageView);
+                    .transform(new GlideRoundTransform(mContext, 10))).into(imageView);
         }
         title.setText(model.getTitle() + "");
     }
