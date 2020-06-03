@@ -26,6 +26,7 @@ import com.faw.hongqi.model.InteractiveVideoModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
+import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.view.SpreadView;
 import com.faw.hongqi.widget.BigPointView;
 
@@ -130,7 +131,13 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 //                    e.printStackTrace();
 //                }
 //            } else {
-            mPlayer.setDataSource(path);
+
+            AssetFileDescriptor afd = getResources().getAssets().openFd("5ec5dd3a24d33.mp4");
+
+            mPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+
+
+//            mPlayer.setDataSource(path);
 //            }
 
         } catch (Exception e) {
@@ -143,7 +150,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         initInteractive();
         newsModel = (NewsModel) getIntent().getSerializableExtra("data");
         path = (FileUtil.getResPath() + newsModel.getVideo1()).replace("/HONGQIH9/standard", "");
-        Log.i("playPath", path);
+        LogUtil.logError("playPath = " + path);
         setContentView(R.layout.activity_c229_play_video);
         initViews();
         initSurfaceView();
@@ -162,6 +169,9 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         interactive_layout = findViewById(R.id.interactive_layout);
         spreadView = findViewById(R.id.spreadView);
         playOrPauseIv.setVisibility(View.GONE);
+
+        Intent intent = new Intent("com.haowei.wyc.hongqicar.sound.source");
+        sendBroadcast(intent);
     }
 
     @Override
@@ -487,4 +497,14 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
