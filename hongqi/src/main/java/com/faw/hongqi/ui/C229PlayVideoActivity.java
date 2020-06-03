@@ -132,12 +132,12 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 //                }
 //            } else {
 
-            AssetFileDescriptor afd = getResources().getAssets().openFd("5ec5dd3a24d33.mp4");
+//            AssetFileDescriptor afd = getResources().getAssets().openFd("5ec5dd3a24d33.mp4");
+//
+//            mPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 
-            mPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 
-
-//            mPlayer.setDataSource(path);
+            mPlayer.setDataSource(path);
 //            }
 
         } catch (Exception e) {
