@@ -102,7 +102,7 @@ public class C229MainActivity extends BaseActivity {
         });
         main_layout = findViewById(R.id.main_layout);
         changeTabs("0");
-        setBreoadcast();
+//        setBreoadcast();
     }
 
     @Override
@@ -111,6 +111,8 @@ public class C229MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.anim_fade_in,
+                        R.anim.anim_fade_out);
 //                try {
 //                    String command = "chmod 777 " + "/vendor/mnt/presetdata/manual/images";
 

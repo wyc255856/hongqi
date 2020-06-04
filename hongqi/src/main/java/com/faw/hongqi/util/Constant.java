@@ -16,8 +16,8 @@ import java.util.Map;
  */
 
 public class Constant {
-//    public static String BASE_URL = "http://www.e-guides.faw.cn";//正式环境
-    public static String BASE_URL = "http://www.haoweisys.com";//测试环境
+    public static String BASE_URL = "http://www.e-guides.faw.cn";//正式环境
+//    public static String BASE_URL = "http://www.haoweisys.com";//测试环境
 
     public final static boolean IS_PHONE = false;//判断包是否是手机应用
     public final static boolean IS_PRO = false;//判断包是生产环境

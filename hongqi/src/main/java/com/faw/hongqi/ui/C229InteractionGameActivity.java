@@ -36,7 +36,7 @@ public class C229InteractionGameActivity extends BaseActivity {
 
     @Override
     boolean isHasTitle() {
-        return false;
+        return true;
     }
 
     @Override

@@ -35,13 +35,13 @@
         <activity
             android:name="com.faw.hongqi.ui.C229InteractionGameActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Translucent">
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.faw.hongqi.ui.C229MainActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.NoBackgroundAndTitleMain">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.faw.hongqicar.c229.voice"></action>

@@ -73,7 +73,8 @@ public class C229ContentActivity extends BaseActivity {
             public void onClick(View v) {
                 finish();
 //                exitAPP();
-
+                overridePendingTransition(R.anim.anim_fade_in,
+                        R.anim.anim_fade_out);
             }
         });
     }
@@ -186,8 +187,8 @@ public class C229ContentActivity extends BaseActivity {
         Intent intent = new Intent(context, C229ContentActivity.class);
         intent.putExtra("data", newsModel);
         context.startActivity(intent);
-        ((Activity)context).overridePendingTransition(R.anim.in,
-                R.anim.out);
+        ((Activity)context).overridePendingTransition(R.anim.anim_fade_in,
+                R.anim.anim_fade_out);
 
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="theme1_text_color_gray" >#83878e</color>
-    <color name="theme1_text_color_gray1" >#bfbfbf</color>
-    <color name="theme1_text_color_white" >#e0e0e0</color>
-    <color name="theme1_text_color_blue" >#83baff</color>
+    <color name="theme1_text_color_gray" >#83878E</color>
+    <color name="theme1_text_color_gray1" >#BFBFBF</color>
+    <color name="theme1_text_color_white" >#E0E0E0</color>
+    <color name="theme1_text_color_blue" >#83BAFF</color>
     <color name="theme1_text_color_black" >#000000</color>
-    <color name="theme1_text_color_scroll_black" >#383a3d</color>>
-    <color name="theme1_text_color_scroll_white" >#bfbfbf</color>>
+    <color name="theme1_text_color_scroll_black" >#383A3D</color>>
+    <color name="theme1_text_color_scroll_white" >#BFBFBF</color>>
 </resources>

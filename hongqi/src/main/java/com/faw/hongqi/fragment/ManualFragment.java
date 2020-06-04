@@ -52,11 +52,13 @@ public class ManualFragment extends BaseFragment implements CheckListener {
     }
 
     public void createFragment() {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        mSortDetailFragment = new SortDetailFragment(newsList,list);
-        mSortDetailFragment.setListener(this);
-        fragmentTransaction.add(R.id.lin_fragment, mSortDetailFragment);
-        fragmentTransaction.commit();
+        if (getActivity().getSupportFragmentManager() != null) {
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            mSortDetailFragment = new SortDetailFragment(newsList, list);
+            mSortDetailFragment.setListener(this);
+            fragmentTransaction.add(R.id.lin_fragment, mSortDetailFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     private void setChecked(int position, boolean isLeft) {

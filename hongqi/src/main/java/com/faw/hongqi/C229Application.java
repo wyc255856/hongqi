@@ -49,6 +49,7 @@ public class C229Application extends Application {
 
             }
 
+
             @Override
             public void onInitFailed() {
                 LogUtil.logError("car_model= " + "error");
