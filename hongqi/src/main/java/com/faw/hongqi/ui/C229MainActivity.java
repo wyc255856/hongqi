@@ -65,6 +65,7 @@ public class C229MainActivity extends BaseActivity {
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
     @Override
     protected void initData() {
+        LogUtil.logError("activity onCreat");
         requestWritePermission();
         deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/news.json"));
         deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/category.json"));
@@ -271,5 +272,36 @@ public class C229MainActivity extends BaseActivity {
                 });
             }
         }.start();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtil.logError("activity onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtil.logError("activity onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtil.logError("activity onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtil.logError("activity onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtil.logError("activity onDestroy");
     }
 }

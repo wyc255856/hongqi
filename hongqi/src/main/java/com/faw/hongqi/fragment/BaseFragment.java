@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.faw.hongqi.util.LogUtil;
+
 import org.xutils.x;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,8 @@ public abstract class BaseFragment extends Fragment {
     private boolean injected = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogUtil.logError("fragment onCreateView");
+
         injected = true;
         mContext = getActivity();
         Tag = mContext.toString();

@@ -2,9 +2,14 @@ package com.faw.hongqi.fragment;
 
 import android.app.Activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,14 +56,44 @@ public class FastFragment extends BaseFragment implements CheckListener {
     }
 
     private List<CategoryModel> list5 = new ArrayList<>();
+
     public void createFragment() {
-        if (getActivity().getSupportFragmentManager() != null) {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        LogUtil.logError("fragment onCreat");
+
+         if(getActivity()==null){
+             return;
+         }
+        if (((FragmentActivity) mContext).getSupportFragmentManager() != null) {
+            FragmentTransaction fragmentTransaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
             mSortDetailFragment = new SortDetailFragment(newsList, list5);
             mSortDetailFragment.setListener(this);
-            fragmentTransaction.add(R.id.fast_lin_fragment, mSortDetailFragment);
-            fragmentTransaction.commit();
+            try {
+                fragmentTransaction.add(R.id.fast_lin_fragment, mSortDetailFragment);
+            } catch (Exception e) {
+                ((Activity) mContext).finish();
+            }
+            fragmentTransaction.commitAllowingStateLoss();
         }
+
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.logError("fragment onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.logError("fragment onResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtil.logError("fragment onStop");
     }
 
     private void setChecked(int position, boolean isLeft) {
@@ -85,6 +120,7 @@ public class FastFragment extends BaseFragment implements CheckListener {
 
 
     }
+
     @Override
     public void check(int position, boolean isScroll) {
         setChecked(position, isScroll);
@@ -95,11 +131,12 @@ public class FastFragment extends BaseFragment implements CheckListener {
         //将点击的position转换为当前屏幕上可见的item的位置以便于计算距离顶部的高度，从而进行移动居中
         View childAt = rvSort.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
         if (childAt != null) {
-            int y = (childAt.getTop() - (rvSort.getHeight() / 2)+PhoneUtil.dip2px(getActivity(),0f));
+            int y = (childAt.getTop() - (rvSort.getHeight() / 2) + PhoneUtil.dip2px(mContext, 0f));
             rvSort.smoothScrollBy(0, y);
         }
 
     }
+
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
@@ -136,6 +173,7 @@ public class FastFragment extends BaseFragment implements CheckListener {
         });
 
     }
+
     private void initData1() {
         List<String> lists = new ArrayList<>();
         //初始化左侧列表数据
@@ -155,10 +193,11 @@ public class FastFragment extends BaseFragment implements CheckListener {
         rvSort.setAdapter(mSortAdapter);
         createFragment();
     }
+
     @Override
     protected void initView(View view) {
         rvSort = view.findViewById(R.id.rv_sort);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
         rvSort.setLayoutManager(mLinearLayoutManager);
 
 
@@ -267,7 +306,9 @@ public class FastFragment extends BaseFragment implements CheckListener {
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
+        LogUtil.logError("fragment onDestroy");
         EventBus.getDefault().unregister(this);
     }
 
@@ -277,7 +318,7 @@ public class FastFragment extends BaseFragment implements CheckListener {
     private void getFastNewsList() {
 
         CategoryModel categoryModel = list.get(newIndex);
-        DBUtil.getNewsListByCatId(mContext,categoryModel.getCatid(), new TransactionListener() {
+        DBUtil.getNewsListByCatId(mContext, categoryModel.getCatid(), new TransactionListener() {
             @Override
             public void onResultReceived(Object result) {
 

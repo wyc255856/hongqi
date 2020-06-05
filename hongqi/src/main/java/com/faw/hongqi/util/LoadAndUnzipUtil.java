@@ -152,7 +152,7 @@ public class LoadAndUnzipUtil {
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
                         e.printStackTrace();
- 
+
                         LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
                     }

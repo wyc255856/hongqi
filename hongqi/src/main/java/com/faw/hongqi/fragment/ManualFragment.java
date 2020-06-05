@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,12 +53,13 @@ public class ManualFragment extends BaseFragment implements CheckListener {
     }
 
     public void createFragment() {
-        if (getActivity().getSupportFragmentManager() != null) {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        if (((FragmentActivity)mContext).getSupportFragmentManager() != null) {
+            FragmentTransaction fragmentTransaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
             mSortDetailFragment = new SortDetailFragment(newsList, list);
             mSortDetailFragment.setListener(this);
             fragmentTransaction.add(R.id.lin_fragment, mSortDetailFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commitAllowingStateLoss();
         }
     }
 
@@ -95,7 +97,7 @@ public class ManualFragment extends BaseFragment implements CheckListener {
         //将点击的position转换为当前屏幕上可见的item的位置以便于计算距离顶部的高度，从而进行移动居中
         View childAt = rvSort.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
         if (childAt != null) {
-            int y = (childAt.getTop() - (rvSort.getHeight() / 2)+PhoneUtil.dip2px(getActivity(),60f));
+            int y = (childAt.getTop() - (rvSort.getHeight() / 2)+PhoneUtil.dip2px(mContext,60f));
             rvSort.smoothScrollBy(0, y);
         }
 
@@ -162,7 +164,7 @@ public class ManualFragment extends BaseFragment implements CheckListener {
     @Override
     protected void initView(View view) {
         rvSort = view.findViewById(R.id.rv_sort);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
         rvSort.setLayoutManager(mLinearLayoutManager);
     }
 
