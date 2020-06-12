@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.faw.hongqi.R;
 import com.faw.hongqi.dbutil.DBUtil;
+import com.faw.hongqi.fragment.BrightSpotFragment;
 import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
@@ -28,15 +29,20 @@ import com.faw.hongqi.ui.C229ContentActivity;
 import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.PhoneUtil;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import org.json.JSONObject;
 
 public class BaseModelItem extends LinearLayout {
     protected Activity mContext;
@@ -71,6 +77,38 @@ public class BaseModelItem extends LinearLayout {
                         @Override
                         public void run() {
                             C229ContentActivity.goContentActivity(mContext, finalResult1List.get(0));
+
+
+
+                            DBUtil.getCatgoryByCatid(finalResult1List.get(0).getCatid(), new TransactionListener() {
+                                @Override
+                                public void onResultReceived(Object result) {
+
+                                }
+
+                                @Override
+                                public boolean onReady(BaseTransaction transaction) {
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean hasResult(BaseTransaction transaction, Object result) {
+                                    List<CategoryModel> categoryModelList = new ArrayList<>();
+                                    categoryModelList= (List<CategoryModel>) result;
+                                    CategoryModel categoryModel=   categoryModelList.get(0);
+                                    Map<String,Object> mapCommondata = new LinkedHashMap<>();
+                                    JSONObject gatherObject;
+                                    mapCommondata.put("manualcategaryid",finalResult1List.get(0).getCatid());
+                                    mapCommondata.put("manualcategary",categoryModel.getCatname());
+                                    mapCommondata.put("manualcontent",finalResult1List.get(0).getTitle());
+                                    mapCommondata.put("manualcontentid",finalResult1List.get(0).getId());
+                                    mapCommondata.put("source","1");
+                                    gatherObject = new JSONObject(mapCommondata);
+                                    HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250010",gatherObject.toString());
+                                    return false;
+                                }
+                            });
+
                         }
                     });
                 }
@@ -78,6 +116,10 @@ public class BaseModelItem extends LinearLayout {
             }
         });
     }
+
+
+
+
     public BaseModelItem(Context context) {
         super(context);
     }

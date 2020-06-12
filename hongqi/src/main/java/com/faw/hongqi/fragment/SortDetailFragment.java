@@ -18,13 +18,19 @@ import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.RightBean;
 import com.faw.hongqi.ui.C229ContentActivity;
 import com.faw.hongqi.ui.C229PlayVideoActivity;
+import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.widget.CheckListener;
 import com.faw.hongqi.widget.ItemHeaderDecoration;
 import com.faw.hongqi.widget.RvListener;
 import com.faw.hongqi.widget.SortDetailPresenter;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressLint("ValidFragment")
 public class SortDetailFragment extends BaseListFragment<SortDetailPresenter, String> implements CheckListener {
@@ -124,10 +130,27 @@ public class SortDetailFragment extends BaseListFragment<SortDetailPresenter, St
                 newsModel.setTemplate10(rightBean.getTemplate10());
                 newsModel.setTitle(rightBean.getTitle());
                 newsModel.setHead_image(rightBean.getHead_image());
-
+                newsModel.setId(rightBean.getId());
+                newsModel.setCatid(rightBean.getCatid());
+                newsModel.setTop_title(rightBean.getContent_title());
                 if (mDatas.get(position).getTemplate1() != 6) {
                     if (newsModel.getHead_image()!=null) {
                         C229ContentActivity.goContentActivity(mContext, newsModel);
+                        Map<String,Object> mapCommondata = new LinkedHashMap<>();
+                        JSONObject gatherObject;
+                        mapCommondata.put("manualcategaryid",newsModel.getCatid());
+                        mapCommondata.put("manualcategary",newsModel.getTop_title());
+                        mapCommondata.put("manualcontent",newsModel.getTitle());
+                        mapCommondata.put("manualcontentid",newsModel.getId());
+                        if (Constant.TAG_TOP.equals("1")){
+                            mapCommondata.put("source","2");
+                            gatherObject = new JSONObject(mapCommondata);
+                            HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250007",gatherObject.toString());
+                        }else{
+                            mapCommondata.put("source","4");
+                            gatherObject = new JSONObject(mapCommondata);
+                            HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250008",gatherObject.toString());
+                        }
                     }
                 } else {
                     C229PlayVideoActivity.goVideoActivity(mContext,newsModel);
@@ -199,6 +222,9 @@ public class SortDetailFragment extends BaseListFragment<SortDetailPresenter, St
                 body.setTemplate10(categoryTwoArray.get(j).getTemplate10());
                 body.setHead_image(categoryTwoArray.get(j).getHead_image());
                 body.setTitle(categoryTwoArray.get(j).getTitle());
+                body.setId(categoryTwoArray.get(j).getId());
+                body.setCatid(categoryTwoArray.get(j).getCatid());
+                body.setContent_title(list.get(i).getCatname());
                 mDatas.add(body);
             }
         }

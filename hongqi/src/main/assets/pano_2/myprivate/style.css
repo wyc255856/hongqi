@@ -381,8 +381,8 @@ img {
 	font-family: "思源黑体 CN";
 }
 
-.list ul li:first-child {
-	color: #83baff;
+.list_child {
+	color: #83baff!important;
 }
 
 

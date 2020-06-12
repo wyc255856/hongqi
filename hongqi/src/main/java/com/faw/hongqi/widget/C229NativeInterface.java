@@ -8,12 +8,18 @@ import com.faw.hongqi.fragment.BrightSpotFragment;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.ui.C229ContentActivity;
 import com.faw.hongqi.ui.C229InteractionGameActivity;
+import com.faw.hongqi.ui.C229MainActivity;
 import com.faw.hongqi.ui.C229PlayVideoActivity;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class C229NativeInterface {
 
@@ -23,6 +29,11 @@ public class C229NativeInterface {
             @Override
             public void run() {
                 if ("213".equals(id)){
+                    Map<String,Object> mapCommondata = new LinkedHashMap<>();
+                    JSONObject gatherObject;
+                    mapCommondata.put("gogame","自动泊车");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250006",gatherObject.toString());
                     BrightSpotFragment.context.startActivity(new Intent(BrightSpotFragment.context, C229InteractionGameActivity.class));
                 }else{
                     getFastNewsList(id);

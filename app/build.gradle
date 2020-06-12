@@ -10,10 +10,10 @@ android {
 //    }
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.haowei.wyc.hongqicar"
+        applicationId "com.haowei.wyc.hongqicar1"
         minSdkVersion 26
-        versionCode 18
-        versionName "1.1.8"
+        versionCode 19
+        versionName "1.1.9"
         targetSdkVersion 29
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
        // signingConfig signingConfigs.platform
@@ -42,6 +42,8 @@ dependencies {
 //    api project(path: ':third_library')
 
     api(name: 'HQExtendsProxy', ext: 'aar')
+    api(name: 'HQDataGatherProxy', ext: 'aar')
+    api(name: 'DataGatherSDK', ext: 'aar')
 //    implementation project(path: ':e115')
     implementation project(path: ':hongqi')
 

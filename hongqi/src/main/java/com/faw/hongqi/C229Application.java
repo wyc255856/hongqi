@@ -1,11 +1,14 @@
 package com.faw.hongqi;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.faw.hongqi.ui.C229MainActivity;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.util.TypefaceUtil;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
+import com.faw.hqzl3.datagatherproxy.Interfaces.IRegistDataGatherListener;
 import com.faw.hqzl3.hqextendsproxy.HQExtendsProxy;
 import com.faw.hqzl3.hqextendsproxy.Interfaces.IExtendsListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -56,5 +59,17 @@ public class C229Application extends Application {
 
             }
         });
+        HQDataGatherProxy.getInstance(getApplicationContext()).registerGatherListener(new IRegistDataGatherListener() {
+            @Override
+            public void onRegistSuccess() {
+                
+            }
+
+            @Override
+            public void onRegistFailed() {
+
+            }
+        });
     }
+
 }

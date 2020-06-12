@@ -20,10 +20,12 @@ import com.faw.hongqi.widget.C229NativeInterface;
 public class BrightSpotFragment extends BaseFragment {
     WebView webView;
     public static Activity context;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_c229_bring;
     }
+
     @Override
     protected void initData() {
         context = getActivity();
@@ -31,7 +33,7 @@ public class BrightSpotFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        webView=view.findViewById(R.id.web_view);
+        webView = view.findViewById(R.id.web_view);
         webView.getSettings().setAllowFileAccess(true);
         webView.setBackgroundColor(0);
         webView.setWebChromeClient(new WebChromeClient() {
@@ -113,7 +115,10 @@ public class BrightSpotFragment extends BaseFragment {
     }
 
     private void loadUrl() {
-        webView.loadUrl("file:///android_asset/pano_2/index.html");
+//        webView.loadUrl("file:///android_asset/pano_2/index.html?style=" + getWebStyle());
+//        LogUtil.logError("file:///android_asset/pano_2/index.html?style=" + getWebStyle());
+         webView.loadUrl("file:///android_asset/pano_2/index.html");
+
     }
 
     @Override
@@ -126,5 +131,15 @@ public class BrightSpotFragment extends BaseFragment {
 
     }
 
-
+    private String getWebStyle() {
+        int color = mContext.getColor(R.color.theme1_text_color_blue);
+        if (color == 0x83A3FF) {
+            return "SI";
+        } else if (color == 0x83E3FF) {
+            return "SM";
+        } else if (color == 0x83BAFF) {
+            return "SP";
+        }
+        return "SP";
+    }
 }

@@ -202,6 +202,16 @@ public class DBUtil {
                 .async().queryList(transactionListener);
     }
 
+
+
+    public  static void getCatgoryByCatid(int catid,TransactionListener transactionListener){
+        SQLite.select()
+                .from(CategoryModel.class)
+                .where(CategoryModel_Table.catid.eq(catid))
+//                .where()
+
+                .async().queryList(transactionListener);
+    }
     public static void getNewsListByCatId(Context context, int catid, TransactionListener transactionListener) {
         LogUtil.logError("fast catid = " + catid);
         SQLite.select()

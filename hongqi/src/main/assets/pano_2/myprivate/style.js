@@ -41,6 +41,7 @@
 
 
 	function myprivate() {
+		
 		//车门
 		var host_1 = document.getElementsByClassName('host_1')[0];
 		host_1.onclick = function(e) {
@@ -69,6 +70,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 
 				}
@@ -103,6 +105,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 
 				}
@@ -140,6 +143,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 		
 				}
@@ -179,6 +183,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 		
 				}
@@ -219,6 +224,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 		
 				}
@@ -268,6 +274,7 @@
 				list_class[i].onclick = function() {
 					var host_id = this.getAttribute('data-id')
 					// console.log(host_id)
+					$(this).addClass('list_child').siblings().removeClass('list_child');
 					doJsTest(host_id)
 		
 				}

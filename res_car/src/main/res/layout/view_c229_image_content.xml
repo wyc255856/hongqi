@@ -9,7 +9,9 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="140dp"
-        android:fadeScrollbars="false"
+        android:fadeScrollbars="true"
+        android:scrollbarThumbVertical="@drawable/bg_scroll_bar"
+        android:scrollbarTrackVertical="@drawable/seek_blue_bg"
         android:layout_marginBottom="55dp">
 
         <LinearLayout

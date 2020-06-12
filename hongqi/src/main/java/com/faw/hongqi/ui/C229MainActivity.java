@@ -6,20 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Environment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.faw.hongqi.C229Application;
 import com.faw.hongqi.R;
-import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.fragment.BaseFragment;
-import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.model.VersionModel;
 import com.faw.hongqi.model.VersionUpdateModel;
 import com.faw.hongqi.util.Constant;
@@ -32,43 +24,36 @@ import com.faw.hongqi.util.NetWorkCallBack;
 import com.faw.hongqi.util.PhoneUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.widget.TabView;
-import com.faw.hqzl3.hqextendsproxy.HQExtendsProxy;
-import com.faw.hqzl3.hqextendsproxy.Interfaces.IExtendsListener;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
 import com.google.gson.Gson;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
-import com.liulishuo.filedownloader.util.FileDownloadUtils;
-import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
-import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import static com.faw.hongqi.ui.C229LoadAndUnzipFileActivity.goC229LoadAndUnzipFileActivity;
+import org.json.JSONObject;
 
 public class C229MainActivity extends BaseActivity {
     private BaseFragment currentFragment;
     private String currentTag;
     TabView tabView;
-
     View main_layout;
     private VersionModel bean = null;
-    private HQExtendsProxy mHQExtendsProxy;
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
+
     @Override
     protected void initData() {
         LogUtil.logError("activity onCreat");
         requestWritePermission();
+
         deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/news.json"));
         deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/category.json"));
+//        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew"));
+
         deleteFile();
     }
 
@@ -97,6 +82,30 @@ public class C229MainActivity extends BaseActivity {
             @Override
             public void onTabClickCallBack(String tag) {
                 changeTabs(tag);
+                Constant.TAG_TOP = tag;
+                Map<String,Object> mapCommondata = new LinkedHashMap<>();
+                JSONObject gatherObject;
+                if ("0".equals(tag)){
+                    mapCommondata.put("tabname","车型概览");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(C229MainActivity.this).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250001",gatherObject.toString());
+                }else if ("1".equals(tag)){
+                    mapCommondata.put("tabname","快速入门");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(C229MainActivity.this).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250002",gatherObject.toString());
+                }else if ("2".equals(tag)){
+                    mapCommondata.put("tabname","车型亮点");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(C229MainActivity.this).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250003",gatherObject.toString());
+                }else if ("3".equals(tag)){
+                    mapCommondata.put("tabname","手册");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(C229MainActivity.this).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250004",gatherObject.toString());
+                }else if ("4".equals(tag)){
+                    mapCommondata.put("tabname","搜索");
+                    gatherObject = new JSONObject(mapCommondata);
+                    HQDataGatherProxy.getInstance(C229MainActivity.this).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250005",gatherObject.toString());
+                }
 
             }
 
@@ -114,19 +123,6 @@ public class C229MainActivity extends BaseActivity {
                 finish();
                 overridePendingTransition(R.anim.anim_fade_in,
                         R.anim.anim_fade_out);
-//                try {
-//                    String command = "chmod 777 " + "/vendor/mnt/presetdata/manual/images";
-
-//                    Log.i("zyl", "command = " + command);
-//                    Runtime runtime = Runtime.getRuntime();
-//
-//                    Process proc = runtime.exec(command);
-//                } catch (IOException e) {
-//                    Log.i("zyl","chmod fail!!!!");
-//                    e.printStackTrace();
-//                }
-
-//                new File( "/vendor/mnt/presetdata/manual/images/2020-03-18").mkdir();
             }
         });
     }
@@ -212,24 +208,11 @@ public class C229MainActivity extends BaseActivity {
         filter.addAction("com.faw.hqzl3.tspservice.change.environment");
         registerReceiver(receiver, filter);
     }
+
     public static void goC229MainActivity(Context context, String tag) {
         Intent intent = new Intent(context, C229MainActivity.class);
         intent.putExtra("tag", tag);
         context.startActivity(intent);
-    }
-
-    //判断文件夹下是否存在该文件
-    public boolean fileIsExists(String strFile) {
-        try {
-            File f = new File(strFile);
-            if (!f.exists()) {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-
-        }
-        return true;
     }
 
     public void deleteFile() {
@@ -237,8 +220,6 @@ public class C229MainActivity extends BaseActivity {
             @Override
             public void run() {
                 super.run();
-                LoadAndUnzipUtil.unzip_size = 0;
-                LoadAndUnzipUtil.unzip_size_index = 0;
                 VersionUpdateModel model = (VersionUpdateModel) getIntent().getSerializableExtra("model");
 //                SharedpreferencesUtil.setVersionCode(C229MainActivity.this, "121");
                 final String id = SharedpreferencesUtil.getVersionCode(C229MainActivity.this).replace(".0", "");
@@ -250,18 +231,25 @@ public class C229MainActivity extends BaseActivity {
                         LogUtil.logError("data = " + data);
                         bean = new Gson().fromJson((String) data, VersionModel.class);
                         if ("".equals(bean.getVersion())) {
-
                             //如果相同版本无需更新
                         } else {
-                            LoadAndUnzipUtil.unzip_size = bean.getZip_address().size();
+//                            LoadAndUnzipUtil.unzip_size = bean.getZip_address().size();
 //                            for (int i = 0; i < bean.getZip_address().size(); i++) {
 //                              LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i),bean.getVersion());
 //                            }
-                            //队列
-                            LoadAndUnzipUtil.start_multi(C229MainActivity.this, bean.getZip_address(), bean.getVersion());
-
-                            LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews(), bean.getVersion());
-                            LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
+                            //判断静默更新是否是json，还是图片视频资源更新
+                            LogUtil.logError("资源数组 = " + bean.getZip_address().size());
+                            if (bean.getZip_address().get(0).equals("")){
+                                LoadAndUnzipUtil.startDownloadNews(C229MainActivity.this, bean.getNews(), bean.getVersion());
+                                LoadAndUnzipUtil.startDownloadCategory(C229MainActivity.this, bean.getCategory());
+                                LogUtil.logError("资源数组 = " + "w");
+                            }else{
+                                //队列
+                                LogUtil.logError("资源数组 = " + "T");
+                                LoadAndUnzipUtil.start_multi(C229MainActivity.this, bean.getZip_address(), bean.getVersion());
+                                LoadAndUnzipUtil.startDownloadNewsJson(C229MainActivity.this, bean.getNews(), bean.getVersion());
+                                LoadAndUnzipUtil.startDownloadCategoryJson(C229MainActivity.this, bean.getCategory());
+                            }
                         }
                     }
 

@@ -9,6 +9,35 @@ import java.io.Serializable;
  */
 
 public class RightBean implements Serializable {
+
+    private String content_title;
+    private String id;
+    private int catid;
+
+    public String getContent_title() {
+        return content_title;
+    }
+
+    public void setContent_title(String content_title) {
+        this.content_title = content_title;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getCatid() {
+        return catid;
+    }
+
+    public void setCatid(int catid) {
+        this.catid = catid;
+    }
+
     private String tag;
     private boolean isTitle;
     private String head_image;

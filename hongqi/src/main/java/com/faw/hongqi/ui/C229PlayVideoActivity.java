@@ -69,6 +69,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
                     updateTime();
                     mHandler.sendEmptyMessageDelayed(UPDATE_TIME, 500);
                     break;
+
                 case HIDE_CONTROL:
 //                    hideControl();
                     break;
@@ -169,9 +170,6 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         interactive_layout = findViewById(R.id.interactive_layout);
         spreadView = findViewById(R.id.spreadView);
         playOrPauseIv.setVisibility(View.GONE);
-
-        Intent intent = new Intent("com.haowei.wyc.hongqicar.sound.source");
-        sendBroadcast(intent);
     }
 
     @Override

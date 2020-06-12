@@ -53,7 +53,9 @@ public class ManualFragment extends BaseFragment implements CheckListener {
     }
 
     public void createFragment() {
-
+        if(getActivity()==null){
+            return;
+        }
         if (((FragmentActivity)mContext).getSupportFragmentManager() != null) {
             FragmentTransaction fragmentTransaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
             mSortDetailFragment = new SortDetailFragment(newsList, list);

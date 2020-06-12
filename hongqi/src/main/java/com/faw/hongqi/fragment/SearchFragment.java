@@ -20,14 +20,18 @@ import com.faw.hongqi.model.NewsListModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.widget.HotWordView;
+import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
 import com.raizlabs.android.dbflow.runtime.transaction.TransactionListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,6 +71,7 @@ public class SearchFragment extends BaseFragment {
             @Override
             public void onClickItem(String word) {
                 search_edit.setText(word);
+
             }
         });
     }

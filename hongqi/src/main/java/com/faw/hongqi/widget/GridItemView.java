@@ -78,6 +78,8 @@ public class GridItemView extends LinearLayout implements View.OnClickListener {
                     C229ContentActivity.goContentActivity(mContext, data);
                 } else {
 //            mContext.startActivity(new Intent(mContext, C229PlayVideoActivity.class));
+                    Intent intent = new Intent("com.haowei.wyc.hongqicar.sound.source");
+                    mContext.sendBroadcast(intent);
                     C229PlayVideoActivity.goVideoActivity(mContext,data);
                 }
             }

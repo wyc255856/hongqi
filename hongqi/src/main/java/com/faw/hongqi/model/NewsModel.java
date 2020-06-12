@@ -157,6 +157,16 @@ public class NewsModel extends BaseModel implements Serializable {
     private int zdzg;
     @Column
     private int zdqj;
+    @Column
+    private String top_title;
+
+    public String getTop_title() {
+        return top_title;
+    }
+
+    public void setTop_title(String top_title) {
+        this.top_title = top_title;
+    }
 
     public void setId(String id) {
         this.id = id;
