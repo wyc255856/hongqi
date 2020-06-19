@@ -50,6 +50,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     private MediaPlayer mPlayer;
     private SeekBar mSeekBar;
     private String path;
+    private TextView text_title;
+    private TextView text_content;
     private RelativeLayout rootViewRl;
     private LinearLayout controlLl;
     private TextView startTime, endTime;
@@ -165,11 +167,16 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         startTime = (TextView) findViewById(R.id.tv_start_time);
         endTime = (TextView) findViewById(R.id.tv_end_time);
         mSeekBar = (SeekBar) findViewById(R.id.tv_progess);
+        text_title = (TextView) findViewById(R.id.text_title);
+        text_content = (TextView) findViewById(R.id.text_content);
         rootViewRl = (RelativeLayout) findViewById(R.id.root_rl);
         controlLl = (LinearLayout) findViewById(R.id.control_ll);
         interactive_layout = findViewById(R.id.interactive_layout);
         spreadView = findViewById(R.id.spreadView);
         playOrPauseIv.setVisibility(View.GONE);
+        text_title.setText(newsModel.getTitle());
+        LogUtil.logError("Video1_note = " + newsModel.getVideo1_note());
+        text_content.setText(newsModel.getVideo1_note());
     }
 
     @Override
@@ -393,18 +400,19 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     List<InteractiveVideoModel> list = new ArrayList<>();
 
     public void initInteractive() {
-        InteractiveVideoModel interactiveVideoModel1 = new InteractiveVideoModel();
-        interactiveVideoModel1.isShow = false;
-        interactiveVideoModel1.resId = R.mipmap.test_video;
-        interactiveVideoModel1.time = 10000;
-        list.add(interactiveVideoModel1);
-
-
-        InteractiveVideoModel interactiveVideoModel2 = new InteractiveVideoModel();
-        interactiveVideoModel2.isShow = false;
-        interactiveVideoModel2.resId = R.mipmap.test_video;
-        interactiveVideoModel2.time = 20000;
-        list.add(interactiveVideoModel2);
+        //播放10秒暂停
+//        InteractiveVideoModel interactiveVideoModel1 = new InteractiveVideoModel();
+//        interactiveVideoModel1.isShow = false;
+//        interactiveVideoModel1.resId = R.mipmap.test_video;
+//        interactiveVideoModel1.time = 10000;
+//        list.add(interactiveVideoModel1);
+//
+//
+//        InteractiveVideoModel interactiveVideoModel2 = new InteractiveVideoModel();
+//        interactiveVideoModel2.isShow = false;
+//        interactiveVideoModel2.resId = R.mipmap.test_video;
+//        interactiveVideoModel2.time = 20000;
+//        list.add(interactiveVideoModel2);
 
 
     }

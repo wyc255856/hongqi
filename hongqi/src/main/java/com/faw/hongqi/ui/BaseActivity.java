@@ -44,7 +44,7 @@ public abstract class BaseActivity extends FragmentActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.theme1_text_color_black));
         }
-        DBUtil.initData(this);
+        DBUtil.getInstance().initData(this);
         initData();
         initViews();
         initWidgetActions();

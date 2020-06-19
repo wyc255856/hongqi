@@ -133,6 +133,7 @@ public class SortDetailFragment extends BaseListFragment<SortDetailPresenter, St
                 newsModel.setId(rightBean.getId());
                 newsModel.setCatid(rightBean.getCatid());
                 newsModel.setTop_title(rightBean.getContent_title());
+                newsModel.setVideo1_note(rightBean.getVideo1_note());
                 if (mDatas.get(position).getTemplate1() != 6) {
                     if (newsModel.getHead_image()!=null) {
                         C229ContentActivity.goContentActivity(mContext, newsModel);
@@ -225,6 +226,7 @@ public class SortDetailFragment extends BaseListFragment<SortDetailPresenter, St
                 body.setId(categoryTwoArray.get(j).getId());
                 body.setCatid(categoryTwoArray.get(j).getCatid());
                 body.setContent_title(list.get(i).getCatname());
+                body.setVideo1_note(categoryTwoArray.get(j).getVideo1_note());
                 mDatas.add(body);
             }
         }

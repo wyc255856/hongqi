@@ -64,6 +64,7 @@ public class RightBean implements Serializable {
     private String content9;
     private String content10;
     private String video1;
+    private String video1_note;
     private String video2;
     private String video3;
     private String video4;
@@ -83,6 +84,14 @@ public class RightBean implements Serializable {
     private int template8;
     private int template9;
     private int template10;
+
+    public String getVideo1_note() {
+        return video1_note;
+    }
+
+    public void setVideo1_note(String video1_note) {
+        this.video1_note = video1_note;
+    }
 
     public String getHead_image() {
         return head_image;

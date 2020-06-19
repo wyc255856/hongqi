@@ -3,6 +3,7 @@ package com.faw.hongqi;
 import android.app.Application;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.faw.hongqi.ui.C229MainActivity;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
@@ -23,6 +24,7 @@ public class C229Application extends Application {
     public void onCreate() {
         super.onCreate();
         C229API.init(this);
+
         TypefaceUtil.replaceSystemDefaultFont(this,"fonts/fzlt.TTF");
         mHQExtendsProxy = HQExtendsProxy.getInstance(getApplicationContext());
         mHQExtendsProxy.initCarApi(new IExtendsListener() {

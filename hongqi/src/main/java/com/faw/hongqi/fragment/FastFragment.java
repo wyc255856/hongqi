@@ -140,37 +140,28 @@ public class FastFragment extends BaseFragment implements CheckListener {
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
+        list = DBUtil.getInstance().getFastCategoryList();
+        for (int i = 0; i < 5; i++) {
+            list5.add(list.get(i));
+        }
+        startTime = System.currentTimeMillis();
+         //categoryModel =null;
+        for(int i=0;i<list.size();i++){
+            CategoryModel  categoryModel = list.get(i);
+            List<NewsModel> result1List=DBUtil.getInstance().getNewsListByCatId(mContext,categoryModel.getCatid());
+            NewsListModel newsListModel = new NewsListModel();
+            newsListModel.setRECORDS(result1List);
+            newsList.add(newsListModel);
+        }
 
-        DBUtil.getFastCategoryList(new TransactionListener() {
-            @Override
-            public void onResultReceived(Object result) {
+        LogUtil.logError("查询栏目数据耗时" + (System.currentTimeMillis() - startTime) + "毫秒");
+        LogUtil.logError("查询栏目数据长度 = " + newsList.size());
 
-            }
 
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
 
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                if (result != null)
-                    list = (List<CategoryModel>) result;
-                for (int i = 0; i < 5; i++) {
-                    list5.add(list.get(i));
-                }
 
-                LogUtil.logError("list size = " + list.size());
-                ((Activity) mContext).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initList();
-                    }
-                });
+       // getFastNewsList();
 
-                return false;
-            }
-        });
 
     }
 
@@ -199,7 +190,7 @@ public class FastFragment extends BaseFragment implements CheckListener {
         rvSort = view.findViewById(R.id.rv_sort);
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         rvSort.setLayoutManager(mLinearLayoutManager);
-
+        initData1();
 
 //        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
 //            @Override
@@ -241,11 +232,7 @@ public class FastFragment extends BaseFragment implements CheckListener {
     //记录查询所需时间的起始时间
     long startTime = 0;
 
-    private void initList() {
-        startTime = System.currentTimeMillis();
-        getFastNewsList();
 
-    }
 
     //是否禁止监听scoller事件
     private boolean isBanScorller = false;
@@ -317,42 +304,42 @@ public class FastFragment extends BaseFragment implements CheckListener {
      */
     private void getFastNewsList() {
 
-        CategoryModel categoryModel = list.get(newIndex);
-        DBUtil.getNewsListByCatId(mContext, categoryModel.getCatid(), new TransactionListener() {
-            @Override
-            public void onResultReceived(Object result) {
 
-            }
-
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
-
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                List<NewsModel> result1List = new ArrayList<>();
-                if (result != null)
-                    result1List = (List<NewsModel>) result;
-                LogUtil.logError("news list size = " + result1List.size());
-                NewsListModel newsListModel = new NewsListModel();
-                newsListModel.setRECORDS(result1List);
-                newsList.add(newsListModel);
-                newIndex++;
-                if (newIndex < list.size()) {
-                    getFastNewsList();
-                } else {
-                    ((Activity) mContext).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            onDone();
-                        }
-                    });
-
-                }
-                return false;
-            }
-        });
+//        DBUtil.getNewsListByCatId(mContext, categoryModel.getCatid(), new TransactionListener() {
+//            @Override
+//            public void onResultReceived(Object result) {
+//
+//            }
+//
+//            @Override
+//            public boolean onReady(BaseTransaction transaction) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean hasResult(BaseTransaction transaction, Object result) {
+//                List<NewsModel> result1List = new ArrayList<>();
+//                if (result != null)
+//                    result1List = (List<NewsModel>) result;
+//                LogUtil.logError("news list size = " + result1List.size());
+//                NewsListModel newsListModel = new NewsListModel();
+//                newsListModel.setRECORDS(result1List);
+//                newsList.add(newsListModel);
+//                newIndex++;
+//                if (newIndex < list.size()) {
+//                    getFastNewsList();
+//                } else {
+//                    ((Activity) mContext).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            onDone();
+//                        }
+//                    });
+//
+//                }
+//                return false;
+//            }
+//        });
 
 
     }
@@ -362,25 +349,25 @@ public class FastFragment extends BaseFragment implements CheckListener {
 
     //当结束通过一级标签遍历二级目录
     private void onDone() {
-        LogUtil.logError("查询栏目数据耗时" + (System.currentTimeMillis() - startTime) + "毫秒");
-        LogUtil.logError("查询栏目数据长度 = " + newsList.size());
-        int downIndex = 0;
-//        List<Integer> lines = new ArrayList<>();
-        for (int i = 0; i < newsList.size(); i++) {
-            NewsListModel newsListModel = newsList.get(i);
-            int newsSize = newsListModel.getRECORDS().size();
-            int lineCount = Constant.IS_PHONE ? 4 : 4;
-            int lineNum = 0;
-            if (newsSize % lineCount == 0) {
-                lineNum = newsSize / lineCount;
-            } else {
-                lineNum = (newsSize / lineCount) + 1;
-            }
-            downIndex += lineNum * PhoneUtil.dip2px(mContext, 240f);
-            LogUtil.logError("downIndex = " + downIndex);
-            scrollerUpIndexs.add(downIndex);
-        }
-        initData1();
+//        LogUtil.logError("查询栏目数据耗时" + (System.currentTimeMillis() - startTime) + "毫秒");
+//        LogUtil.logError("查询栏目数据长度 = " + newsList.size());
+//        int downIndex = 0;
+////        List<Integer> lines = new ArrayList<>();
+//        for (int i = 0; i < newsList.size(); i++) {
+//            NewsListModel newsListModel = newsList.get(i);
+//            int newsSize = newsListModel.getRECORDS().size();
+//            int lineCount = Constant.IS_PHONE ? 4 : 4;
+//            int lineNum = 0;
+//            if (newsSize % lineCount == 0) {
+//                lineNum = newsSize / lineCount;
+//            } else {
+//                lineNum = (newsSize / lineCount) + 1;
+//            }
+//            downIndex += lineNum * PhoneUtil.dip2px(mContext, 240f);
+//            LogUtil.logError("downIndex = " + downIndex);
+//            scrollerUpIndexs.add(downIndex);
+//        }
+//        initData1();
     }
 
     //记录上一次滑动切换的标记

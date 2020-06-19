@@ -112,7 +112,7 @@ public class LoadAndUnzipUtil {
                         //下载完成
                         SharedpreferencesUtil.setVersionCode(context, code);
                         LogUtil.logError("更新JSON至最新版本 = " + code);
-                        DBUtil.initDataNet(context, "news");
+                        //DBUtil.initDataNet(context, "news");
                         super.blockComplete(task);
                     }
 
@@ -168,7 +168,7 @@ public class LoadAndUnzipUtil {
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
                         //下载完成
-                        DBUtil.initDataNet(context, "category");
+                        //DBUtil.initDataNet(context, "category");
                         super.blockComplete(task);
                     }
 
@@ -221,7 +221,7 @@ public class LoadAndUnzipUtil {
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
                         //下载完成
-                        DBUtil.initDataNet(context, "news");
+                       // DBUtil.initDataNet(context, "news");
                         super.blockComplete(task);
                     }
 
@@ -277,7 +277,7 @@ public class LoadAndUnzipUtil {
                                 ",fileName:" + task.getFilename() + ",speed:" + task.getSpeed() + ",isReuse:" + task.reuse());
                         fileName = task.getFilename();
                         //下载完成
-                        DBUtil.initDataNet(context, "category");
+                       // DBUtil.initDataNet(context, "category");
                         super.blockComplete(task);
                     }
 
@@ -390,8 +390,9 @@ public class LoadAndUnzipUtil {
             load_index++;
             LogUtil.logError("load_index = " + load_index);
             LogUtil.logError("zipSum = " + zipSum);
-            if (load_index == zipSum) {
+            if ((load_index/2) == zipSum) {
                 LogUtil.logError("更新资源至最新版本 = " + code);
+                load_index = 0;
                 SharedpreferencesUtil.setVersionCode(context, code);
             }
         } catch (Exception e) {

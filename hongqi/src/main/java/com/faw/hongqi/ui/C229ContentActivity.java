@@ -95,6 +95,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent1());
             contentItemMode.setTemplate(newsModel.getTemplate1());
             contentItemMode.setVideo(newsModel.getVideo1());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第二组
@@ -104,6 +105,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent2());
             contentItemMode.setTemplate(newsModel.getTemplate2());
             contentItemMode.setVideo(newsModel.getVideo2());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第三组
@@ -113,6 +115,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent3());
             contentItemMode.setTemplate(newsModel.getTemplate3());
             contentItemMode.setVideo(newsModel.getVideo3());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第四组
@@ -122,6 +125,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent4());
             contentItemMode.setTemplate(newsModel.getTemplate4());
             contentItemMode.setVideo(newsModel.getVideo4());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第五组
@@ -131,6 +135,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent5());
             contentItemMode.setTemplate(newsModel.getTemplate5());
             contentItemMode.setVideo(newsModel.getVideo5());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第六组
@@ -140,6 +145,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent6());
             contentItemMode.setTemplate(newsModel.getTemplate6());
             contentItemMode.setVideo(newsModel.getVideo6());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第七组
@@ -149,6 +155,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent7());
             contentItemMode.setTemplate(newsModel.getTemplate7());
             contentItemMode.setVideo(newsModel.getVideo7());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第八组
@@ -158,6 +165,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent8());
             contentItemMode.setTemplate(newsModel.getTemplate8());
             contentItemMode.setVideo(newsModel.getVideo8());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第九组
@@ -167,6 +175,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent9());
             contentItemMode.setTemplate(newsModel.getTemplate9());
             contentItemMode.setVideo(newsModel.getVideo9());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
         //第十组
@@ -176,6 +185,7 @@ public class C229ContentActivity extends BaseActivity {
             contentItemMode.setContent(newsModel.getContent10());
             contentItemMode.setTemplate(newsModel.getTemplate10());
             contentItemMode.setVideo(newsModel.getVideo10());
+            contentItemMode.setVideo1_note(newsModel.getVideo1_note());
             data_list.add(contentItemMode);
         }
     }

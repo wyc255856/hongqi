@@ -7,6 +7,15 @@ public class ContentItemModel implements Serializable {
     String video;
     int template;
     String content;
+    String video1_note;
+
+    public String getVideo1_note() {
+        return video1_note;
+    }
+
+    public void setVideo1_note(String video1_note) {
+        this.video1_note = video1_note;
+    }
 
     public int getTemplate() {
         return template;

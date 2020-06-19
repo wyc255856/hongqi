@@ -114,7 +114,7 @@ public class SearchFragment extends BaseFragment {
         });
     }
 
-    List<CategoryModel> list;
+    List<NewsModel> list;
 
     private void search(String word) {
         recyclerView.setVisibility(View.VISIBLE);
@@ -122,32 +122,34 @@ public class SearchFragment extends BaseFragment {
         DBUtil.insertHotWord(word);
         WORD = word;
         list = new ArrayList<>();
-        DBUtil.searchByWord(mContext, word, new TransactionListener() {
-            @Override
-            public void onResultReceived(Object result) {
-
-            }
-
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
-
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                if (result != null)
-                    list = (List<CategoryModel>) result;
-                ((Activity) mContext).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.refreshData(list);
-                    }
-                });
-
-                LogUtil.logError("list size = " + list.size());
-                return false;
-            }
-        });
+        list = DBUtil.getInstance().searchByWord(mContext,word);
+        mAdapter.refreshData(list);
+//        DBUtil.searchByWord(mContext, word, new TransactionListener() {
+//            @Override
+//            public void onResultReceived(Object result) {
+//
+//            }
+//
+//            @Override
+//            public boolean onReady(BaseTransaction transaction) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean hasResult(BaseTransaction transaction, Object result) {
+//                if (result != null)
+//                    list = (List<CategoryModel>) result;
+//                ((Activity) mContext).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mAdapter.refreshData(list);
+//                    }
+//                });
+//
+//                LogUtil.logError("list size = " + list.size());
+//                return false;
+//            }
+//        });
     }
 
     public void HideKeyboard(View v) {

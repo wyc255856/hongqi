@@ -49,11 +49,7 @@ public class C229MainActivity extends BaseActivity {
     protected void initData() {
         LogUtil.logError("activity onCreat");
         requestWritePermission();
-
-        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/news.json"));
-        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/category.json"));
 //        deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew"));
-
         deleteFile();
     }
 
@@ -214,7 +210,13 @@ public class C229MainActivity extends BaseActivity {
         intent.putExtra("tag", tag);
         context.startActivity(intent);
     }
-
+    //1.更新完成时暂停页面之后提版重新启动应用继续更新
+    //2.更新文字
+    //3.更新图片
+    //4.删除文字及图片
+    //5.更新百兆资源退出应用大概多少秒线程杀死
+    //6.文字或者图片各自更新失败版本是否记录可以回退
+    //7.
     public void deleteFile() {
         new Thread() {
             @Override
@@ -237,6 +239,8 @@ public class C229MainActivity extends BaseActivity {
 //                            for (int i = 0; i < bean.getZip_address().size(); i++) {
 //                              LoadAndUnzipUtil.startDownload(C229MainActivity.this, bean.getZip_address().get(i),bean.getVersion());
 //                            }
+                            deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/news.json"));
+                            deleteDir(new File(FileUtil.getDownloadResPath() + File.separator + "imagesnew" + "/category.json"));
                             //判断静默更新是否是json，还是图片视频资源更新
                             LogUtil.logError("资源数组 = " + bean.getZip_address().size());
                             if (bean.getZip_address().get(0).equals("")){

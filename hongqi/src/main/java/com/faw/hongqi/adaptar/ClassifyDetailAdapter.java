@@ -76,9 +76,12 @@ public class ClassifyDetailAdapter extends RvAdapter<RightBean> {
                     if (!TextUtils.isEmpty(sortBean.getHead_image())) {
                         String url = FileUtil.getResPath() + sortBean.getHead_image().replace("HONGQIH9/standard/","");
                         LogUtil.logError("image url = " + url);
+                        LogUtil.logError("catid = " + sortBean.getCatid());
                         File file = new File(FileUtil.getResPath() + sortBean.getHead_image().replace("HONGQIH9/standard/",""));
+                        LogUtil.logError("file = "+file);
                         Glide.with(mContext)
                                 .load(Uri.fromFile(file)).apply(new RequestOptions()
+//                                .skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .transform(new GlideRoundTransform(mContext, 10))).into(avatar);
                     } else {
                         String url = "images/2019-04-26/5cc2b440a0ab1.png";

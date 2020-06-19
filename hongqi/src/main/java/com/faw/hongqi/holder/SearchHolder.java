@@ -16,6 +16,7 @@ import com.faw.hongqi.fragment.SearchFragment;
 import com.faw.hongqi.model.CategoryModel;
 import com.faw.hongqi.model.NewsModel;
 import com.faw.hongqi.ui.C229ContentActivity;
+import com.faw.hongqi.ui.C229PlayVideoActivity;
 import com.faw.hongqi.widget.NoDoubleClickListener;
 import com.faw.hqzl3.datagatherproxy.HQDataGatherProxy;
 import com.raizlabs.android.dbflow.runtime.transaction.BaseTransaction;
@@ -52,35 +53,53 @@ public class SearchHolder extends BaseHolder {
                 if (NoDoubleClickListener.isFastClick()) {
                     return ;
                 }
-                C229ContentActivity.goContentActivity(mContext, bean);
-                DBUtil.getCatgoryByCatid(bean.getCatid(), new TransactionListener() {
-                    @Override
-                    public void onResultReceived(Object result) {
+                if (bean.getTemplate1() != 6) {
+                    C229ContentActivity.goContentActivity(mContext, bean);
 
-                    }
+                }else {
+                    C229PlayVideoActivity.goVideoActivity(mContext,bean);
 
-                    @Override
-                    public boolean onReady(BaseTransaction transaction) {
-                        return false;
-                    }
+                }
+               // C229ContentActivity.goContentActivity(mContext, bean);
+                CategoryModel categoryModel=DBUtil.getInstance().getCatgoryByCatid(bean.getCatid());
+                Map<String,Object> mapCommondata = new LinkedHashMap<>();
+                JSONObject gatherObject;
+                mapCommondata.put("manualcategaryid",bean.getCatid());
+                mapCommondata.put("manualcategary",categoryModel.getCatname());
+                mapCommondata.put("manualcontent",bean.getTitle());
+                mapCommondata.put("manualcontentid",bean.getId());
+                mapCommondata.put("source","5");
+                gatherObject = new JSONObject(mapCommondata);
+                HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250011",gatherObject.toString());
 
-                    @Override
-                    public boolean hasResult(BaseTransaction transaction, Object result) {
-                        List<CategoryModel> categoryModelList = new ArrayList<>();
-                        categoryModelList= (List<CategoryModel>) result;
-                        CategoryModel categoryModel=   categoryModelList.get(0);
-                        Map<String,Object> mapCommondata = new LinkedHashMap<>();
-                        JSONObject gatherObject;
-                        mapCommondata.put("manualcategaryid",bean.getCatid());
-                        mapCommondata.put("manualcategary",categoryModel.getCatname());
-                        mapCommondata.put("manualcontent",bean.getTitle());
-                        mapCommondata.put("manualcontentid",bean.getId());
-                        mapCommondata.put("source","5");
-                        gatherObject = new JSONObject(mapCommondata);
-                        HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250011",gatherObject.toString());
-                        return false;
-                    }
-                });
+//                DBUtil.getCatgoryByCatid(bean.getCatid(), new TransactionListener() {
+//                    @Override
+//                    public void onResultReceived(Object result) {
+//
+//                    }
+//
+//                    @Override
+//                    public boolean onReady(BaseTransaction transaction) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean hasResult(BaseTransaction transaction, Object result) {
+//                        List<CategoryModel> categoryModelList = new ArrayList<>();
+//                        categoryModelList= (List<CategoryModel>) result;
+//                        CategoryModel categoryModel=   categoryModelList.get(0);
+//                        Map<String,Object> mapCommondata = new LinkedHashMap<>();
+//                        JSONObject gatherObject;
+//                        mapCommondata.put("manualcategaryid",bean.getCatid());
+//                        mapCommondata.put("manualcategary",categoryModel.getCatname());
+//                        mapCommondata.put("manualcontent",bean.getTitle());
+//                        mapCommondata.put("manualcontentid",bean.getId());
+//                        mapCommondata.put("source","5");
+//                        gatherObject = new JSONObject(mapCommondata);
+//                        HQDataGatherProxy.getInstance(BrightSpotFragment.context).sendGatherData(HQDataGatherProxy.TYPE_REALTIME,"20250011",gatherObject.toString());
+//                        return false;
+//                    }
+//                });
             }
         });
     }

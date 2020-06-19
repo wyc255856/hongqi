@@ -23,8 +23,7 @@
         <VideoView
             android:id="@+id/video_view"
             android:layout_width="1030dp"
-            android:layout_height="580dp"
-            />
+            android:layout_height="580dp" />
 
         <Button
             android:id="@+id/play_btn"
@@ -58,7 +57,7 @@
 
     <ScrollView
         android:layout_width="580dp"
-        android:layout_height="455dp"
+        android:layout_height="580dp"
         android:layout_marginLeft="55dp"
         android:layout_marginRight="90dp"
         android:scrollbars="vertical">
@@ -78,10 +77,11 @@
             <TextView
                 android:id="@+id/text_content"
                 style="@style/text_28_gray"
-                android:lineSpacingExtra="15dp"
                 android:layout_marginTop="40dp"
+                android:lineSpacingExtra="15dp"
                 android:text="按下盲区探测关闭按键，组合仪表显示系统关闭指示灯，盲区探测系统关闭。再次按下关闭按键，指示灯熄灭，盲区探测系统开启
 若系统故障时，盲区探测系统为关闭状态，通过开关无法开启。" />
+
         </LinearLayout>
 
     </ScrollView>

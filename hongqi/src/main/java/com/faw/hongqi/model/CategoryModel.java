@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @ModelContainer
 @Table(database = CarDatabase.class)
-public class CategoryModel extends BaseModel {
+public class CategoryModel extends BaseModel implements Comparable<CategoryModel>{
     @PrimaryKey(autoincrement = false)
     private int catid;
     @Column
@@ -230,5 +230,10 @@ public class CategoryModel extends BaseModel {
 
     public void setCaid(int caid) {
         this.caid = caid;
+    }
+
+    @Override
+    public int compareTo(CategoryModel o) {
+        return getCatid() - o.getCatid();
     }
 }

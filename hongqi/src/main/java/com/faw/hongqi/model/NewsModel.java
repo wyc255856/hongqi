@@ -58,6 +58,8 @@ public class NewsModel extends BaseModel implements Serializable {
     @Column
     private int updatetime;
     @Column
+    private String video1_note;
+    @Column
     private String image;
     @Column
     private String image1;
@@ -159,6 +161,14 @@ public class NewsModel extends BaseModel implements Serializable {
     private int zdqj;
     @Column
     private String top_title;
+
+    public String getVideo1_note() {
+        return video1_note;
+    }
+
+    public void setVideo1_note(String video1_note) {
+        this.video1_note = video1_note;
+    }
 
     public String getTop_title() {
         return top_title;

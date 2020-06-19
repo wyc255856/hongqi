@@ -34,8 +34,9 @@ public class SharedpreferencesUtil {
     public static String getVersionCode(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return sharedPreferences.getString(VERSION_CODE, "136");
+        return sharedPreferences.getString(VERSION_CODE, "169");
 //        return sharedPreferences.getString(VERSION_CODE, "142");
+//        return sharedPreferences.getString(VERSION_CODE, "169");//红旗1.0.0
     }
     public static void setVersionTestCode(Context context, String versionCode) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUtil.getPackageName(context)

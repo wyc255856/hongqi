@@ -42,35 +42,49 @@ public class C229NativeInterface {
         });
     }
     private void getFastNewsList(String  id) {
-        DBUtil.getNewsListById(BrightSpotFragment.context,id, new TransactionListener() {
+        final NewsModel newsModel=DBUtil.getInstance().getNewsListById(id);
+        BrightSpotFragment.context.runOnUiThread(new Runnable() {
             @Override
-            public void onResultReceived(Object result) {
-
-            }
-
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
-
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                List<NewsModel> result1List = new ArrayList<>();
-                if (result != null)
-                    result1List = (List<NewsModel>) result;
-                final List<NewsModel> finalResult1List = result1List;
-                if (finalResult1List.size() == 0){
+            public void run() {
+                if (newsModel.getTemplate1() != 6) {
+                    C229ContentActivity.goContentActivity(BrightSpotFragment.context, newsModel);
 
                 }else {
-                    BrightSpotFragment.context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            C229ContentActivity.goContentActivity(BrightSpotFragment.context, finalResult1List.get(0));
-                        }
-                    });
+                    C229PlayVideoActivity.goVideoActivity(BrightSpotFragment.context,newsModel);
+
                 }
-                return false;
+              //  C229ContentActivity.goContentActivity(BrightSpotFragment.context, newsModel);
             }
         });
+//        DBUtil.getNewsListById(BrightSpotFragment.context,id, new TransactionListener() {
+//            @Override
+//            public void onResultReceived(Object result) {
+//
+//            }
+//
+//            @Override
+//            public boolean onReady(BaseTransaction transaction) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean hasResult(BaseTransaction transaction, Object result) {
+//                List<NewsModel> result1List = new ArrayList<>();
+//                if (result != null)
+//                    result1List = (List<NewsModel>) result;
+//                final List<NewsModel> finalResult1List = result1List;
+//                if (finalResult1List.size() == 0){
+//
+//                }else {
+//                    BrightSpotFragment.context.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            C229ContentActivity.goContentActivity(BrightSpotFragment.context, finalResult1List.get(0));
+//                        }
+//                    });
+//                }
+//                return false;
+//            }
+//        });
     }
 }

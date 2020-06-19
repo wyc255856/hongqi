@@ -112,34 +112,51 @@ public class ManualFragment extends BaseFragment implements CheckListener {
 
     @Override
     protected void initData() {
+//        EventBus.getDefault().register(this);
+//
+//        DBUtil.getManuaCategoryList(new TransactionListener() {
+//            @Override
+//            public void onResultReceived(Object result) {
+//
+//            }
+//
+//            @Override
+//            public boolean onReady(BaseTransaction transaction) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean hasResult(BaseTransaction transaction, Object result) {
+//                if (result != null)
+//                    list = (List<CategoryModel>) result;
+//                LogUtil.logError("list size = " + list.size());
+//                ((Activity) mContext).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        initList();
+//                    }
+//                });
+//
+//                return false;
+//            }
+//        });
         EventBus.getDefault().register(this);
+        list = DBUtil.getInstance().getManuaCategoryList();
 
-        DBUtil.getManuaCategoryList(new TransactionListener() {
-            @Override
-            public void onResultReceived(Object result) {
+        startTime = System.currentTimeMillis();
+        //categoryModel =null;
+        for(int i=0;i<list.size();i++){
+            CategoryModel  categoryModel = list.get(i);
+            List<NewsModel> result1List=DBUtil.getInstance().getNewsListByCatId(mContext,categoryModel.getCatid());
+            NewsListModel newsListModel = new NewsListModel();
+            newsListModel.setRECORDS(result1List);
+            newsList.add(newsListModel);
+        }
 
-            }
+        LogUtil.logError("查询栏目数据耗时" + (System.currentTimeMillis() - startTime) + "毫秒");
+        LogUtil.logError("查询栏目数据长度 = " + newsList.size());
 
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
 
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                if (result != null)
-                    list = (List<CategoryModel>) result;
-                LogUtil.logError("list size = " + list.size());
-                ((Activity) mContext).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initList();
-                    }
-                });
-
-                return false;
-            }
-        });
 
     }
     private void initData1() {
@@ -168,6 +185,7 @@ public class ManualFragment extends BaseFragment implements CheckListener {
         rvSort = view.findViewById(R.id.rv_sort);
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         rvSort.setLayoutManager(mLinearLayoutManager);
+        initData1();
     }
 
     int dyCount = 0;
@@ -247,42 +265,42 @@ public class ManualFragment extends BaseFragment implements CheckListener {
      */
     private void getFastNewsList() {
 
-        CategoryModel categoryModel = list.get(newIndex);
-        DBUtil.getNewsListByCatId(mContext,categoryModel.getCatid(), new TransactionListener() {
-            @Override
-            public void onResultReceived(Object result) {
-
-            }
-
-            @Override
-            public boolean onReady(BaseTransaction transaction) {
-                return false;
-            }
-
-            @Override
-            public boolean hasResult(BaseTransaction transaction, Object result) {
-                List<NewsModel> result1List = new ArrayList<>();
-                if (result != null)
-                    result1List = (List<NewsModel>) result;
-                LogUtil.logError("news list size = " + result1List.size());
-                NewsListModel newsListModel = new NewsListModel();
-                newsListModel.setRECORDS(result1List);
-                newsList.add(newsListModel);
-                newIndex++;
-                if (newIndex < list.size()) {
-                    getFastNewsList();
-                } else {
-                    ((Activity) mContext).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            onDone();
-                        }
-                    });
-
-                }
-                return false;
-            }
-        });
+//        CategoryModel categoryModel = list.get(newIndex);
+//        DBUtil.getNewsListByCatId(mContext,categoryModel.getCatid(), new TransactionListener() {
+//            @Override
+//            public void onResultReceived(Object result) {
+//
+//            }
+//
+//            @Override
+//            public boolean onReady(BaseTransaction transaction) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean hasResult(BaseTransaction transaction, Object result) {
+//                List<NewsModel> result1List = new ArrayList<>();
+//                if (result != null)
+//                    result1List = (List<NewsModel>) result;
+//                LogUtil.logError("news list size = " + result1List.size());
+//                NewsListModel newsListModel = new NewsListModel();
+//                newsListModel.setRECORDS(result1List);
+//                newsList.add(newsListModel);
+//                newIndex++;
+//                if (newIndex < list.size()) {
+//                    getFastNewsList();
+//                } else {
+//                    ((Activity) mContext).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            onDone();
+//                        }
+//                    });
+//
+//                }
+//                return false;
+//            }
+//        });
 
 
     }
