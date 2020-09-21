@@ -41,8 +41,8 @@ public class PointView extends LinearLayout {
                 this, true);
         iv1 = findViewById(R.id.iv_wave_1);
         iv2 = findViewById(R.id.iv_wave_2);
-        setAnim1();
-        setAnim2();
+//        setAnim1();
+//        setAnim2();
     }
 
     private void setAnim1() {
@@ -54,8 +54,10 @@ public class PointView extends LinearLayout {
         //渐变动画
         AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.5f);
         scaleAnimation.setDuration(800);
-        scaleAnimation.setRepeatCount(Animation.INFINITE);
-        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        scaleAnimation.setRepeatCount(1);
+        alphaAnimation.setRepeatCount(1);
+        scaleAnimation.setFillAfter(true);
+        alphaAnimation.setFillAfter(true);
         as.setDuration(800);
         as.addAnimation(scaleAnimation);
         as.addAnimation(alphaAnimation);
@@ -71,11 +73,22 @@ public class PointView extends LinearLayout {
         //渐变动画
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 0.1f);
         scaleAnimation.setDuration(800);
-        scaleAnimation.setRepeatCount(Animation.INFINITE);
-        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        scaleAnimation.setRepeatCount(1);
+        alphaAnimation.setRepeatCount(1);
+        scaleAnimation.setFillAfter(true);
+        alphaAnimation.setFillAfter(true);
         as.setDuration(800);
         as.addAnimation(scaleAnimation);
         as.addAnimation(alphaAnimation);
         iv2.startAnimation(as);
+    }
+    public void onPuase(){
+      //  iv1.set
+//        AnimationSet as = new AnimationSet(true);
+//        iv1.startAnimation(as);
+//        iv2.startAnimation(as);
+    }
+    public void onResume(){
+
     }
 }

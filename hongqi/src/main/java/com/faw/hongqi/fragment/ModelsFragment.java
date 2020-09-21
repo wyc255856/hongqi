@@ -57,57 +57,58 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
 
     @Override
     protected void initWidgetActions() {
-        ViewTreeObserver vto = car_model.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void
-            onGlobalLayout() {
-                car_model.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) car_model.getLayoutParams();
-                if (Constant.IS_PHONE) {
-                    //TODO 手机尺寸适配
+//        ViewTreeObserver vto = car_model.getViewTreeObserver();
+//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void
+//            onGlobalLayout() {
+//                car_model.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) car_model.getLayoutParams();
+//                if (Constant.IS_PHONE) {
+//                    //TODO 手机尺寸适配
+//
+//                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
+////                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+//                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
+//                    lp.height = (int) (lp.width * 0.46785);
+//                } else {
+//                    lp.width = 1440;
+//
+//                    lp.height = 675;
+//                }
+//
+//                car_model.setLayoutParams(lp);
+//
+//            }
+//
+//        });
+//        ViewTreeObserver vtoView = homeModelHotPointView.getViewTreeObserver();
+//        vtoView.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void
+//            onGlobalLayout() {
+//                homeModelHotPointView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) homeModelHotPointView.getLayoutParams();
+//                if (Constant.IS_PHONE) {
+//                    //TODO 手机尺寸适配
+//                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
+////                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
+//                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
+//                    lp.height = (int) (lp.width * 0.46785);
+//                    homeModelHotPointView.setItem(lp.width);
+//                } else {
+//                    lp.width = PhoneUtil.getDisplayWidth(mContext);
+//                    lp.height = 620;
+//                    homeModelHotPointView.setItem(lp.width);
+//                }
+//                homeModelHotPointView.setLayoutParams(lp);
+//
+//
+//            }
+//
+//        });
 
-                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
-//                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
-                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
-                    lp.height = (int) (lp.width * 0.46785);
-                } else {
-                    lp.width = 1440;
-
-                    lp.height = 675;
-                }
-
-                car_model.setLayoutParams(lp);
-
-            }
-
-        });
-        ViewTreeObserver vtoView = homeModelHotPointView.getViewTreeObserver();
-        vtoView.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void
-            onGlobalLayout() {
-                homeModelHotPointView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) homeModelHotPointView.getLayoutParams();
-                if (Constant.IS_PHONE) {
-                    //TODO 手机尺寸适配
-                    int screenWidth = PhoneUtil.getDisplayWidth(mContext);
-//                    lp.width = screenWidth-PhoneUtil.dip2px(mContext,120);
-                    lp.width = screenWidth - PhoneUtil.dip2px(mContext, (float) (screenWidth * 0.1) / 2);
-                    lp.height = (int) (lp.width * 0.46785);
-                    homeModelHotPointView.setItem(lp.width);
-                } else {
-                    lp.width = PhoneUtil.getDisplayWidth(mContext);
-                    lp.height = 620;
-                    homeModelHotPointView.setItem(lp.width);
-                }
-                homeModelHotPointView.setLayoutParams(lp);
-
-
-            }
-
-        });
-
+        homeModelHotPointView.setItem(PhoneUtil.getDisplayWidth(mContext));
 
     }
 
@@ -120,6 +121,18 @@ public class ModelsFragment extends BaseFragment implements View.OnTouchListener
     boolean leftScreen;
     long startTime;
     float singleSpec = 15;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        homeModelHotPointView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        homeModelHotPointView.onPuase();
+    }
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {

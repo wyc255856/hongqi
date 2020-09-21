@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.faw.hongqi.ui.C229MainActivity;
+import com.faw.hongqi.util.AppUtil;
 import com.faw.hongqi.util.LogUtil;
 import com.faw.hongqi.util.SharedpreferencesUtil;
 import com.faw.hongqi.util.TypefaceUtil;
@@ -33,6 +34,7 @@ public class C229Application extends Application {
                 //一定要在初始化成功以后再调用一项这些方法
                 vehicleCfg = mHQExtendsProxy.getVehicleCfg();//获取车辆高低配，18个字符，已转换为String
                 LogUtil.logError("car_model= " + vehicleCfg);
+                LogUtil.logError("version= " + AppUtil.getVersionName(C229Application.this));
                 if (vehicleCfg != null) {
                     if (vehicleCfg.equals("DBCCCBCC0000000000")) {
                         SharedpreferencesUtil.setCarModel(getApplicationContext(), "C229_1");

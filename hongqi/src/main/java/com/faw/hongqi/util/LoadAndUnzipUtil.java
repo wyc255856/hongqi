@@ -95,6 +95,7 @@ public class LoadAndUnzipUtil {
                     @Override
                     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.pending(task, soFarBytes, totalBytes);
+                        LogUtil.logError("data = " + "pending");
                     }
 
                     @Override
@@ -102,6 +103,7 @@ public class LoadAndUnzipUtil {
                         LogUtil.logError("----->progress taskId:" + task.getId() + ",soFarBytes:" + soFarBytes + ",totalBytes:" + totalBytes
                                 + ",percent:" + soFarBytes * 1.0 / totalBytes + ",speed:" + task.getSpeed());
                         super.progress(task, soFarBytes, totalBytes);
+                        LogUtil.logError("data = " + "progress");
                     }
 
                     @Override
@@ -114,17 +116,20 @@ public class LoadAndUnzipUtil {
                         LogUtil.logError("更新JSON至最新版本 = " + code);
                         //DBUtil.initDataNet(context, "news");
                         super.blockComplete(task);
+                        LogUtil.logError("data = " + "blockcomplete");
                     }
 
                     @Override
                     protected void completed(BaseDownloadTask task) {
                         LogUtil.logError("---------->completed taskId:" + task.getId() + ",isReuse:" + task.reuse());
                         super.completed(task);
+                        LogUtil.logError("data = " + "completed");
                     }
 
                     @Override
                     protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                         super.paused(task, soFarBytes, totalBytes);
+                        LogUtil.logError("data = " + "paused");
                     }
 
                     @Override
@@ -133,11 +138,13 @@ public class LoadAndUnzipUtil {
 
                         LogUtil.logError("--------->error taskId:" + task.getId() + ",e:" + e.getLocalizedMessage());
                         super.error(task, e);
+                        LogUtil.logError("data = " + "error");
                     }
 
                     @Override
                     protected void warn(BaseDownloadTask task) {
                         super.warn(task);
+                        LogUtil.logError("data = " + "warn");
                     }
                 });
         singleTaskId = singleTask.start();

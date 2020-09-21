@@ -20,8 +20,10 @@
 
         <com.faw.hongqi.widget.PointView
             android:id="@+id/point"
+
             android:layout_width="30dp"
-            android:layout_height="30dp" />
+            android:layout_height="30dp"
+            />
 
         <TextView
             android:id="@+id/text"

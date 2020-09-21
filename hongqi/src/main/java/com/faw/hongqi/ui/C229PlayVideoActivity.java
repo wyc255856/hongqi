@@ -1,18 +1,21 @@
 package com.faw.hongqi.ui;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,17 +23,15 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import com.faw.hongqi.R;
-import com.faw.hongqi.dbutil.DBUtil;
 import com.faw.hongqi.model.InteractiveVideoModel;
 import com.faw.hongqi.model.NewsModel;
-import com.faw.hongqi.util.Constant;
 import com.faw.hongqi.util.FileUtil;
 import com.faw.hongqi.util.LogUtil;
-import com.faw.hongqi.view.SpreadView;
 import com.faw.hongqi.widget.BigPointView;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     BigPointView spreadView;
     public static final int UPDATE_TIME = 0x0001;
     public static final int HIDE_CONTROL = 0x0002;
-
+    private boolean is_prepared = false;
     NewsModel newsModel;
 
     private Handler mHandler = new Handler() {
@@ -111,18 +112,31 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         videoSuf.getHolder().addCallback(this);
     }
 
+    private AudioAttributes abs;
+
     private void initPlayer() {
+        abs = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
+        mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                .setOnAudioFocusChangeListener(afChangeListener)
+                .setAudioAttributes(abs)
+                .setAcceptsDelayedFocusGain(true)
+                .build();
+        LogUtil.logError("initPlayer");
         mPlayer = new MediaPlayer();
         mAm = (AudioManager) getSystemService(AUDIO_SERVICE);
+        mPlayer.reset();
         mPlayer.setOnCompletionListener(this);
         mPlayer.setOnErrorListener(this);
         mPlayer.setOnInfoListener(this);
         mPlayer.setOnPreparedListener(this);
         mPlayer.setOnSeekCompleteListener(this);
         mPlayer.setOnVideoSizeChangedListener(this);
+        mPlayer.setAudioAttributes(abs);
         try {
             //使用手机本地视频
-
 //            if (Constant.TEST) {
 //                AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.vd);
 //                try {
@@ -134,12 +148,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 //                    e.printStackTrace();
 //                }
 //            } else {
-
 //            AssetFileDescriptor afd = getResources().getAssets().openFd("5ec5dd3a24d33.mp4");
-//
 //            mPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-
-
             mPlayer.setDataSource(path);
 //            }
 
@@ -159,6 +169,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         initSurfaceView();
         initPlayer();
         initEvent();
+        Intent intent = new Intent("com.haowei.wyc.hongqicar.sound.source");
+        sendBroadcast(intent);
     }
 
     @Override
@@ -208,6 +220,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         mPlayer.setDisplay(holder);
+
+        LogUtil.logError("surfaceCreated");
         mPlayer.prepareAsync();
     }
 
@@ -218,7 +232,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+//       pause();
     }
 
     @Override
@@ -227,6 +241,8 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         endTime.setText(formatLongToTimeStr(mp.getDuration()));
         mSeekBar.setMax(mp.getDuration());
         mSeekBar.setProgress(mp.getCurrentPosition());
+        is_prepared = true;
+        LogUtil.logError("onPrepared");
         play();
     }
 
@@ -246,10 +262,14 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     }
 
     private void play() {
+        LogUtil.logError("play");
         if (requestFocus()) {
             if (mPlayer == null) {
+                LogUtil.logError("player null");
+                initPlayer();
                 return;
             }
+
             Log.i("playPath", path);
             if (mPlayer.isPlaying()) {
                 mPlayer.pause();
@@ -265,6 +285,7 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 //                playOrPauseIv.setImageResource(android.R.drawable.ic_media_pause);
             }
         }
+
     }
 
     @Override
@@ -293,27 +314,34 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
         }
     }
 
+
     private void pause() {
-        mPlayer.pause();
-        mHandler.removeMessages(UPDATE_TIME);
+        if (mPlayer != null) {
+            mPlayer.pause();
+            mHandler.removeMessages(UPDATE_TIME);
 //            mHandler.removeMessages(HIDE_CONTROL);
-        playOrPauseIv.setVisibility(View.VISIBLE);
+            playOrPauseIv.setVisibility(View.VISIBLE);
 //        playOrPauseIv.setImageResource(android.R.drawable.ic_media_play);
-        isShow = true;
+            isShow = true;
 //        mHandler.removeMessages(HIDE_CONTROL);
-        mHandler.sendEmptyMessage(UPDATE_TIME);
+            mHandler.sendEmptyMessage(UPDATE_TIME);
 //            showControl();
+        }
     }
 
     /**
      * 更新播放时间
      */
     private void updateTime() {
+        try {
+            startTime.setText(formatLongToTimeStr(
+                    mPlayer.getCurrentPosition()));
+            mSeekBar.setProgress(mPlayer.getCurrentPosition());
+            showinitInteractive(mPlayer.getCurrentPosition());
+        } catch (Exception e) {
 
-        startTime.setText(formatLongToTimeStr(
-                mPlayer.getCurrentPosition()));
-        mSeekBar.setProgress(mPlayer.getCurrentPosition());
-        showinitInteractive(mPlayer.getCurrentPosition());
+        }
+
     }
 
     /**
@@ -456,14 +484,14 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
     }
 
 
-
     private AudioManager mAm;
 
     /**
      * 请求语音焦点
+     *
      * @return
      */
-    private boolean requestFocus() {
+    private boolean requestFocus1() {
         int result = mAm.requestAudioFocus(afChangeListener,
                 AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN);
@@ -471,18 +499,39 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
 
     }
 
+    private AudioFocusRequest mAudioFocusRequest;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private boolean requestFocus() {
+        if (mAudioFocusRequest == null) {
+            abs = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                    .setOnAudioFocusChangeListener(afChangeListener)
+                    .setAudioAttributes(abs)
+                    .setAcceptsDelayedFocusGain(true)
+                    .build();
+        }
+        int result = mAm.requestAudioFocus(mAudioFocusRequest);
+
+        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
+    }
 
     AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
 
         public void onAudioFocusChange(int focusChange) {
 
             if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-
                 pause();
-
-
             } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-                play();
+                LogUtil.logError("OnAudioFocusChangeListener play");
+                if (isOnForground(C229PlayVideoActivity.this)) {
+                    play();
+                } else {
+                    pause();
+                }
 
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                 mAm.abandonAudioFocus(afChangeListener);
@@ -500,17 +549,77 @@ public class C229PlayVideoActivity extends BaseActivity implements SurfaceHolder
             mPlayer.stop();
 
         }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtil.logError("onPause");
+        pause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        stop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LogUtil.logError("onDestroy");
+        if (mPlayer != null) {
+            try {
+                mPlayer.stop();
+            } catch (IllegalStateException e) {
+                // TODO 如果当前java状态和jni里面的状态不一致，
+                //e.printStackTrace();
+                LogUtil.logError("onDestroy IllegalStateException");
+                mPlayer = null;
+//                mPlayer.stop();
+            }
+            mPlayer.release();
+            mPlayer = null;
+        }
+        if (mAudioFocusRequest != null) {
+            mAm.abandonAudioFocusRequest(mAudioFocusRequest);
+        }
+    }
+
+    /**
+     * Activity是否在前台
+     *
+     * @param context
+     * @return
+     */
+    private boolean isOnForground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcessInfoList = activityManager.getRunningAppProcesses();
+        if (appProcessInfoList == null) {
+            return false;
+        }
+
+        String packageName = context.getPackageName();
+        for (ActivityManager.RunningAppProcessInfo processInfo : appProcessInfoList) {
+            if (processInfo.processName.equals(packageName) && processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isRunBackground(Activity activity) {
+        ActivityManager activityManager = (ActivityManager) activity.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = activity.getApplicationContext().getPackageName();
+        //获取Android设备中所有正在运行的App
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null)
+            return true;
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            // The name of the process that this object is associated with.
+            if (appProcess.processName.equals(packageName) && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return false;
+            }
+        }
+        return true;
     }
 }

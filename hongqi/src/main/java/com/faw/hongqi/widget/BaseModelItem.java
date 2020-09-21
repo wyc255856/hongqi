@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -188,7 +189,13 @@ public class BaseModelItem extends LinearLayout {
 //            }
 //        });
     }
-
+    public void onPuase(){
+        //  iv1.set
+       pointView.onPuase();
+    }
+    public void onResume(){
+        pointView.onResume();
+    }
     private double k;
 
     public void setPosition(int x, int y, int style, double k,boolean isShow) {

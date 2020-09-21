@@ -40,7 +40,8 @@ public class DBUtil {
         Constant.initHotWord();
         try{
         newsList=getLocalList(context);
-        categoryList=getLocalCategoryList(context);}catch (Exception e){
+        categoryList=getLocalCategoryList(context);}
+        catch (Exception e){
             LogUtil.logError("使用工程里的news数据");
             newsList=getList(context);
             categoryList=getCategoryList(context);

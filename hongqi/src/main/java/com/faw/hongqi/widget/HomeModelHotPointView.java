@@ -323,7 +323,18 @@ public class HomeModelHotPointView extends LinearLayout implements View.OnClickL
         showHotPointViewByResId(R.drawable.c229_car_1);
     }
 
+    public void onPuase(){
+        //  iv1.set
+        for (BaseModelItem item : view_list) {
+            item.onPuase();
+        }
 
+    }
+    public void onResume(){
+        for (BaseModelItem item : view_list) {
+            item.onResume();
+        }
+    }
     private void setCarPointView(int resID) {
         if (resID == R.drawable.c229_car_1) {
             view_list.get(0).setPosition(100, 400, 24, k,false);
