@@ -153,7 +153,7 @@
 				//热点名称
 				var host_list = [{
 					'text': '座椅记忆',
-					'id': '231'
+					'id': '272'
 				}];
 				host_main(host_3, host_list, style_color)
 			} else {
@@ -225,10 +225,10 @@
 				//热点名称
 				var host_list = [{
 					'text': '前碰撞预警',
-					'id': '223'
+					'id': '273'
 				}, {
 					'text': '盲区探测',
-					'id': '225'
+					'id': '274'
 				}, {
 					'text': '车道保持辅助',
 					'id': '227'
